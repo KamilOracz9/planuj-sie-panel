@@ -1,3 +1,4 @@
+import { Pathnames } from '@/features/routing';
 import { defineRouting } from 'next-intl/routing';
 
 export const routing = defineRouting({
@@ -5,25 +6,25 @@ export const routing = defineRouting({
     locales: ['en', 'pl'],
 
     // Used when no locale matches
-    defaultLocale: 'en',
+    defaultLocale: 'pl',
     localePrefix: 'as-needed',
     pathnames: {
         '/': '/',
-        '/auth/sign-in': {
-          'pl': '/logowanie',
-          'en': '/sign-in',
-        },
-        '/auth/sign-up': {
-          'pl': '/rejestracja',
-          'en': '/sign-up',
-        },
-        '/pricing': {
-          'pl': '/cennik',
-          'en': '/pricing',
-        },
-        '/profile': {
-          'pl': '/profil',
-          'en': '/profile',
+        // '/auth/sign-in': {
+        //   'pl': '/logowanie',
+        //   'en': '/sign-in',
+        // },
+        // '/auth/sign-up': {
+        //   'pl': '/rejestracja',
+        //   'en': '/sign-up',
+        // },
+        // '/pricing': {
+        //   'pl': '/cennik',
+        //   'en': '/pricing',
+        // },
+        [Pathnames.USERS]: {
+          'pl': '/uzytkownicy',
+          'en': '/users',
         },
       }
 });
