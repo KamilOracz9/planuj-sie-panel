@@ -1,6 +1,6 @@
-export type UsersListResponseType = {
+export type User = {
     id: number;
     name: string;
     email: string;
-    updatedAt: string;
+    created_at: string;
 }

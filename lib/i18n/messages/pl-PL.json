@@ -1,0 +1,20 @@
+{
+    "HomePage": {
+        "title": "Strona glowna"
+    },
+    "Users": {
+        "title": "Użytkownicy",
+        "fields": {
+            "name": "Nazwa",
+            "email": "Email"
+        }
+    },
+    "Shared": {
+        "actions": {
+        },
+        "fields": {
+            "created_at": "Utworzono",
+            "actions": "Akcje"
+        }
+    }
+}

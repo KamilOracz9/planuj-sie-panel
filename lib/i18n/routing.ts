@@ -1,30 +1,26 @@
-import { Pathnames } from '@/features/routing';
+import { Route } from '@/features/routing';
 import { defineRouting } from 'next-intl/routing';
 
 export const routing = defineRouting({
     // A list of all locales that are supported
-    locales: ['en', 'pl'],
+    locales: ['en-US', 'pl-PL'],
 
     // Used when no locale matches
-    defaultLocale: 'pl',
+    defaultLocale: 'pl-PL',
     localePrefix: 'as-needed',
     pathnames: {
         '/': '/',
-        // '/auth/sign-in': {
-        //   'pl': '/logowanie',
-        //   'en': '/sign-in',
-        // },
-        // '/auth/sign-up': {
-        //   'pl': '/rejestracja',
-        //   'en': '/sign-up',
-        // },
-        // '/pricing': {
-        //   'pl': '/cennik',
-        //   'en': '/pricing',
-        // },
-        [Pathnames.USERS]: {
-          'pl': '/uzytkownicy',
-          'en': '/users',
+        [Route.PRIVATE.USERS.LIST.PATHNAME]: {
+          'pl-PL': '/uzytkownicy',
+          'en-US': '/users',
+        },
+        [Route.PRIVATE.USERS.SHOW.PATHNAME]: {
+          'pl-PL': '/uzytkownicy/[id]/podglad',
+          'en-US': '/users/[id]/show',
+        },
+        [Route.PRIVATE.USERS.EDIT.PATHNAME]: {
+          'pl-PL': '/uzytkownicy/[id]/edycja',
+          'en-US': '/users/[id]/edit',
         },
       }
 });

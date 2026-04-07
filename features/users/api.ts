@@ -1,6 +1,6 @@
-import { UsersListResponseType } from "./types";
+import { User } from "./types";
 
-export const fetchUsersList = async (): Promise<UsersListResponseType[]> => await fetch(`${process.env.API_URL}/users`, {
+export const fetchUsersList = async ({ locale }: { locale: string }): Promise<User[]> => await fetch(`${process.env.API_URL}/${locale}/users`, {
     headers: {
         'X-API-KEY': process.env.API_KEY || '',
     }

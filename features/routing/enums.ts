@@ -3,7 +3,10 @@ export enum Pathnames {
     SIGN_UP = "/auth/sign-up",
 
     DASHBOARD = "/",
+    
     USERS = "/users",
+    USERS_SHOW = `/users/[id]/show`,
+    USERS_EDIT = "/users/[id]/edit",
 }
 
 export const Route = {
@@ -12,8 +15,10 @@ export const Route = {
             PATHNAME: Pathnames.DASHBOARD
         },
         USERS: {
-            PATHNAME: Pathnames.USERS
-        }
+            LIST: { PATHNAME: Pathnames.USERS },
+            EDIT: { PATHNAME: Pathnames.USERS_EDIT },
+            SHOW: { PATHNAME: Pathnames.USERS_SHOW }
+        },
     },
     PUBLIC: {
         SIGN_IN: {
