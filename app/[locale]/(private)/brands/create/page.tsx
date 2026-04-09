@@ -1,15 +1,16 @@
 "use client"
 
-import { createUser } from "@/app/actions/user";
+import { createBrand } from "@/app/actions/brand";
+import { BrandWithTranslations, Form } from "@/features/brands";
 import { Route } from "@/features/routing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/features/shared/components/ui/card"
-import { Form, User } from "@/features/users";
+import { transformData } from "@/features/shared/utils";
 import { useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 const Create = () => {
-  const tUsers = useTranslations('Users');
+  const tBrands = useTranslations('Brands');
 
   const [errors, setErrors] = useState<Record<string, string> | null>(null);
 
@@ -18,13 +19,13 @@ const Create = () => {
 
     const formData = new FormData(e.currentTarget as HTMLFormElement);
 
-    const data = Object.fromEntries(formData.entries()) as unknown as User;
+    const data = Object.fromEntries(formData.entries()) as Record<string, string>;
 
-    createUser(data).then((res) => {
+    createBrand(transformData(data)).then((res) => {
       if(res.errors) {
         setErrors(res.errors);
       } else {
-        redirect(Route.PRIVATE.USERS.LIST.PATHNAME);
+        redirect(Route.PRIVATE.BRANDS.LIST.PATHNAME);
       }
     })
   }
@@ -32,7 +33,7 @@ const Create = () => {
   return (
     <Card className="flex-1">
       <CardHeader>
-        <CardTitle>{tUsers('create.title')}</CardTitle>
+        <CardTitle>{tBrands('create.title')}</CardTitle>
       </CardHeader>
       <CardContent>
           <Form handleSubmit={handleSubmit} errors={errors} />

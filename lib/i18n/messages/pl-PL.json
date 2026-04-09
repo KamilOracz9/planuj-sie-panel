@@ -20,6 +20,22 @@
             "confirm_password": "Powtórz hasło"
         }
     },
+    "Brands": {
+        "list": {
+            "title": "Marki"
+        },
+        "edit": {
+            "title": "Edytuj markę"
+        },
+        "create": {
+            "title": "Utwórz markę"
+        },
+        "show": {
+            "title": "Szczegóły marki"
+        },
+        "fields": {
+        }
+    },
     "Shared": {
         "actions": {
             "save": "Zapisz"
@@ -27,6 +43,7 @@
         "fields": {
             "name": "Nazwa",
             "email": "Email",
+            "slug": "Slug",
             "created_at": "Utworzono",
             "actions": "Akcje"
         }

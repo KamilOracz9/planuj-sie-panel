@@ -1,11 +1,12 @@
 import { Sidebar, SidebarContent, SidebarHeader, SidebarMenuItem } from "./ui/sidebar";
 import { Link } from "@/lib/i18n/navigation";
 import { Route } from "@/features/routing";
-import { User2 } from "lucide-react";
+import { Tag, User2 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 export async function AppSidebar() {
   const tUsers = await getTranslations('Users.list');
+  const tBrands = await getTranslations('Brands.list');
 
   return (
     <Sidebar>
@@ -18,6 +19,9 @@ export async function AppSidebar() {
         <SidebarMenuItem>
           <Link href={Route.PRIVATE.USERS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
             <User2 className="mr-2" /> {tUsers('title')}
+          </Link>
+          <Link href={Route.PRIVATE.BRANDS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
+            <Tag className="mr-2" /> {tBrands('title')}
           </Link>
         </SidebarMenuItem>
       </SidebarContent>
