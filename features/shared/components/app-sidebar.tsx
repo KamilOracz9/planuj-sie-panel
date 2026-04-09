@@ -5,7 +5,7 @@ import { User2 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 export async function AppSidebar() {
-  const tUsers = await getTranslations('Users');
+  const tUsers = await getTranslations('Users.list');
 
   return (
     <Sidebar>

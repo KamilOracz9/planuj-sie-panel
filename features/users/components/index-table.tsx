@@ -15,7 +15,6 @@ interface IndexTableProps {
 }
 
 const IndexTable = ({ usersPromise }: IndexTableProps) => {
-    const tUsers = useTranslations('Users');
     const tShared = useTranslations('Shared');
 
     const [users, setUsers] = useState<User[]>(use(usersPromise));
@@ -32,8 +31,8 @@ const IndexTable = ({ usersPromise }: IndexTableProps) => {
         <Table>
             <TableHeader>
                 <TableRow>
-                    <TableHead>{tUsers('fields.name')}</TableHead>
-                    <TableHead>{tUsers('fields.email')}</TableHead>
+                    <TableHead>{tShared('fields.name')}</TableHead>
+                    <TableHead>{tShared('fields.email')}</TableHead>
                     <TableHead>{tShared('fields.created_at')}</TableHead>
                     <TableHead className="text-center w-20">{tShared('fields.actions')}</TableHead>
                 </TableRow>

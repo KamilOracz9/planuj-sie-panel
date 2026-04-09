@@ -15,7 +15,7 @@ const List = async () => {
     return (
         <Card className="flex-1">
             <CardHeader>
-                <CardTitle>{tUsers('title')}</CardTitle>
+                <CardTitle>{tUsers('list.title')}</CardTitle>
                 <CardAction>
                     <Button variant="ghost" asChild>
                         <Link href={{ pathname: Route.PRIVATE.USERS.CREATE.PATHNAME }}>

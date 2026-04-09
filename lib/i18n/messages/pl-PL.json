@@ -3,16 +3,30 @@
         "title": "Strona glowna"
     },
     "Users": {
-        "title": "Użytkownicy",
+        "list": {
+            "title": "Użytkownicy"
+        },
+        "edit": {
+            "title": "Edytuj użytkownika"
+        },
+        "create": {
+            "title": "Utwórz użytkownika"
+        },
+        "show": {
+            "title": "Szczegóły użytkownika"
+        },
         "fields": {
-            "name": "Nazwa",
-            "email": "Email"
+            "password": "Hasło",
+            "confirm_password": "Powtórz hasło"
         }
     },
     "Shared": {
         "actions": {
+            "save": "Zapisz"
         },
         "fields": {
+            "name": "Nazwa",
+            "email": "Email",
             "created_at": "Utworzono",
             "actions": "Akcje"
         }

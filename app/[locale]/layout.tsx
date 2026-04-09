@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import { NextIntlClientProvider } from "next-intl";
-import StoreProvider from "../store-provider";
 import { TooltipProvider } from "@/features/shared/components/ui/tooltip";
 
 export const metadata: Metadata = {
@@ -18,11 +17,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextIntlClientProvider>
-          <StoreProvider>
+          {/* <StoreProvider> */}
             <TooltipProvider>
               {children}
             </TooltipProvider>
-          </StoreProvider>
+          {/* </StoreProvider> */}
         </NextIntlClientProvider>
       </body>
     </html>
