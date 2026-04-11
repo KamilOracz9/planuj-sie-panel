@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 export async function AppSidebar() {
   const tUsers = await getTranslations('Users.list');
   const tBrands = await getTranslations('Brands.list');
+  const tCategories = await getTranslations('Categories.list');
 
   return (
     <Sidebar>
@@ -22,6 +23,9 @@ export async function AppSidebar() {
           </Link>
           <Link href={Route.PRIVATE.BRANDS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
             <Tag className="mr-2" /> {tBrands('title')}
+          </Link>
+          <Link href={Route.PRIVATE.CATEGORIES.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
+            <Tag className="mr-2" /> {tCategories('title')}
           </Link>
         </SidebarMenuItem>
       </SidebarContent>

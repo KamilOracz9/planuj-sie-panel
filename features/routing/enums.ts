@@ -13,6 +13,11 @@ export enum Pathnames {
     BRANDS_CREATE = "/brands/create",
     BRANDS_SHOW = "/brands/[id]/show",
     BRANDS_EDIT = "/brands/[id]/edit",
+
+    CATEGORIES_LIST = "/categories",
+    CATEGORIES_CREATE = "/categories/create",
+    CATEGORIES_SHOW = "/categories/[id]/show",
+    CATEGORIES_EDIT = "/categories/[id]/edit",
 }
 
 export const Route = {
@@ -31,6 +36,12 @@ export const Route = {
             CREATE: { PATHNAME: Pathnames.BRANDS_CREATE },
             EDIT: { PATHNAME: Pathnames.BRANDS_EDIT },
             SHOW: { PATHNAME: Pathnames.BRANDS_SHOW }
+        },
+        CATEGORIES: {
+            LIST: { PATHNAME: Pathnames.CATEGORIES_LIST },
+            CREATE: { PATHNAME: Pathnames.CATEGORIES_CREATE },
+            EDIT: { PATHNAME: Pathnames.CATEGORIES_EDIT },
+            SHOW: { PATHNAME: Pathnames.CATEGORIES_SHOW }
         },
     },
     PUBLIC: {

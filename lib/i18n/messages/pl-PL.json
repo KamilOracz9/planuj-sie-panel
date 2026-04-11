@@ -36,6 +36,22 @@
         "fields": {
         }
     },
+    "Categories": {
+        "list": {
+            "title": "Kategorie"
+        },
+        "edit": {
+            "title": "Edytuj kategorię"
+        },
+        "create": {
+            "title": "Utwórz kategorię"
+        },
+        "show": {
+            "title": "Szczegóły kategorii"
+        },
+        "fields": {
+        }
+    },
     "Shared": {
         "actions": {
             "save": "Zapisz"
