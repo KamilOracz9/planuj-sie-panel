@@ -1,13 +1,14 @@
 "use client";
 
 import { updateBrand } from "@/app/actions/brand";
-import { Brand, BrandWithTranslations, Form, useBrand } from "@/features/brands";
+import { Form, useBrand } from "@/features/brands";
+import { brandSchema } from "@/features/brands/schemas";
 import { Route } from "@/features/routing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/features/shared/components/ui/card";
-import { transformData } from "@/features/shared/utils";
 import { useTranslations } from "next-intl";
 import { redirect, useParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import {  useState } from "react";
+import * as z from "zod"
 
 const Edit = () => {
   const params = useParams();
@@ -18,21 +19,14 @@ const Edit = () => {
 
   const brandPromise = useBrand();
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
+  function onSubmit(data: z.infer<typeof brandSchema>) {
     const brandId = Number(params.id);
 
     if (isNaN(brandId)) {
       return;
     }
 
-    const data = Object.fromEntries(formData.entries()) as Record<string, string>;
-
-    setErrors(null);
-
-    updateBrand(transformData(data), brandId).then((res) => {
+    updateBrand(data, brandId).then((res) => {
       if (res.errors) {
         setErrors(res.errors);
       } else {
@@ -47,7 +41,7 @@ const Edit = () => {
         <CardTitle>{tBrands('show.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form brandPromise={brandPromise} handleSubmit={handleSubmit} errors={errors} />
+        <Form brandPromise={brandPromise} onSubmit={onSubmit} errors={errors} />
       </CardContent>
     </Card>
   )
