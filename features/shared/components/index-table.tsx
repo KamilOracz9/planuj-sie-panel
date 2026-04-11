@@ -18,10 +18,14 @@ interface IndexTableProps<T extends { id: string | number }> {
     edit: PrivateRouteWithId
   }
     fields: Array<Exclude<keyof T, "id">>
+    modelTranslationsPrefix?: string
 }
 
-const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteAction, routes, fields }: IndexTableProps<T>) => {
+const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteAction, routes, fields, modelTranslationsPrefix }: IndexTableProps<T>) => {
     const tShared = useTranslations('Shared');
+    const tModel = modelTranslationsPrefix ? useTranslations(modelTranslationsPrefix) : tShared;
+
+    const t = (field: string) => tModel.has(`fields.${field}`) ? tModel(`fields.${field}`) : tShared(`fields.${field}`);
 
     const [items, setItems] = useState<T[]>(use(dataPromise));
 
@@ -40,16 +44,16 @@ const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteActi
             <TableHeader>
                 <TableRow>
                     {fields.map((field) => (
-                        <TableHead key={String(field)}>{tShared(`fields.${String(field)}`)}</TableHead>
+                        <TableHead key={String(field)}>{t(String(field))}</TableHead>
                     ))}
-                    <TableHead className="text-center w-20">{tShared('fields.actions')}</TableHead>
+                    <TableHead className="text-center w-20">{t('actions')}</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {items.map((item) => (
                     <TableRow key={item.id}>
                         {fields.map((field) => (
-                            <TableCell key={String(field)}>{String(item[field])}</TableCell>
+                            <TableCell key={String(field)}>{item[field] ? String(item[field]) : ''}</TableCell>
                         ))}
                         <TableCell className="text-center">
                             <Button onClick={() => handleDelete(item.id)} variant="ghost" className="cursor-pointer">

@@ -1,6 +1,6 @@
 "use server"
 
-import { Category } from "@/features/categories";
+import { Category, CategorySelectItem } from "@/features/categories";
 import { categorySchema } from "@/features/categories/schemas";
 import * as z from "zod";
 
@@ -33,4 +33,12 @@ export async function updateCategory(data: z.infer<typeof categorySchema>, id: C
             'Content-Type': 'application/json',
         }
     }).then(res => res.json())
+}
+
+export async function fetchCategoriesListForSelect({ locale }: { locale: string }): Promise<CategorySelectItem[]> {
+    return await fetch(`${process.env.API_URL}/${locale}/categories/select`, {
+        headers: {
+            'X-API-KEY': process.env.API_KEY || '',
+        }
+    }).then(res => res.json());
 }

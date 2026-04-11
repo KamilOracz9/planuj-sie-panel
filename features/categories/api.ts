@@ -1,4 +1,4 @@
-import { Category, CategoryWithTranslations } from "./types";
+import { Category, CategorySelectItem, CategoryWithTranslations } from "./types";
 
 export const fetchCategoriesList = async ({ locale }: { locale: string }): Promise<Category[]> => await fetch(`${process.env.API_URL}/${locale}/categories`, {
     headers: {
@@ -11,3 +11,10 @@ export const fetchCategory = async ({ locale, id }: { locale: string, id: Catego
         'X-API-KEY': process.env.API_KEY || '',
     }
 }).then(res => res.json());
+
+export const fetchCategoriesListForSelect = async ({ locale }: { locale: string }): Promise<CategorySelectItem[]> => await fetch(`${process.env.API_URL}/${locale}/categories/select`, {
+    headers: {
+        'X-API-KEY': process.env.API_KEY || '',
+    }
+}).then(res => res.json());
+

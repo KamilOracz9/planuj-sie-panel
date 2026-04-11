@@ -50,6 +50,8 @@
             "title": "Szczegóły kategorii"
         },
         "fields": {
+            "parent_id": "Kategoria nadrzędna",
+            "parent_name": "Nazwa nadrzędnej kategorii"
         }
     },
     "Shared": {
@@ -62,6 +64,12 @@
             "slug": "Slug",
             "created_at": "Utworzono",
             "actions": "Akcje"
+        },
+        "values": {
+            "null": "Brak"
+        },
+        "messages": {
+            "no-items-found": "Nie znaleziono żadnych elementów."
         }
     }
 }

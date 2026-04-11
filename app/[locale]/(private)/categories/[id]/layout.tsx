@@ -1,4 +1,4 @@
-import { CategoryContext, fetchCategory } from "@/features/categories";
+import { CategoryContext, fetchCategoriesListForSelect, fetchCategory } from "@/features/categories";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -9,9 +9,10 @@ const Layout = async ({ children, params }: LayoutProps) => {
     const { id, locale } = await params;
 
     const categoryPromise = fetchCategory({ id, locale });
+    const categoriesSelectPromise = fetchCategoriesListForSelect({ locale });
 
     return (
-        <CategoryContext value={categoryPromise}>
+        <CategoryContext value={{ categoryPromise, categoriesSelectPromise }}>
             {children}
         </CategoryContext>
     )

@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 const Show = () => {
   const tCategories = useTranslations('Categories');
 
-  const categoryPromise = useCategory();
+  const { categoryPromise, categoriesSelectPromise } = useCategory();
 
   return (
     <Card className="flex-1">
@@ -16,7 +16,7 @@ const Show = () => {
         <CardTitle>{tCategories('show.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form categoryPromise={categoryPromise} />
+        <Form categoryPromise={categoryPromise} categoriesSelectPromise={categoriesSelectPromise} />
       </CardContent>
     </Card>
   )

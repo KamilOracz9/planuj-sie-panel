@@ -8,7 +8,7 @@ import { Route } from "@/features/routing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/features/shared/components/ui/card";
 import { useTranslations } from "next-intl";
 import { redirect, useParams } from "next/navigation";
-import {  useState } from "react";
+import { useState } from "react";
 import * as z from "zod"
 
 const Edit = () => {
@@ -18,7 +18,7 @@ const Edit = () => {
 
   const [errors, setErrors] = useState<Record<string, string> | null>(null);
 
-  const categoryPromise = useCategory();
+  const { categoryPromise, categoriesSelectPromise } = useCategory();
 
   function onSubmit(data: z.infer<typeof categorySchema>) {
     const categoryId = Number(params.id);
@@ -42,7 +42,7 @@ const Edit = () => {
         <CardTitle>{tCategories('edit.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form categoryPromise={categoryPromise} onSubmit={onSubmit} errors={errors} />
+        <Form categoryPromise={categoryPromise} categoriesSelectPromise={categoriesSelectPromise} onSubmit={onSubmit} errors={errors} />
       </CardContent>
     </Card>
   )

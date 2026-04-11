@@ -28,7 +28,8 @@ const List = async () => {
                     show: Route.PRIVATE.CATEGORIES.SHOW.PATHNAME,
                     edit: Route.PRIVATE.CATEGORIES.EDIT.PATHNAME,
                 }}
-                fields={['name']}
+                modelTranslationsPrefix="Categories"
+                fields={['name', 'parent_name']}
             />  
         </Listing>
     )
