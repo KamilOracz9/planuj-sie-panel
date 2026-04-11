@@ -1,14 +1,13 @@
 "use client"
 
 import { createBrand } from "@/app/actions/brand";
-import { BrandWithTranslations, Form } from "@/features/brands";
+import { Form } from "@/features/brands";
 import { brandSchema } from "@/features/brands/schemas";
 import { Route } from "@/features/routing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/features/shared/components/ui/card"
-import { transformData } from "@/features/shared/utils";
 import { useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import * as z from "zod"
 
 const Create = () => {
@@ -18,7 +17,7 @@ const Create = () => {
 
   function onSubmit(data: z.infer<typeof brandSchema>) {
     createBrand(data).then((res) => {
-      if(res.errors) {
+      if (res.errors) {
         setErrors(res.errors);
       } else {
         redirect(Route.PRIVATE.BRANDS.LIST.PATHNAME);

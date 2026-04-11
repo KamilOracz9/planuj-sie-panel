@@ -1,8 +1,11 @@
 "use server"
 
 import { Brand } from "@/features/brands"
+import { brandSchema } from "@/features/brands/schemas"
 
-export async function deleteBrand(brandId: Brand['id']): Promise<{id: Brand['id']}> {
+import * as z from "zod";
+
+export async function deleteBrand(brandId: Brand['id']): Promise<{ id: Brand['id'] }> {
     return await fetch(`${process.env.API_URL}/brands/${brandId}`, {
         method: 'DELETE',
         headers: {
@@ -11,7 +14,7 @@ export async function deleteBrand(brandId: Brand['id']): Promise<{id: Brand['id'
     }).then(res => res.json())
 }
 
-export async function createBrand(data: object) {
+export async function createBrand(data: z.infer<typeof brandSchema>) {
     return await fetch(`${process.env.API_URL}/brands`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -22,7 +25,7 @@ export async function createBrand(data: object) {
     }).then(res => res.json())
 }
 
-export async function updateBrand(data: object, id: Brand['id']) {
+export async function updateBrand(data: z.infer<typeof brandSchema>, id: Brand['id']) {
     return await fetch(`${process.env.API_URL}/brands/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
