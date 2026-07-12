@@ -87,6 +87,22 @@
             "parent_name": "Nazwa nadrzędnej kategorii"
         }
     },
+    "Attributes": {
+        "list": {
+            "title": "Atrybuty"
+        },
+        "edit": {
+            "title": "Edytuj atrybut"
+        },
+        "create": {
+            "title": "Utwórz atrybut"
+        },
+        "show": {
+            "title": "Szczegóły atrybutu"
+        },
+        "fields": {
+        }
+    },
     "Shared": {
         "actions": {
             "save": "Zapisz"

@@ -100,5 +100,23 @@ export const routing = defineRouting({
       'pl-PL': '/warianty/[id]/edycja',
       'en-US': '/variants/[id]/edit',
     },
+
+    // Attributes
+    [Route.PRIVATE.ATTRIBUTES.LIST.PATHNAME]: {
+      'pl-PL': '/atrybuty',
+      'en-US': '/attributes',
+    },
+    [Route.PRIVATE.ATTRIBUTES.CREATE.PATHNAME]: {
+      'pl-PL': '/atrybuty/nowy',
+      'en-US': '/attributes/new',
+    },
+    [Route.PRIVATE.ATTRIBUTES.SHOW.PATHNAME]: {
+      'pl-PL': '/atrybuty/[id]/podglad',
+      'en-US': '/attributes/[id]/show',
+    },
+    [Route.PRIVATE.ATTRIBUTES.EDIT.PATHNAME]: {
+      'pl-PL': '/atrybuty/[id]/edycja',
+      'en-US': '/attributes/[id]/edit',
+    },
   }
 });
