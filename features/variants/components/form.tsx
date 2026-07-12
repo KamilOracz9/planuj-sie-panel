@@ -35,8 +35,6 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, errors }: FormP
 
     const selectedProduct = useMemo(() => productsSelect.find(p => p.id === variant.product_id), [productsSelect, variant.product_id]);
 
-    console.log(productsSelect)
-
     const form = useForm<VariantFormValues>({
         resolver: zodResolver(variantSchema),
         defaultValues: {
