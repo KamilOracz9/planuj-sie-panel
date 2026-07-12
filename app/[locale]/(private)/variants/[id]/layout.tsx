@@ -3,7 +3,7 @@ import { fetchVariant, VariantContext } from "@/features/variants";
 
 interface LayoutProps {
     children: React.ReactNode;
-    params: { id: number, locale: string };
+    params: Promise<{ id: string, locale: string }>;
 }
 
 const Layout = async ({ children, params }: LayoutProps) => {

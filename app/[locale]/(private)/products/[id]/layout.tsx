@@ -2,7 +2,7 @@ import { ProductContext, fetchProduct } from "@/features/products";
 
 interface LayoutProps {
     children: React.ReactNode;
-    params: { id: number, locale: string };
+    params: Promise<{ id: string, locale: string }>;
 }
 
 const Layout = async ({ children, params }: LayoutProps) => {

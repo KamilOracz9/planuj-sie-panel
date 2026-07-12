@@ -1,29 +1,17 @@
-export type CategorySelectItem = {
-    id: number;
-    name: string;
-}
+import { Model, ModelWithTranslations, SelectItem, Translation } from "../shared/types";
+
+export type CategorySelectItem = {} & SelectItem;
 
 export type Category = {
-    id: number;
-    name: string;
-    slug: string;
     parent_name: string;
-    created_at: string;
-}
+} & Model;
 
 export type CategoryWithTranslations = {
-    id: number;
     parent_id: number | null;
-    created_at: string;
-    updated_at: string;
-    translations: Record<string, CategoryTranslation>;
-}
+} & ModelWithTranslations<CategoryTranslation>;
 
 export type CategoryTranslation = {
-    id: number;
-    locale: string;
-    name: string;
-    slug: string;
+    category_id: number;
     description: string | null;
     short_description: string | null;
-}
+} & Translation;

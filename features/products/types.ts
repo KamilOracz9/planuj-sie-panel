@@ -1,25 +1,11 @@
-export type ProductSelectItem = {
-    id: number;
-    name: string;
-}
+import { Model, ModelWithTranslations, SelectItem, Translation } from "../shared/types";
 
-export type Product = {
-    id: number;
-    name: string;
-    slug: string;
-    created_at: string;
-}
+export type ProductSelectItem = {} & SelectItem;
 
-export type ProductWithTranslations = {
-    id: number;
-    created_at: string;
-    updated_at: string;
-    translations: Record<string, ProductTranslation>;
-}
+export type Product = {} & Model;
+
+export type ProductWithTranslations = {} & ModelWithTranslations<ProductTranslation>;
 
 export type ProductTranslation = {
-    id: number;
-    locale: string;
-    name: string;
-    slug: string;
-}
+    product_id: number;
+} & Translation;
