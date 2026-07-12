@@ -64,5 +64,41 @@ export const routing = defineRouting({
       'pl-PL': '/kategorie/[id]/edycja',
       'en-US': '/categories/[id]/edit',
     },
+
+    // Products
+    [Route.PRIVATE.PRODUCTS.LIST.PATHNAME]: {
+      'pl-PL': '/produkty',
+      'en-US': '/products',
+    },
+    [Route.PRIVATE.PRODUCTS.CREATE.PATHNAME]: {
+      'pl-PL': '/produkty/nowy',
+      'en-US': '/products/new',
+    },
+    [Route.PRIVATE.PRODUCTS.SHOW.PATHNAME]: {
+      'pl-PL': '/produkty/[id]/podglad',
+      'en-US': '/products/[id]/show',
+    },
+    [Route.PRIVATE.PRODUCTS.EDIT.PATHNAME]: {
+      'pl-PL': '/produkty/[id]/edycja',
+      'en-US': '/products/[id]/edit',
+    },
+
+    // Variants
+    [Route.PRIVATE.VARIANTS.LIST.PATHNAME]: {
+      'pl-PL': '/warianty',
+      'en-US': '/variants',
+    },
+    [Route.PRIVATE.VARIANTS.CREATE.PATHNAME]: {
+      'pl-PL': '/warianty/nowy',
+      'en-US': '/variants/new',
+    },
+    [Route.PRIVATE.VARIANTS.SHOW.PATHNAME]: {
+      'pl-PL': '/warianty/[id]/podglad',
+      'en-US': '/variants/[id]/show',
+    },
+    [Route.PRIVATE.VARIANTS.EDIT.PATHNAME]: {
+      'pl-PL': '/warianty/[id]/edycja',
+      'en-US': '/variants/[id]/edit',
+    },
   }
 });

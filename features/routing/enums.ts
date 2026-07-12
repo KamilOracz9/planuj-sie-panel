@@ -1,9 +1,19 @@
 export enum Pathnames {
+    PRODUCTS_LIST = "/products",
+    PRODUCTS_CREATE = "/products/create",
+    PRODUCTS_SHOW = "/products/[id]/show",
+    PRODUCTS_EDIT = "/products/[id]/edit",
+
+    VARIANTS_LIST = "/variants",
+    VARIANTS_CREATE = "/variants/create",
+    VARIANTS_SHOW = "/variants/[id]/show",
+    VARIANTS_EDIT = "/variants/[id]/edit",
+
     SIGN_IN = "/auth/sign-in",
     SIGN_UP = "/auth/sign-up",
 
     DASHBOARD = "/",
-    
+
     USERS_LIST = "/users",
     USERS_CREATE = "/users/create",
     USERS_SHOW = "/users/[id]/show",
@@ -37,11 +47,23 @@ export const Route = {
             EDIT: { PATHNAME: Pathnames.BRANDS_EDIT },
             SHOW: { PATHNAME: Pathnames.BRANDS_SHOW }
         },
+        PRODUCTS: {
+            LIST: { PATHNAME: Pathnames.PRODUCTS_LIST },
+            CREATE: { PATHNAME: Pathnames.PRODUCTS_CREATE },
+            EDIT: { PATHNAME: Pathnames.PRODUCTS_EDIT },
+            SHOW: { PATHNAME: Pathnames.PRODUCTS_SHOW }
+        },
         CATEGORIES: {
             LIST: { PATHNAME: Pathnames.CATEGORIES_LIST },
             CREATE: { PATHNAME: Pathnames.CATEGORIES_CREATE },
             EDIT: { PATHNAME: Pathnames.CATEGORIES_EDIT },
             SHOW: { PATHNAME: Pathnames.CATEGORIES_SHOW }
+        },
+        VARIANTS: {
+            LIST: { PATHNAME: Pathnames.VARIANTS_LIST },
+            CREATE: { PATHNAME: Pathnames.VARIANTS_CREATE },
+            EDIT: { PATHNAME: Pathnames.VARIANTS_EDIT },
+            SHOW: { PATHNAME: Pathnames.VARIANTS_SHOW }
         },
     },
     PUBLIC: {

@@ -8,6 +8,8 @@ export async function AppSidebar() {
   const tUsers = await getTranslations('Users.list');
   const tBrands = await getTranslations('Brands.list');
   const tCategories = await getTranslations('Categories.list');
+  const tProducts = await getTranslations('Products.list');
+  const tVariants = await getTranslations('Variants.list');
 
   return (
     <Sidebar>
@@ -26,6 +28,12 @@ export async function AppSidebar() {
           </Link>
           <Link href={Route.PRIVATE.CATEGORIES.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
             <Tag className="mr-2" /> {tCategories('title')}
+          </Link>
+          <Link href={Route.PRIVATE.PRODUCTS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
+            <Tag className="mr-2" /> {tProducts('title')}
+          </Link>
+          <Link href={Route.PRIVATE.VARIANTS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
+            <Tag className="mr-2" /> {tVariants('title')}
           </Link>
         </SidebarMenuItem>
       </SidebarContent>

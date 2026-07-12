@@ -36,6 +36,39 @@
         "fields": {
         }
     },
+    "Products": {
+        "list": {
+            "title": "Produkty"
+        },
+        "edit": {
+            "title": "Edytuj produkt"
+        },
+        "create": {
+            "title": "Utwórz produkt"
+        },
+        "show": {
+            "title": "Szczegóły produktu"
+        },
+        "fields": {
+        }
+    },
+    "Variants": {
+        "list": {
+            "title": "Warianty"
+        },
+        "edit": {
+            "title": "Edytuj wariant"
+        },
+        "create": {
+            "title": "Utwórz wariant"
+        },
+        "show": {
+            "title": "Szczegóły wariantu"
+        },
+        "fields": {
+            "product_id": "Produkt"
+        }
+    },
     "Categories": {
         "list": {
             "title": "Kategorie"
