@@ -17,7 +17,7 @@ const Edit = () => {
 
   const [errors, setErrors] = useState<Record<string, string> | null>(null);
 
-  const attributePromise = useAttribute();
+  const { attributePromise, attributeTypesPromise} = useAttribute();
 
   function onSubmit(data: z.infer<typeof attributeSchema>) {
     const productId = Number(params.id);
@@ -41,7 +41,7 @@ const Edit = () => {
         <CardTitle>{tAttributes('edit.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form attributePromise={attributePromise} onSubmit={onSubmit} errors={errors} />
+        <Form attributePromise={attributePromise} attributeTypesSelectPromise={attributeTypesPromise} onSubmit={onSubmit} errors={errors} />
       </CardContent>
     </Card>
   )

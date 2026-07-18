@@ -1,9 +1,13 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { AttributeWithTranslations } from "./types";
+import { AttributeType, AttributeWithTranslations } from "./types";
 
-export const AttributeContext = createContext<Promise<AttributeWithTranslations> | null>(null);
+export const AttributeContext = createContext<{
+    attributePromise: Promise<AttributeWithTranslations> | undefined,
+    attributeTypesPromise: Promise<AttributeType[]> | undefined
+} | undefined>(undefined);
+
 
 export const useAttribute = () => {
     const ctx = useContext(AttributeContext);

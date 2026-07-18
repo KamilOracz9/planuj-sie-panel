@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 const Show = () => {
   const tProducts = useTranslations('Products');
 
-  const attributePromise = useAttribute();
+  const { attributePromise, attributeTypesPromise } = useAttribute();
 
   return (
     <Card className="flex-1">
@@ -15,7 +15,7 @@ const Show = () => {
         <CardTitle>{tProducts('show.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form attributePromise={attributePromise} />
+        <Form attributePromise={attributePromise} attributeTypesSelectPromise={attributeTypesPromise} />
       </CardContent>
     </Card>
   )

@@ -101,6 +101,7 @@
             "title": "Szczegóły atrybutu"
         },
         "fields": {
+            "type": "Typ atrybutu"
         }
     },
     "Shared": {

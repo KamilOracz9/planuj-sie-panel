@@ -1,6 +1,6 @@
 "use server"
 
-import { Attribute } from "@/features/attributes";
+import { Attribute, AttributeType } from "@/features/attributes";
 import { attributeSchema } from "@/features/attributes/schemas";
 
 import * as z from "zod";
@@ -34,4 +34,12 @@ export async function updateAttribute(data: z.infer<typeof attributeSchema>, id:
             'Content-Type': 'application/json',
         }
     }).then(res => res.json())
+}
+
+export async function fetchAttributeTypesListForSelect({ locale }: { locale: string }): Promise<AttributeType[]> {
+    return await fetch(`${process.env.API_URL}/${locale}/attribute-types/select`, {
+        headers: {
+            'X-API-KEY': process.env.API_KEY || '',
+        }
+    }).then(res => res.json());
 }

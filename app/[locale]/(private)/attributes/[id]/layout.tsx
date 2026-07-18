@@ -1,3 +1,4 @@
+import { fetchAttributeTypesListForSelect } from "@/app/actions/attribute";
 import { AttributeContext } from "@/features/attributes";
 import { fetchAttribute } from "@/features/attributes/api";
 
@@ -10,9 +11,10 @@ const Layout = async ({ children, params }: LayoutProps) => {
     const { id, locale } = await params;
 
     const attributePromise = fetchAttribute({ id, locale });
+    const attributeTypesPromise = fetchAttributeTypesListForSelect({ locale });
 
     return (
-        <AttributeContext value={attributePromise}>
+        <AttributeContext value={{ attributePromise, attributeTypesPromise }}>
             {children}
         </AttributeContext>
     )

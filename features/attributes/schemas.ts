@@ -7,4 +7,5 @@ const localesValidation = () => {
 
 export const attributeSchema = z.object({
     name: localesValidation(),
+    attribute_type_id: z.number().int(),
 })
