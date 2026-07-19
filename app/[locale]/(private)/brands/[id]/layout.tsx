@@ -7,7 +7,6 @@ interface LayoutProps {
 
 const Layout = async ({ children, params }: LayoutProps) => {
     const { id, locale } = await params;
-    console.log(id)
 
     const brandPromise = fetchBrand({ id, locale });
 
