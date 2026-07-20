@@ -34,6 +34,8 @@
             "title": "Szczegóły marki"
         },
         "fields": {
+            "attribute_id": "Atrybut",
+            "data": "Wartość"
         }
     },
     "Products": {
@@ -106,7 +108,9 @@
     },
     "Shared": {
         "actions": {
-            "save": "Zapisz"
+            "save": "Zapisz",
+            "add": "Dodaj",
+            "remove": "Usuń"
         },
         "fields": {
             "name": "Nazwa",
@@ -120,6 +124,10 @@
         },
         "messages": {
             "no-items-found": "Nie znaleziono żadnych elementów."
+        },
+        "tabs": {
+            "basic": "Podstawowe",
+            "attributes": "Atrybuty"
         }
     }
 }

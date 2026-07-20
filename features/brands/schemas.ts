@@ -7,4 +7,8 @@ const localesValidation = () => {
 
 export const brandSchema = z.object({
     name: localesValidation(),
+    attributes: z.array(z.object({
+        data: z.string().optional(),
+        attribute_id: z.string().optional(),
+    })).optional(),
 })

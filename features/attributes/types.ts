@@ -11,3 +11,10 @@ export type AttributeTranslation = {
 } & Translation;
 
 export type AttributeType = {} & Model;
+
+export type ExistingAttributeValue = {
+    id: number;
+    data: string;
+    attribute_type_code: string;
+    attribute_id: number;
+}

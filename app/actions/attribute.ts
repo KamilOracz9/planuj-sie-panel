@@ -43,3 +43,19 @@ export async function fetchAttributeTypesListForSelect({ locale }: { locale: str
         }
     }).then(res => res.json());
 }
+
+export async function fetchAttributesListForSelect({ locale }: { locale: string }): Promise<Attribute[]> {
+    return await fetch(`${process.env.API_URL}/${locale}/attributes/select`, {
+        headers: {
+            'X-API-KEY': process.env.API_KEY || '',
+        }
+    }).then(res => res.json());
+}
+
+export async function fetchAttributeValuesByModel({ locale, modelId, modelType }: { locale: string, modelId: number, modelType: string }): Promise<any> {
+    return await fetch(`${process.env.API_URL}/${locale}/attribute-values/select/${modelType}/${modelId}`, {
+        headers: {
+            'X-API-KEY': process.env.API_KEY || '',
+        }
+    }).then(res => res.json());
+}
