@@ -1,7 +1,7 @@
 "use client";
 
 import { updateBrand } from "@/app/actions/brand";
-import { Form, useBrand } from "@/features/brands";
+import { Form } from "@/features/brands";
 import { brandSchema } from "@/features/brands/schemas";
 import { Route } from "@/features/routing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/features/shared/components/ui/card";
@@ -16,8 +16,6 @@ const Edit = () => {
   const tBrands = useTranslations('Brands');
 
   const [errors, setErrors] = useState<Record<string, string> | null>(null);
-
-  const { brandPromise, attributesSelectPromise, existingAttributesPromise } = useBrand();
 
   function onSubmit(data: z.infer<typeof brandSchema>) {
     const brandId = Number(params.id);
@@ -42,11 +40,8 @@ const Edit = () => {
       </CardHeader>
       <CardContent>
         <Form
-          brandPromise={brandPromise}
           onSubmit={onSubmit}
           errors={errors}
-          attributesSelectPromise={attributesSelectPromise}
-          existingAttributesPromise={existingAttributesPromise}
         />
       </CardContent>
     </Card>

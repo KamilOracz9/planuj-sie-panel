@@ -1,0 +1,1 @@
+export { default as useAttribute } from './use-attribute';

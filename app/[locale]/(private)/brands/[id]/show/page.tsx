@@ -1,13 +1,11 @@
 "use client";
 
-import { Form, useBrand } from "@/features/brands";
+import { Form } from "@/features/brands";
 import { Card, CardContent, CardHeader, CardTitle } from "@/features/shared/components/ui/card";
 import { useTranslations } from "next-intl";
 
 const Show = () => {
   const tBrands = useTranslations('Brands');
-
-  const { brandPromise, attributesSelectPromise } = useBrand();
 
   return (
     <Card className="flex-1">
@@ -15,7 +13,7 @@ const Show = () => {
         <CardTitle>{tBrands('show.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form brandPromise={brandPromise} attributesSelectPromise={attributesSelectPromise} />
+        <Form />
       </CardContent>
     </Card>
   )

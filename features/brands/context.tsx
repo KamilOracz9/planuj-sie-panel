@@ -1,17 +1,33 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { createContext, use, useContext } from "react";
 import { BrandWithTranslations } from "./types";
-import { Attribute, ExistingAttributeValue } from "../attributes/types";
+import { ExistingAttributeValue } from "../attributes/types";
+import { routing } from "@/lib/i18n/routing";
 
 export const BrandContext = createContext<{
     brandPromise: Promise<BrandWithTranslations> | undefined,
-    attributesSelectPromise: Promise<Attribute[]> | undefined,
     existingAttributesPromise: Promise<ExistingAttributeValue[]>
 } | undefined>(undefined);
 
 export const useBrand = () => {
     const ctx = useContext(BrandContext);
+    const brand = ctx?.brandPromise ? use(ctx.brandPromise) : {} as BrandWithTranslations;
+    const existingAttributes = ctx?.existingAttributesPromise ? use(ctx.existingAttributesPromise) : [] as ExistingAttributeValue[];
+
+    const defaultNameValues = Object.fromEntries(routing.locales.map(locale => [locale, brand.translations ? brand.translations[locale as keyof typeof brand.translations]?.name : undefined]));
+
+    const defaultAttributes = existingAttributes?.map(av => ({
+        attribute_id: String(av.attribute_id),
+        data: av.data,
+    })) ?? [];
+
     if (!ctx) throw new Error("useBrand must be used within BrandContext");
-    return ctx;
+    return {
+        ...ctx,
+        brand,
+        existingAttributes,
+        defaultNameValues,
+        defaultAttributes
+    };
 };
