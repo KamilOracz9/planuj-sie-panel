@@ -2,7 +2,6 @@
 
 import { updateCategory } from "@/app/actions/category";
 import { Form } from "@/features/categories";
-import { useCategory } from "@/features/categories/context";
 import { categorySchema } from "@/features/categories/schemas";
 import { Route } from "@/features/routing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/features/shared/components/ui/card";
@@ -17,8 +16,6 @@ const Edit = () => {
   const tCategories = useTranslations('Categories');
 
   const [errors, setErrors] = useState<Record<string, string> | null>(null);
-
-  const { categoryPromise, categoriesSelectPromise } = useCategory();
 
   function onSubmit(data: z.infer<typeof categorySchema>) {
     const categoryId = Number(params.id);
@@ -42,7 +39,7 @@ const Edit = () => {
         <CardTitle>{tCategories('edit.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form categoryPromise={categoryPromise} categoriesSelectPromise={categoriesSelectPromise} onSubmit={onSubmit} errors={errors} />
+        <Form onSubmit={onSubmit} errors={errors} />
       </CardContent>
     </Card>
   )

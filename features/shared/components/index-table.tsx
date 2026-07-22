@@ -7,6 +7,7 @@ import { Edit, Eye, Trash } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/lib/i18n/navigation"
 import { Pathnames } from "@/features/routing"
+import { slugify } from "@/lib/utils"
 
 type PrivateRouteWithId = Extract<Pathnames, `${string}[id]${string}`>
 
@@ -60,12 +61,12 @@ const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteActi
                                 <Trash className="h-4 w-4" />
                             </Button>
                             <Button variant="ghost" className="cursor-pointer" asChild>
-                                <Link href={{ pathname: routes.show, params: { id: item.id } }} >
+                                <Link href={{ pathname: routes.show, hash: slugify(tShared('tabs.basic')), params: { id: item.id } }} >
                                     <Eye className="h-4 w-4" />
                                 </Link>
                             </Button>
                             <Button variant="ghost" className="cursor-pointer" asChild>
-                                <Link href={{ pathname: routes.edit, params: { id: item.id } }} >
+                                <Link href={{ pathname: routes.edit, hash: slugify(tShared('tabs.basic')), params: { id: item.id } }} >
                                     <Edit className="h-4 w-4" />
                                 </Link>
                             </Button>

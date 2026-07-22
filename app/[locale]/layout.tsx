@@ -6,6 +6,8 @@ import StoreProvider from "../store-provider";
 import { ATTRIBUTE_SLICE_NAME } from "@/features/attributes";
 import { fetchAttributesListForSelect } from "../actions/attribute";
 import { getLocale } from "next-intl/server";
+import { CATEGORY_SLICE_NAME } from "@/features/categories/store/slice";
+import { fetchCategoriesListForSelect } from "../actions/category";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,11 +25,14 @@ export default async function RootLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider>
-          <StoreProvider preloadedState={{ 
+          <StoreProvider preloadedState={{
             [ATTRIBUTE_SLICE_NAME]: {
               attributesSelect: await fetchAttributesListForSelect({ locale })
+            },
+            [CATEGORY_SLICE_NAME]: {
+              categoriesSelect: await fetchCategoriesListForSelect({ locale })
             }
-           }}>
+          }}>
             <TooltipProvider>
               {children}
             </TooltipProvider>

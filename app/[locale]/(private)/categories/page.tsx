@@ -5,18 +5,20 @@ import IndexTable from "@/features/shared/components/index-table";
 import Listing from "@/features/shared/components/listing";
 import { Button } from "@/features/shared/components/ui/button";
 import { Link } from "@/lib/i18n/navigation";
+import { slugify } from "@/lib/utils";
 import { PlusCircle } from "lucide-react";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const List = async () => {
     const locale = await getLocale();
+    const tShared = await getTranslations('Shared');
 
     const categoriesPromise = fetchCategoriesList({ locale });
 
     return (
         <Listing translationsPrefix="Categories" actions={
             <Button variant="ghost" asChild>
-                <Link href={{ pathname: Route.PRIVATE.CATEGORIES.CREATE.PATHNAME }}>
+                <Link href={{ pathname: Route.PRIVATE.CATEGORIES.CREATE.PATHNAME, hash: slugify(tShared('tabs.basic')) }}>
                     <PlusCircle className="h-4 w-4" />
                 </Link>
             </Button>

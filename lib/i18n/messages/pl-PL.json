@@ -86,7 +86,10 @@
         },
         "fields": {
             "parent_id": "Kategoria nadrzędna",
-            "parent_name": "Nazwa nadrzędnej kategorii"
+            "parent_name": "Nazwa nadrzędnej kategorii",
+            "name": "Nazwa",
+            "description": "Opis",
+            "short_description": "Krótki opis"
         }
     },
     "Attributes": {

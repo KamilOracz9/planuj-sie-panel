@@ -22,7 +22,6 @@ export const useBrand = () => {
         data: av.data,
     })) ?? [];
 
-    if (!ctx) throw new Error("useBrand must be used within BrandContext");
     return {
         ...ctx,
         brand,
