@@ -11,6 +11,10 @@ import FormContainer from "@/features/shared/components/form-container";
 import { categorySchema } from "../schemas";
 import { useCategory } from "../hooks";
 import Select from "@/features/shared/components/select";
+import { useMemo } from "react";
+import Tabs, { useTabs } from "@/features/shared/components/tabs";
+import { cn, slugify } from "@/lib/utils";
+import { ModelAttributes } from "@/features/attributes";
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof categorySchema>) => void;
@@ -22,8 +26,9 @@ type CategoryFormValues = z.infer<typeof categorySchema>;
 const Form = ({ onSubmit, errors }: FormProps) => {
     const tShared = useTranslations('Shared');
     const tCategories = useTranslations('Categories');
+    const { normalizedActiveHash } = useTabs();
 
-    const { defaultNameValues, defaultDescriptionValues, defaultShortDescriptionValues, selectedParentCategory, category, categoriesSelect } = useCategory();
+    const { defaultNameValues, defaultDescriptionValues, defaultShortDescriptionValues, selectedParentCategory, category, categoriesSelect, defaultAttributes } = useCategory();
 
     const form = useForm<CategoryFormValues>({
         resolver: zodResolver(categorySchema),
@@ -32,35 +37,57 @@ const Form = ({ onSubmit, errors }: FormProps) => {
             parent_id: category.parent_id ?? null,
             description: defaultDescriptionValues,
             short_description: defaultShortDescriptionValues,
+            attributes: defaultAttributes,
         },
     })
+
+    const tabs = useMemo(() => {
+        return [tShared('tabs.basic'), tShared('tabs.translations'), tShared('tabs.attributes')]
+    }, [])
 
     return (
         <FormContainer onSubmit={onSubmit} form={form} >
             <>
-                <Select
-                    label={tCategories('fields.parent_id')}
-                    name={'parent_id'}
-                    items={[{ id: null, name: tShared('values.null') }, ...categoriesSelect]}
-                    formControl={form.control}
-                    defaultValue={selectedParentCategory?.name}
-                    disabled={!onSubmit}
-                    errors={errors}
-                    emptyMessage={tShared('messages.no-items-found')}
-                />
+                <Tabs tabs={tabs} />
 
-                <Accordion type="single" collapsible defaultValue="pl-PL">
-                    {routing.locales.map(locale => (
-                        <AccordionItem key={locale} value={locale}>
-                            <AccordionTrigger>{locale}</AccordionTrigger>
-                            <AccordionContent className="space-y-4">
-                                <FormField label={tCategories(`fields.name`)} readonly={!onSubmit} name={`name.${locale}`} errors={errors} control={form.control} />
-                                <FormField label={tCategories(`fields.description`)} readonly={!onSubmit} name={`description.${locale}`} errors={errors} control={form.control} />
-                                <FormField label={tCategories(`fields.short_description`)} readonly={!onSubmit} name={`short_description.${locale}`} errors={errors} control={form.control} />
-                            </AccordionContent>
-                        </AccordionItem>
-                    ))}
-                </Accordion>
+                <div className={cn({ 'hidden': normalizedActiveHash !== slugify(tShared('tabs.basic')) })}>
+                    <Select
+                        label={tCategories('fields.parent_id')}
+                        name={'parent_id'}
+                        items={[{ id: null, name: tShared('values.null') }, ...categoriesSelect]}
+                        formControl={form.control}
+                        defaultValue={selectedParentCategory?.name}
+                        disabled={!onSubmit}
+                        errors={errors}
+                        emptyMessage={tShared('messages.no-items-found')}
+                    />
+                </div>
+
+                <div className={cn({ 'hidden': normalizedActiveHash !== slugify(tShared('tabs.translations')) })}>
+                    <Accordion type="single" collapsible defaultValue="pl-PL">
+                        {routing.locales.map(locale => (
+                            <AccordionItem key={locale} value={locale}>
+                                <AccordionTrigger>{locale}</AccordionTrigger>
+                                <AccordionContent className="space-y-4">
+                                    <FormField label={tCategories(`fields.name`)} readonly={!onSubmit} name={`name.${locale}`} errors={errors} control={form.control} />
+                                    <FormField label={tCategories(`fields.description`)} readonly={!onSubmit} name={`description.${locale}`} errors={errors} control={form.control} />
+                                    <FormField label={tCategories(`fields.short_description`)} readonly={!onSubmit} name={`short_description.${locale}`} errors={errors} control={form.control} />
+                                </AccordionContent>
+                            </AccordionItem>
+                        ))}
+                    </Accordion>
+                </div>
+
+                <div className={cn({ 'hidden': normalizedActiveHash !== slugify(tShared('tabs.attributes')) })}>
+                    <div className="space-y-4">
+                        <ModelAttributes
+                            form={form}
+                            label={tCategories('fields.attribute_id')}
+                            onSubmit={onSubmit}
+                            errors={errors}
+                        />
+                    </div>
+                </div>
             </>
         </FormContainer>
 

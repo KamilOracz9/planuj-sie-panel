@@ -1,3 +1,4 @@
+import { fetchAttributeValuesByModel } from "@/app/actions/attribute";
 import { CategoryContext, fetchCategoriesListForSelect, fetchCategory } from "@/features/categories";
 
 interface LayoutProps {
@@ -9,10 +10,10 @@ const Layout = async ({ children, params }: LayoutProps) => {
     const { id, locale } = await params;
 
     const categoryPromise = fetchCategory({ id, locale });
-    const categoriesSelectPromise = fetchCategoriesListForSelect({ locale });
+    const existingAttributesPromise = fetchAttributeValuesByModel({ locale, modelId: Number(id), modelType: 'category' });
 
     return (
-        <CategoryContext value={{ categoryPromise, categoriesSelectPromise }}>
+        <CategoryContext value={{ categoryPromise, existingAttributesPromise }}>
             {children}
         </CategoryContext>
     )

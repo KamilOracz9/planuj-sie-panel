@@ -89,7 +89,8 @@
             "parent_name": "Nazwa nadrzędnej kategorii",
             "name": "Nazwa",
             "description": "Opis",
-            "short_description": "Krótki opis"
+            "short_description": "Krótki opis",
+            "attribute_id": "Atrybut"
         }
     },
     "Attributes": {
@@ -130,7 +131,8 @@
         },
         "tabs": {
             "basic": "Podstawowe",
-            "attributes": "Atrybuty"
+            "attributes": "Atrybuty",
+            "translations": "Tłumaczenia"
         }
     }
 }

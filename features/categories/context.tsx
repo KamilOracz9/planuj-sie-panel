@@ -1,9 +1,10 @@
 "use client";
 
 import { createContext } from "react";
-import { CategorySelectItem, CategoryWithTranslations } from "./types";
+import { CategoryWithTranslations } from "./types";
+import { ExistingAttributeValue } from "../attributes";
 
 export const CategoryContext = createContext<{
     categoryPromise: Promise<CategoryWithTranslations> | undefined,
-    categoriesSelectPromise: Promise<CategorySelectItem[]> | undefined
+    existingAttributesPromise: Promise<ExistingAttributeValue[]>
 } | undefined>(undefined);
