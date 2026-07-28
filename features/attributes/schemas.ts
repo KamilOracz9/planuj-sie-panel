@@ -9,3 +9,7 @@ export const attributeSchema = z.object({
     name: localesValidation(),
     attribute_type_id: z.number().int().optional(),
 })
+
+export const attributeOptionSchema = z.object({
+    name: localesValidation(),
+})

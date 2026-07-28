@@ -2,6 +2,10 @@
     "HomePage": {
         "title": "Strona glowna"
     },
+    "Dashboard": {
+        "title": "Pulpit",
+        "subtitle": "Szybki dostęp do zarządzania sklepem."
+    },
     "Users": {
         "list": {
             "title": "Użytkownicy"
@@ -52,6 +56,7 @@
             "title": "Szczegóły produktu"
         },
         "fields": {
+            "attribute_id": "Atrybut"
         }
     },
     "Variants": {
@@ -68,7 +73,8 @@
             "title": "Szczegóły wariantu"
         },
         "fields": {
-            "product_id": "Produkt"
+            "product_id": "Produkt",
+            "attribute_id": "Atrybut"
         }
     },
     "Categories": {
@@ -108,13 +114,18 @@
         },
         "fields": {
             "type": "Typ atrybutu"
+        },
+        "options": {
+            "add": "Dodaj opcję",
+            "save-hint": "Zapisz atrybut, aby zarządzać jego opcjami."
         }
     },
     "Shared": {
         "actions": {
             "save": "Zapisz",
             "add": "Dodaj",
-            "remove": "Usuń"
+            "remove": "Usuń",
+            "cancel": "Anuluj"
         },
         "fields": {
             "name": "Nazwa",
@@ -132,7 +143,12 @@
         "tabs": {
             "basic": "Podstawowe",
             "attributes": "Atrybuty",
+            "options": "Opcje",
             "translations": "Tłumaczenia"
+        },
+        "nav": {
+            "catalog": "Katalog",
+            "system": "System"
         }
     }
 }

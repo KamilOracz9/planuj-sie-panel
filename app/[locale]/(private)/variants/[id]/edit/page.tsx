@@ -17,7 +17,7 @@ const Edit = () => {
 
   const [errors, setErrors] = useState<Record<string, string> | null>(null);
 
-  const { variantPromise, productsSelectPromise } = useVariant();
+  const { variantPromise, productsSelectPromise, existingAttributesPromise } = useVariant();
 
   function onSubmit(data: z.infer<typeof variantSchema>) {
     const variantId = Number(params.id);
@@ -41,7 +41,7 @@ const Edit = () => {
         <CardTitle>{tVariants('edit.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form variantPromise={variantPromise} productsSelectPromise={productsSelectPromise} onSubmit={onSubmit} errors={errors} />
+        <Form variantPromise={variantPromise} productsSelectPromise={productsSelectPromise} existingAttributesPromise={existingAttributesPromise} onSubmit={onSubmit} errors={errors} />
       </CardContent>
     </Card>
   )

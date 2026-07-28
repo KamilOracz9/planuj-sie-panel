@@ -1,45 +1,83 @@
-import { Sidebar, SidebarContent, SidebarHeader, SidebarMenuItem } from "./ui/sidebar";
-import { Link } from "@/lib/i18n/navigation";
-import { Route } from "@/features/routing";
-import { Tag, User2 } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+"use client";
 
-export async function AppSidebar() {
-  const tUsers = await getTranslations('Users.list');
-  const tBrands = await getTranslations('Brands.list');
-  const tCategories = await getTranslations('Categories.list');
-  const tProducts = await getTranslations('Products.list');
-  const tVariants = await getTranslations('Variants.list');
-  const tAttributes = await getTranslations('Attributes.list');
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "./ui/sidebar";
+import { Link, usePathname } from "@/lib/i18n/navigation";
+import { Route } from "@/features/routing";
+import { FolderTree, Layers, Package, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+const catalogItems = [
+  { pathname: Route.PRIVATE.PRODUCTS.LIST.PATHNAME, translationKey: "Products.list.title", icon: Package },
+  { pathname: Route.PRIVATE.VARIANTS.LIST.PATHNAME, translationKey: "Variants.list.title", icon: Layers },
+  { pathname: Route.PRIVATE.CATEGORIES.LIST.PATHNAME, translationKey: "Categories.list.title", icon: FolderTree },
+  { pathname: Route.PRIVATE.BRANDS.LIST.PATHNAME, translationKey: "Brands.list.title", icon: Tag },
+  { pathname: Route.PRIVATE.ATTRIBUTES.LIST.PATHNAME, translationKey: "Attributes.list.title", icon: SlidersHorizontal },
+] as const;
+
+const systemItems = [
+  { pathname: Route.PRIVATE.USERS.LIST.PATHNAME, translationKey: "Users.list.title", icon: Users },
+] as const;
+
+export function AppSidebar() {
+  const t = useTranslations();
+  const pathname = usePathname();
+
+  const isActive = (pathname_: string) => pathname === pathname_ || pathname.startsWith(`${pathname_}/`);
 
   return (
     <Sidebar>
       <SidebarHeader>
-        <Link href={Route.PRIVATE.DASHBOARD.PATHNAME} className="flex items-center gap-2">
-          <h1 className="text-lg font-bold">Planuj sie</h1>
+        <Link href={Route.PRIVATE.DASHBOARD.PATHNAME} className="flex items-center gap-2 px-2 py-1.5">
+          <Store className="size-5 shrink-0" />
+          <h1 className="text-base font-semibold tracking-tight">Panel</h1>
         </Link>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarMenuItem>
-          <Link href={Route.PRIVATE.USERS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
-            <User2 className="mr-2" /> {tUsers('title')}
-          </Link>
-          <Link href={Route.PRIVATE.BRANDS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
-            <Tag className="mr-2" /> {tBrands('title')}
-          </Link>
-          <Link href={Route.PRIVATE.CATEGORIES.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
-            <Tag className="mr-2" /> {tCategories('title')}
-          </Link>
-          <Link href={Route.PRIVATE.PRODUCTS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
-            <Tag className="mr-2" /> {tProducts('title')}
-          </Link>
-          <Link href={Route.PRIVATE.VARIANTS.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
-            <Tag className="mr-2" /> {tVariants('title')}
-          </Link>
-          <Link href={Route.PRIVATE.ATTRIBUTES.LIST.PATHNAME} className="flex transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted p-2">
-            <Tag className="mr-2" /> {tAttributes('title')}
-          </Link>
-        </SidebarMenuItem>
+        <SidebarGroup>
+          <SidebarGroupLabel>{t("Shared.nav.catalog")}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {catalogItems.map(({ pathname: itemPathname, translationKey, icon: Icon }) => (
+                <SidebarMenuItem key={itemPathname}>
+                  <SidebarMenuButton asChild isActive={isActive(itemPathname)}>
+                    <Link href={itemPathname}>
+                      <Icon />
+                      <span>{t(translationKey)}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>{t("Shared.nav.system")}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {systemItems.map(({ pathname: itemPathname, translationKey, icon: Icon }) => (
+                <SidebarMenuItem key={itemPathname}>
+                  <SidebarMenuButton asChild isActive={isActive(itemPathname)}>
+                    <Link href={itemPathname}>
+                      <Icon />
+                      <span>{t(translationKey)}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   )

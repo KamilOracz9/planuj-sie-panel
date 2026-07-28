@@ -3,11 +3,11 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/features/shared/components/ui/table"
 import { use, useState } from "react"
 import { Button } from "@/features/shared/components/ui/button"
-import { Edit, Eye, Trash } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { Edit, Eye, Inbox, Trash } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import { Link } from "@/lib/i18n/navigation"
 import { Pathnames } from "@/features/routing"
-import { slugify } from "@/lib/utils"
+import { formatDate, slugify } from "@/lib/utils"
 
 type PrivateRouteWithId = Extract<Pathnames, `${string}[id]${string}`>
 
@@ -25,10 +25,17 @@ interface IndexTableProps<T extends { id: string | number }> {
 const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteAction, routes, fields, modelTranslationsPrefix }: IndexTableProps<T>) => {
     const tShared = useTranslations('Shared');
     const tModel = modelTranslationsPrefix ? useTranslations(modelTranslationsPrefix) : tShared;
+    const locale = useLocale();
 
     const t = (field: string) => tModel.has(`fields.${field}`) ? tModel(`fields.${field}`) : tShared(`fields.${field}`);
 
     const [items, setItems] = useState<T[]>(use(dataPromise));
+
+    const renderValue = (field: Exclude<keyof T, "id">, value: T[Exclude<keyof T, "id">]) => {
+        if (!value) return '';
+        if (String(field) === 'created_at') return formatDate(String(value), locale);
+        return String(value);
+    }
 
     const handleDelete = async (itemId: T['id']) => {
         if (deleteAction) {
@@ -51,25 +58,37 @@ const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteActi
                 </TableRow>
             </TableHeader>
             <TableBody>
+                {items.length === 0 && (
+                    <TableRow>
+                        <TableCell colSpan={fields.length + 1} className="h-32 text-center text-muted-foreground">
+                            <div className="flex flex-col items-center justify-center gap-2">
+                                <Inbox className="size-6" />
+                                <span className="text-sm">{tShared('messages.no-items-found')}</span>
+                            </div>
+                        </TableCell>
+                    </TableRow>
+                )}
                 {items.map((item) => (
                     <TableRow key={item.id}>
                         {fields.map((field) => (
-                            <TableCell key={String(field)}>{item[field] ? String(item[field]) : ''}</TableCell>
+                            <TableCell key={String(field)}>{renderValue(field, item[field])}</TableCell>
                         ))}
                         <TableCell className="text-center">
-                            <Button onClick={() => handleDelete(item.id)} variant="ghost" className="cursor-pointer">
-                                <Trash className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" className="cursor-pointer" asChild>
-                                <Link href={{ pathname: routes.show, hash: slugify(tShared('tabs.basic')), params: { id: item.id } }} >
-                                    <Eye className="h-4 w-4" />
-                                </Link>
-                            </Button>
-                            <Button variant="ghost" className="cursor-pointer" asChild>
-                                <Link href={{ pathname: routes.edit, hash: slugify(tShared('tabs.basic')), params: { id: item.id } }} >
-                                    <Edit className="h-4 w-4" />
-                                </Link>
-                            </Button>
+                            <div className="flex items-center justify-center gap-1">
+                                <Button onClick={() => handleDelete(item.id)} variant="ghost" size="icon-sm" className="text-muted-foreground hover:text-destructive">
+                                    <Trash className="h-4 w-4" />
+                                </Button>
+                                <Button variant="ghost" size="icon-sm" asChild>
+                                    <Link href={{ pathname: routes.show, hash: slugify(tShared('tabs.basic')), params: { id: item.id } }} >
+                                        <Eye className="h-4 w-4" />
+                                    </Link>
+                                </Button>
+                                <Button variant="ghost" size="icon-sm" asChild>
+                                    <Link href={{ pathname: routes.edit, hash: slugify(tShared('tabs.basic')), params: { id: item.id } }} >
+                                        <Edit className="h-4 w-4" />
+                                    </Link>
+                                </Button>
+                            </div>
                         </TableCell>
                     </TableRow>
                 ))}

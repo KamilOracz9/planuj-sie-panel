@@ -15,9 +15,11 @@ export default function PrivateLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="w-full flex flex-col flex-1">
-        <SidebarTrigger />
-        <div className="p-6 flex flex-col flex-1">
+      <main className="w-full flex flex-col flex-1 min-w-0">
+        <header className="flex h-14 shrink-0 items-center border-b px-4">
+          <SidebarTrigger />
+        </header>
+        <div className="flex flex-1 flex-col gap-6 p-6">
           {children}
         </div>
       </main>

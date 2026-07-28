@@ -12,6 +12,11 @@ import { routing } from "@/lib/i18n/routing";
 import FormField from "@/features/shared/components/form-field";
 import FormContainer from "@/features/shared/components/form-container";
 import Select from "@/features/shared/components/select";
+import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
+import { cn } from "@/lib/utils";
+import AttributeOptions from "./attribute-options";
+
+const OPTIONABLE_TYPE_CODES = ['select', 'multiselect'];
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof attributeSchema>) => void;
@@ -25,6 +30,7 @@ type AttributeFormValues = z.infer<typeof attributeSchema>;
 const Form = ({ onSubmit, attributePromise, attributeTypesSelectPromise, errors }: FormProps) => {
     const tShared = useTranslations('Shared');
     const tAttributes = useTranslations('Attributes');
+    const { normalizedActiveHash } = useTabs();
 
     const attribute = attributePromise ? use(attributePromise) : {} as AttributeWithTranslations;
     const attributeTypesSelect = attributeTypesSelectPromise ? use(attributeTypesSelectPromise) : [] as AttributeType[];
@@ -41,30 +47,46 @@ const Form = ({ onSubmit, attributePromise, attributeTypesSelectPromise, errors 
 
     const selectedAttributeType = useMemo(() => attributeTypesSelect.find(c => c.id === attribute.attribute_type_id), [attributeTypesSelect, attribute.attribute_type_id]);
 
+    const canManageOptions = !!attribute.id && !!selectedAttributeType?.code && OPTIONABLE_TYPE_CODES.includes(selectedAttributeType.code);
+
+    const tabs = useMemo(() => {
+        return canManageOptions ? [tShared('tabs.basic'), tShared('tabs.options')] : [tShared('tabs.basic')];
+    }, [canManageOptions])
+
     return (
         <FormContainer onSubmit={onSubmit} form={form} >
             <>
-                <Select
-                    label={tAttributes('fields.type')}
-                    name={'attribute_type_id'}
-                    items={[{ id: null, name: tShared('values.null') }, ...attributeTypesSelect]}
-                    formControl={form.control}
-                    defaultValue={selectedAttributeType?.name}
-                    disabled={!onSubmit}
-                    errors={errors}
-                    emptyMessage={tShared('messages.no-items-found')}
-                />
+                {canManageOptions && <Tabs tabs={tabs} />}
 
-                <Accordion type="single" collapsible defaultValue="pl-PL">
-                    {routing.locales.map(locale => (
-                        <AccordionItem key={locale} value={locale}>
-                            <AccordionTrigger>{tShared('fields.name')} ({locale})</AccordionTrigger>
-                            <AccordionContent>
-                                <FormField readonly={!onSubmit} name={`name.${locale}`} errors={errors} control={form.control} />
-                            </AccordionContent>
-                        </AccordionItem>
-                    ))}
-                </Accordion>
+                <div className={cn({ 'hidden': canManageOptions && !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) })}>
+                    <Select
+                        label={tAttributes('fields.type')}
+                        name={'attribute_type_id'}
+                        items={[{ id: null, name: tShared('values.null') }, ...attributeTypesSelect]}
+                        formControl={form.control}
+                        defaultValue={selectedAttributeType?.name}
+                        disabled={!onSubmit}
+                        errors={errors}
+                        emptyMessage={tShared('messages.no-items-found')}
+                    />
+
+                    <Accordion type="single" collapsible defaultValue="pl-PL">
+                        {routing.locales.map(locale => (
+                            <AccordionItem key={locale} value={locale}>
+                                <AccordionTrigger>{tShared('fields.name')} ({locale})</AccordionTrigger>
+                                <AccordionContent>
+                                    <FormField readonly={!onSubmit} name={`name.${locale}`} errors={errors} control={form.control} />
+                                </AccordionContent>
+                            </AccordionItem>
+                        ))}
+                    </Accordion>
+                </div>
+
+                {canManageOptions && (
+                    <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.options'), tabs) })}>
+                        <AttributeOptions attributeId={attribute.id} />
+                    </div>
+                )}
             </>
         </FormContainer>
 

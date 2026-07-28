@@ -1,7 +1,7 @@
 "use client";
 
 import { updateProduct } from "@/app/actions/product";
-import { Form, useProduct } from "@/features/products";
+import { Form } from "@/features/products";
 import { productSchema } from "@/features/products/schemas";
 import { Route } from "@/features/routing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/features/shared/components/ui/card";
@@ -16,8 +16,6 @@ const Edit = () => {
   const tProducts = useTranslations('Products');
 
   const [errors, setErrors] = useState<Record<string, string> | null>(null);
-
-  const productPromise = useProduct();
 
   function onSubmit(data: z.infer<typeof productSchema>) {
     const productId = Number(params.id);
@@ -41,7 +39,7 @@ const Edit = () => {
         <CardTitle>{tProducts('edit.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form productPromise={productPromise} onSubmit={onSubmit} errors={errors} />
+        <Form onSubmit={onSubmit} errors={errors} />
       </CardContent>
     </Card>
   )

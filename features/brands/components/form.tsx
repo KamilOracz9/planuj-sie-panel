@@ -7,8 +7,8 @@ import { brandSchema } from "../schemas";
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormContainer from "@/features/shared/components/form-container";
-import Tabs, { useTabs } from "@/features/shared/components/tabs";
-import { cn, slugify } from "@/lib/utils";
+import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
+import { cn } from "@/lib/utils";
 import TranslatedField from "@/features/shared/components/translated-field";
 import { ModelAttributes } from "@/features/attributes";
 import { useBrand } from "../context";
@@ -43,11 +43,11 @@ const Form = ({ onSubmit, errors }: FormProps) => {
         <FormContainer onSubmit={onSubmit} form={form} >
             <>
                 <Tabs tabs={tabs} />
-                <div className={cn({ 'hidden': normalizedActiveHash !== slugify(tShared('tabs.basic')) })}>
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) })}>
                     <TranslatedField onSubmit={!!onSubmit} errors={errors} form={form} />
                 </div>
 
-                <div className={cn({ 'hidden': normalizedActiveHash !== slugify(tShared('tabs.attributes')) })}>
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.attributes'), tabs) })}>
                     <div className="space-y-4">
                         <ModelAttributes
                             form={form}

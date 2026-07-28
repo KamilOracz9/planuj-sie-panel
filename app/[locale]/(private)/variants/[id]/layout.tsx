@@ -1,3 +1,4 @@
+import { fetchAttributeValuesByModel } from "@/app/actions/attribute";
 import { fetchProductsListForSelect } from "@/app/actions/product";
 import { fetchVariant, VariantContext } from "@/features/variants";
 
@@ -11,9 +12,10 @@ const Layout = async ({ children, params }: LayoutProps) => {
 
     const variantPromise = fetchVariant({ id, locale });
     const productsSelectPromise = fetchProductsListForSelect({ locale });
+    const existingAttributesPromise = fetchAttributeValuesByModel({ locale, modelId: Number(id), modelType: 'variant' });
 
     return (
-        <VariantContext value={{ variantPromise, productsSelectPromise }}>
+        <VariantContext value={{ variantPromise, productsSelectPromise, existingAttributesPromise }}>
             {children}
         </VariantContext>
     )

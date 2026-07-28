@@ -8,9 +8,10 @@ interface FormFieldProps {
   errors?: Record<string, string> | null;
   control: any;
   readonly?: boolean;
+  type?: 'text' | 'number' | 'date';
 }
 
-const FormField = ({ label, name, errors, control, readonly = false }: FormFieldProps) => {
+const FormField = ({ label, name, errors, control, readonly = false, type = 'text' }: FormFieldProps) => {
   return (
     <Field>
       {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
@@ -18,7 +19,7 @@ const FormField = ({ label, name, errors, control, readonly = false }: FormField
         control={control}
         name={name}
         render={({ field }) => (
-          <Input id={name} {...field} className='focus-visible:ring-0' readOnly={readonly} disabled={readonly} />
+          <Input id={name} type={type} {...field} value={field.value ?? ''} className='focus-visible:ring-0' readOnly={readonly} disabled={readonly} />
         )}
       />
       {errors && errors[name] && (

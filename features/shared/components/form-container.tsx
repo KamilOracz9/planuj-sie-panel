@@ -15,10 +15,10 @@ const FormContainer = <TFormValues extends FieldValues>({ children, onSubmit, fo
     return !onSubmit
         ? (<div>{children}</div>)
         : (
-            <form onSubmit={form?.handleSubmit(onSubmit)}>
+            <form onSubmit={form?.handleSubmit(onSubmit)} className="flex flex-col gap-6">
                 {children}
 
-                <Field orientation="horizontal" className="flex justify-end">
+                <Field orientation="horizontal" className="flex justify-end border-t pt-4">
                     <Button type="submit">
                         {tShared('actions.save')}
                     </Button>

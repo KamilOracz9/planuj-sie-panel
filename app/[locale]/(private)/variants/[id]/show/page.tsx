@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 const Show = () => {
   const tVariants = useTranslations('Variants');
 
-  const { variantPromise, productsSelectPromise } = useVariant();
+  const { variantPromise, productsSelectPromise, existingAttributesPromise } = useVariant();
 
   return (
     <Card className="flex-1">
@@ -15,7 +15,7 @@ const Show = () => {
         <CardTitle>{tVariants('show.title')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Form variantPromise={variantPromise} productsSelectPromise={productsSelectPromise} />
+        <Form variantPromise={variantPromise} productsSelectPromise={productsSelectPromise} existingAttributesPromise={existingAttributesPromise} />
       </CardContent>
     </Card>
   )

@@ -12,8 +12,8 @@ import { categorySchema } from "../schemas";
 import { useCategory } from "../hooks";
 import Select from "@/features/shared/components/select";
 import { useMemo } from "react";
-import Tabs, { useTabs } from "@/features/shared/components/tabs";
-import { cn, slugify } from "@/lib/utils";
+import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
+import { cn } from "@/lib/utils";
 import { ModelAttributes } from "@/features/attributes";
 
 interface FormProps {
@@ -50,7 +50,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
             <>
                 <Tabs tabs={tabs} />
 
-                <div className={cn({ 'hidden': normalizedActiveHash !== slugify(tShared('tabs.basic')) })}>
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) })}>
                     <Select
                         label={tCategories('fields.parent_id')}
                         name={'parent_id'}
@@ -63,7 +63,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                     />
                 </div>
 
-                <div className={cn({ 'hidden': normalizedActiveHash !== slugify(tShared('tabs.translations')) })}>
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.translations'), tabs) })}>
                     <Accordion type="single" collapsible defaultValue="pl-PL">
                         {routing.locales.map(locale => (
                             <AccordionItem key={locale} value={locale}>
@@ -78,7 +78,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                     </Accordion>
                 </div>
 
-                <div className={cn({ 'hidden': normalizedActiveHash !== slugify(tShared('tabs.attributes')) })}>
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.attributes'), tabs) })}>
                     <div className="space-y-4">
                         <ModelAttributes
                             form={form}
