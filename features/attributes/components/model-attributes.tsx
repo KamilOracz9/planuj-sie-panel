@@ -22,6 +22,7 @@ import {
     ComboboxList,
     useComboboxAnchor,
 } from "@/features/shared/components/ui/combobox";
+import { MediaSheetButton } from "@/features/media";
 
 interface ModelAttributesProps<T extends FieldValues> {
     form: UseFormReturn<T>;
@@ -60,6 +61,8 @@ const AttributeValueRow = <T extends FieldValues>({
 
     const typeCode = selectedAttribute?.attribute_type_code;
     const isChoiceType = typeCode === 'select' || typeCode === 'multiselect';
+
+    const existingId = form.watch(`attributes.${index}.id` as Path<T>) as unknown as number | undefined;
 
     const [options, setOptions] = useState<AttributeOptionSelectItem[]>([]);
 
@@ -193,6 +196,15 @@ const AttributeValueRow = <T extends FieldValues>({
                     <FormField readonly={!onSubmit} name={dataFieldName} errors={errors} control={form.control} />
                 )}
             </div>
+            {existingId && (
+                <MediaSheetButton
+                    modelType="attribute-values"
+                    id={existingId}
+                    shape="icon"
+                    title={selectedAttribute?.name ?? label}
+                    disabled={!onSubmit}
+                />
+            )}
             {onSubmit && (
                 <Button
                     type="button"

@@ -118,5 +118,17 @@ export const routing = defineRouting({
       'pl-PL': '/atrybuty/[id]/edycja',
       'en-US': '/attributes/[id]/edit',
     },
+
+    // Media gallery
+    [Route.PRIVATE.MEDIA.LIST.PATHNAME]: {
+      'pl-PL': '/galeria',
+      'en-US': '/media',
+    },
+
+    // Document library
+    [Route.PRIVATE.DOCUMENTS.LIST.PATHNAME]: {
+      'pl-PL': '/dokumenty',
+      'en-US': '/documents',
+    },
   }
 });

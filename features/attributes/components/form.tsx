@@ -15,6 +15,7 @@ import Select from "@/features/shared/components/select";
 import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
 import { cn } from "@/lib/utils";
 import AttributeOptions from "./attribute-options";
+import { EntityMediaManager } from "@/features/media";
 
 const OPTIONABLE_TYPE_CODES = ['select', 'multiselect'];
 
@@ -50,15 +51,18 @@ const Form = ({ onSubmit, attributePromise, attributeTypesSelectPromise, errors 
     const canManageOptions = !!attribute.id && !!selectedAttributeType?.code && OPTIONABLE_TYPE_CODES.includes(selectedAttributeType.code);
 
     const tabs = useMemo(() => {
-        return canManageOptions ? [tShared('tabs.basic'), tShared('tabs.options')] : [tShared('tabs.basic')];
+        const items = [tShared('tabs.basic')];
+        if (canManageOptions) items.push(tShared('tabs.options'));
+        items.push(tShared('tabs.media'));
+        return items;
     }, [canManageOptions])
 
     return (
         <FormContainer onSubmit={onSubmit} form={form} >
             <>
-                {canManageOptions && <Tabs tabs={tabs} />}
+                <Tabs tabs={tabs} />
 
-                <div className={cn({ 'hidden': canManageOptions && !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) })}>
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) })}>
                     <Select
                         label={tAttributes('fields.type')}
                         name={'attribute_type_id'}
@@ -87,6 +91,10 @@ const Form = ({ onSubmit, attributePromise, attributeTypesSelectPromise, errors 
                         <AttributeOptions attributeId={attribute.id} />
                     </div>
                 )}
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
+                    <EntityMediaManager modelType="attributes" id={attribute.id} shape="icon" disabled={!onSubmit} />
+                </div>
             </>
         </FormContainer>
 

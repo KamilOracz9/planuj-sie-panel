@@ -9,6 +9,7 @@ export const variantSchema = z.object({
     name: localesValidation(),
     product_id: z.number().nullable(),
     attributes: z.array(z.object({
+        id: z.number().optional(),
         data: z.any().optional(),
         attribute_id: z.string().optional(),
     })).optional(),

@@ -18,6 +18,7 @@ const useCategory = () => {
     const defaultShortDescriptionValues = Object.fromEntries(routing.locales.map(locale => [locale, category.translations?.[locale as keyof typeof category.translations]?.short_description ?? undefined]));
 
     const defaultAttributes = existingAttributes?.map(av => ({
+        id: av.id,
         attribute_id: String(av.attribute_id),
         data: av.data,
     })) ?? [];

@@ -8,6 +8,7 @@ const localesValidation = () => {
 export const productSchema = z.object({
     name: localesValidation(),
     attributes: z.array(z.object({
+        id: z.number().optional(),
         data: z.any().optional(),
         attribute_id: z.string().optional(),
     })).optional(),

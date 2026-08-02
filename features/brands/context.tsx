@@ -18,6 +18,7 @@ export const useBrand = () => {
     const defaultNameValues = Object.fromEntries(routing.locales.map(locale => [locale, brand.translations ? brand.translations[locale as keyof typeof brand.translations]?.name : undefined]));
 
     const defaultAttributes = existingAttributes?.map(av => ({
+        id: av.id,
         attribute_id: String(av.attribute_id),
         data: av.data,
     })) ?? [];

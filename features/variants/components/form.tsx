@@ -18,6 +18,7 @@ import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
 import { cn } from "@/lib/utils";
 import { ModelAttributes } from "@/features/attributes";
 import { ExistingAttributeValue } from "@/features/attributes/types";
+import { EntityMediaManager, DocumentsManager } from "@/features/media";
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof variantSchema>) => void;
@@ -41,6 +42,7 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
     const defaultNameValues = Object.fromEntries(routing.locales.map(locale => [locale, variant.translations ? variant.translations[locale as keyof typeof variant.translations]?.name : undefined]));
 
     const defaultAttributes = existingAttributes?.map(av => ({
+        id: av.id,
         attribute_id: String(av.attribute_id),
         data: av.data,
     })) ?? [];
@@ -57,7 +59,7 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.media'), tShared('tabs.documents')]
     }, [])
 
     return (
@@ -116,6 +118,14 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
                             errors={errors}
                         />
                     </div>
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
+                    <EntityMediaManager modelType="variants" id={variant.id} shape="gallery" disabled={!onSubmit} />
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.documents'), tabs) })}>
+                    <DocumentsManager modelType="variants" id={variant.id} disabled={!onSubmit} />
                 </div>
             </>
         </FormContainer>

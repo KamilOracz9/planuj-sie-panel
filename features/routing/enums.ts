@@ -33,6 +33,10 @@ export enum Pathnames {
     ATTRIBUTES_CREATE = "/attributes/create",
     ATTRIBUTES_SHOW = "/attributes/[id]/show",
     ATTRIBUTES_EDIT = "/attributes/[id]/edit",
+
+    MEDIA_LIST = "/media",
+
+    DOCUMENTS_LIST = "/documents",
 }
 
 export const Route = {
@@ -75,6 +79,12 @@ export const Route = {
             CREATE: { PATHNAME: Pathnames.ATTRIBUTES_CREATE },
             EDIT: { PATHNAME: Pathnames.ATTRIBUTES_EDIT },
             SHOW: { PATHNAME: Pathnames.ATTRIBUTES_SHOW }
+        },
+        MEDIA: {
+            LIST: { PATHNAME: Pathnames.MEDIA_LIST },
+        },
+        DOCUMENTS: {
+            LIST: { PATHNAME: Pathnames.DOCUMENTS_LIST },
         },
     },
     PUBLIC: {

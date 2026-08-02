@@ -13,7 +13,7 @@ import {
 } from "./ui/sidebar";
 import { Link, usePathname } from "@/lib/i18n/navigation";
 import { Route } from "@/features/routing";
-import { FolderTree, Layers, Package, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
+import { FileText, FolderTree, Images, Layers, Package, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const catalogItems = [
@@ -22,6 +22,8 @@ const catalogItems = [
   { pathname: Route.PRIVATE.CATEGORIES.LIST.PATHNAME, translationKey: "Categories.list.title", icon: FolderTree },
   { pathname: Route.PRIVATE.BRANDS.LIST.PATHNAME, translationKey: "Brands.list.title", icon: Tag },
   { pathname: Route.PRIVATE.ATTRIBUTES.LIST.PATHNAME, translationKey: "Attributes.list.title", icon: SlidersHorizontal },
+  { pathname: Route.PRIVATE.MEDIA.LIST.PATHNAME, translationKey: "Shared.nav.media", icon: Images },
+  { pathname: Route.PRIVATE.DOCUMENTS.LIST.PATHNAME, translationKey: "Shared.nav.documents", icon: FileText },
 ] as const;
 
 const systemItems = [

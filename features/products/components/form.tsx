@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import TranslatedField from "@/features/shared/components/translated-field";
 import { ModelAttributes } from "@/features/attributes";
 import { useProduct } from "../context";
+import { EntityMediaManager, DocumentsManager } from "@/features/media";
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof productSchema>) => void;
@@ -25,7 +26,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     const tProducts = useTranslations('Products');
     const { normalizedActiveHash } = useTabs();
 
-    const { defaultNameValues, defaultAttributes } = useProduct();
+    const { product, defaultNameValues, defaultAttributes } = useProduct();
 
     const form = useForm<ProductFormValues>({
         resolver: zodResolver(productSchema),
@@ -36,7 +37,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.media'), tShared('tabs.documents')]
     }, [])
 
     return (
@@ -56,6 +57,14 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                             errors={errors}
                         />
                     </div>
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
+                    <EntityMediaManager modelType="products" id={product.id} shape="gallery" disabled={!onSubmit} />
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.documents'), tabs) })}>
+                    <DocumentsManager modelType="products" id={product.id} disabled={!onSubmit} />
                 </div>
             </>
         </FormContainer>

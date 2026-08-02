@@ -120,6 +120,14 @@
             "save-hint": "Zapisz atrybut, aby zarządzać jego opcjami."
         }
     },
+    "MediaGallery": {
+        "title": "Galeria zdjęć",
+        "subtitle": "Wszystkie przesłane zdjęcia w jednym miejscu."
+    },
+    "DocumentsLibrary": {
+        "title": "Dokumenty",
+        "subtitle": "Wszystkie przesłane dokumenty w jednym miejscu."
+    },
     "Shared": {
         "actions": {
             "save": "Zapisz",
@@ -144,11 +152,35 @@
             "basic": "Podstawowe",
             "attributes": "Atrybuty",
             "options": "Opcje",
-            "translations": "Tłumaczenia"
+            "translations": "Tłumaczenia",
+            "media": "Media",
+            "documents": "Dokumenty"
+        },
+        "media": {
+            "icon": "Ikona",
+            "logo": "Logo",
+            "gallery": "Galeria zdjęć",
+            "main-image": "Zdjęcie główne 1",
+            "main-image-2": "Zdjęcie główne 2",
+            "upload": "Dodaj zdjęcie",
+            "replace": "Podmień",
+            "loading": "Ładowanie...",
+            "save-hint": "Zapisz, aby zarządzać zdjęciami.",
+            "drop-hint": "lub przeciągnij i upuść zdjęcie tutaj",
+            "from-gallery": "Z galerii",
+            "select-from-gallery": "Wybierz zdjęcie z galerii"
+        },
+        "documents": {
+            "field-label": "Dokumenty",
+            "upload": "Dodaj dokument",
+            "from-library": "Z biblioteki",
+            "select-from-library": "Wybierz dokument z biblioteki"
         },
         "nav": {
             "catalog": "Katalog",
-            "system": "System"
+            "system": "System",
+            "media": "Galeria zdjęć",
+            "documents": "Dokumenty"
         }
     }
 }

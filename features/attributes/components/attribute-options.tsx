@@ -19,6 +19,7 @@ import { routing } from "@/lib/i18n/routing";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/features/shared/components/ui/table";
 import { Button } from "@/features/shared/components/ui/button";
 import TranslatedField from "@/features/shared/components/translated-field";
+import { MediaSheetButton } from "@/features/media";
 
 interface AttributeOptionsProps {
     attributeId: number;
@@ -107,6 +108,7 @@ const AttributeOptions = ({ attributeId }: AttributeOptionsProps) => {
                         <TableRow key={option.id}>
                             <TableCell>{option.name}</TableCell>
                             <TableCell className="text-center">
+                                <MediaSheetButton modelType="attribute-options" id={option.id} shape="icon" title={option.name} />
                                 <Button type="button" variant="ghost" onClick={() => handleDelete(option.id)}>
                                     <Trash className="h-4 w-4" />
                                 </Button>

@@ -1,5 +1,68 @@
 {
     "HomePage": {
         "title": "Home page"
+    },
+    "MediaGallery": {
+        "title": "Media gallery",
+        "subtitle": "All uploaded images in one place."
+    },
+    "DocumentsLibrary": {
+        "title": "Documents",
+        "subtitle": "All uploaded documents in one place."
+    },
+    "Shared": {
+        "actions": {
+            "save": "Save",
+            "add": "Add",
+            "remove": "Remove",
+            "cancel": "Cancel"
+        },
+        "fields": {
+            "name": "Name",
+            "email": "Email",
+            "slug": "Slug",
+            "created_at": "Created at",
+            "actions": "Actions"
+        },
+        "values": {
+            "null": "None"
+        },
+        "messages": {
+            "no-items-found": "No items found."
+        },
+        "tabs": {
+            "basic": "Basic",
+            "attributes": "Attributes",
+            "options": "Options",
+            "translations": "Translations",
+            "media": "Media",
+            "documents": "Documents"
+        },
+        "media": {
+            "icon": "Icon",
+            "logo": "Logo",
+            "gallery": "Gallery",
+            "main-image": "Main image 1",
+            "main-image-2": "Main image 2",
+            "upload": "Upload",
+            "replace": "Replace",
+            "loading": "Loading...",
+            "save-hint": "Save the record first to manage images.",
+            "drop-hint": "or drag and drop an image here",
+            "from-gallery": "From gallery",
+            "select-from-gallery": "Select an image from the gallery"
+        },
+        "documents": {
+            "field-label": "Documents",
+            "upload": "Upload document",
+            "from-library": "From library",
+            "select-from-library": "Select a document from the library"
+        },
+        "nav": {
+            "catalog": "Catalog",
+            "system": "System",
+            "media": "Media gallery",
+            "documents": "Documents"
+        }
     }
 }

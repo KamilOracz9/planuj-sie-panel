@@ -11,6 +11,7 @@ export const categorySchema = z.object({
     description: localesValidation().nullable(),
     short_description: localesValidation().nullable(),
     attributes: z.array(z.object({
+        id: z.number().optional(),
         data: z.any().optional(),
         attribute_id: z.string().optional(),
     })).optional(),

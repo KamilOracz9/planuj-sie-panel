@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import TranslatedField from "@/features/shared/components/translated-field";
 import { ModelAttributes } from "@/features/attributes";
 import { useBrand } from "../context";
+import { EntityMediaManager, DocumentsManager } from "@/features/media";
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof brandSchema>) => void;
@@ -25,7 +26,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     const tBrands = useTranslations('Brands');
     const { normalizedActiveHash } = useTabs();
 
-    const { defaultNameValues, defaultAttributes } = useBrand();
+    const { brand, defaultNameValues, defaultAttributes } = useBrand();
 
     const form = useForm<BrandFormValues>({
         resolver: zodResolver(brandSchema),
@@ -36,7 +37,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.media'), tShared('tabs.documents')]
     }, [])
 
     return (
@@ -56,6 +57,14 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                             errors={errors}
                         />
                     </div>
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
+                    <EntityMediaManager modelType="brands" id={brand.id} shape="logo" disabled={!onSubmit} />
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.documents'), tabs) })}>
+                    <DocumentsManager modelType="brands" id={brand.id} disabled={!onSubmit} />
                 </div>
             </>
         </FormContainer>
