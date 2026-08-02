@@ -1,14 +1,15 @@
 "use server"
 
-import { MediaItem, MediaModelType } from "@/features/media/types";
+import { MediaFolder, MediaFolderType, MediaItem, MediaModelType } from "@/features/media/types";
 
 const headers = () => ({
     'X-API-KEY': process.env.API_KEY || '',
     'Accept': 'application/json',
 });
 
-export async function fetchGalleryMedia(): Promise<MediaItem[]> {
-    return await fetch(`${process.env.API_URL}/gallery`, {
+export async function fetchGalleryMedia(folderId?: number | null): Promise<MediaItem[]> {
+    const query = folderId ? `?folder_id=${folderId}` : '';
+    return await fetch(`${process.env.API_URL}/gallery${query}`, {
         headers: headers(),
     }).then(res => res.json());
 }
@@ -28,8 +29,20 @@ export async function deleteGalleryMedia(mediaId: MediaItem['id']): Promise<{ id
     }).then(res => res.json());
 }
 
-export async function fetchDocumentLibrary(): Promise<MediaItem[]> {
-    return await fetch(`${process.env.API_URL}/documents`, {
+export async function moveGalleryMedia(mediaId: MediaItem['id'], folderId: number | null): Promise<MediaItem> {
+    return await fetch(`${process.env.API_URL}/gallery/${mediaId}/move`, {
+        method: 'POST',
+        body: JSON.stringify({ folder_id: folderId }),
+        headers: {
+            ...headers(),
+            'Content-Type': 'application/json',
+        },
+    }).then(res => res.json());
+}
+
+export async function fetchDocumentLibrary(folderId?: number | null): Promise<MediaItem[]> {
+    const query = folderId ? `?folder_id=${folderId}` : '';
+    return await fetch(`${process.env.API_URL}/documents${query}`, {
         headers: headers(),
     }).then(res => res.json());
 }
@@ -44,6 +57,52 @@ export async function uploadDocumentLibrary(formData: FormData): Promise<MediaIt
 
 export async function deleteDocumentLibrary(mediaId: MediaItem['id']): Promise<{ id: MediaItem['id'] }> {
     return await fetch(`${process.env.API_URL}/documents/${mediaId}`, {
+        method: 'DELETE',
+        headers: headers(),
+    }).then(res => res.json());
+}
+
+export async function moveDocumentLibrary(mediaId: MediaItem['id'], folderId: number | null): Promise<MediaItem> {
+    return await fetch(`${process.env.API_URL}/documents/${mediaId}/move`, {
+        method: 'POST',
+        body: JSON.stringify({ folder_id: folderId }),
+        headers: {
+            ...headers(),
+            'Content-Type': 'application/json',
+        },
+    }).then(res => res.json());
+}
+
+export async function fetchMediaFolders(type: MediaFolderType): Promise<MediaFolder[]> {
+    return await fetch(`${process.env.API_URL}/folders/${type}`, {
+        headers: headers(),
+    }).then(res => res.json());
+}
+
+export async function createMediaFolder(type: MediaFolderType, name: string, parentId: number | null): Promise<MediaFolder> {
+    return await fetch(`${process.env.API_URL}/folders/${type}`, {
+        method: 'POST',
+        body: JSON.stringify({ name, parent_id: parentId }),
+        headers: {
+            ...headers(),
+            'Content-Type': 'application/json',
+        },
+    }).then(res => res.json());
+}
+
+export async function updateMediaFolder(type: MediaFolderType, id: number, parentId: number | null): Promise<MediaFolder> {
+    return await fetch(`${process.env.API_URL}/folders/${type}/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ parent_id: parentId }),
+        headers: {
+            ...headers(),
+            'Content-Type': 'application/json',
+        },
+    }).then(res => res.json());
+}
+
+export async function deleteMediaFolder(type: MediaFolderType, id: number): Promise<{ id: number }> {
+    return await fetch(`${process.env.API_URL}/folders/${type}/${id}`, {
         method: 'DELETE',
         headers: headers(),
     }).then(res => res.json());

@@ -6,10 +6,23 @@ export interface MediaItem {
     mime_type: string;
     size: number;
     order_column: number | null;
+    folder_id: number | null;
     url: string;
     conversions: Record<string, string>;
     created_at: string;
 }
+
+export type MediaFolderType = "images" | "documents";
+
+export interface MediaFolder {
+    id: number;
+    name: string;
+    parent_id: number | null;
+}
+
+/** Custom drag-and-drop payload types used to move folders and media between folders. */
+export const DND_FOLDER_TYPE = "application/x-media-folder-id";
+export const DND_MEDIA_TYPE = "application/x-media-item-id";
 
 export type MediaModelType =
     | 'attributes'

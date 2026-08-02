@@ -58,6 +58,12 @@
             "from-library": "From library",
             "select-from-library": "Select a document from the library"
         },
+        "folders": {
+            "all": "All",
+            "root": "Root folder",
+            "new": "New folder",
+            "name-placeholder": "Folder name"
+        },
         "nav": {
             "catalog": "Catalog",
             "system": "System",

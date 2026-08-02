@@ -10,20 +10,22 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
 } from "./ui/sidebar";
 import { Link, usePathname } from "@/lib/i18n/navigation";
 import { Route } from "@/features/routing";
 import { FileText, FolderTree, Images, Layers, Package, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { SidebarFolderTree } from "@/features/media";
 
 const catalogItems = [
-  { pathname: Route.PRIVATE.PRODUCTS.LIST.PATHNAME, translationKey: "Products.list.title", icon: Package },
-  { pathname: Route.PRIVATE.VARIANTS.LIST.PATHNAME, translationKey: "Variants.list.title", icon: Layers },
-  { pathname: Route.PRIVATE.CATEGORIES.LIST.PATHNAME, translationKey: "Categories.list.title", icon: FolderTree },
-  { pathname: Route.PRIVATE.BRANDS.LIST.PATHNAME, translationKey: "Brands.list.title", icon: Tag },
-  { pathname: Route.PRIVATE.ATTRIBUTES.LIST.PATHNAME, translationKey: "Attributes.list.title", icon: SlidersHorizontal },
-  { pathname: Route.PRIVATE.MEDIA.LIST.PATHNAME, translationKey: "Shared.nav.media", icon: Images },
-  { pathname: Route.PRIVATE.DOCUMENTS.LIST.PATHNAME, translationKey: "Shared.nav.documents", icon: FileText },
+  { pathname: Route.PRIVATE.PRODUCTS.LIST.PATHNAME, translationKey: "Products.list.title", icon: Package, folderType: undefined },
+  { pathname: Route.PRIVATE.VARIANTS.LIST.PATHNAME, translationKey: "Variants.list.title", icon: Layers, folderType: undefined },
+  { pathname: Route.PRIVATE.CATEGORIES.LIST.PATHNAME, translationKey: "Categories.list.title", icon: FolderTree, folderType: undefined },
+  { pathname: Route.PRIVATE.BRANDS.LIST.PATHNAME, translationKey: "Brands.list.title", icon: Tag, folderType: undefined },
+  { pathname: Route.PRIVATE.ATTRIBUTES.LIST.PATHNAME, translationKey: "Attributes.list.title", icon: SlidersHorizontal, folderType: undefined },
+  { pathname: Route.PRIVATE.MEDIA.LIST.PATHNAME, translationKey: "Shared.nav.media", icon: Images, folderType: "images" as const },
+  { pathname: Route.PRIVATE.DOCUMENTS.LIST.PATHNAME, translationKey: "Shared.nav.documents", icon: FileText, folderType: "documents" as const },
 ] as const;
 
 const systemItems = [
@@ -49,7 +51,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>{t("Shared.nav.catalog")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {catalogItems.map(({ pathname: itemPathname, translationKey, icon: Icon }) => (
+              {catalogItems.map(({ pathname: itemPathname, translationKey, icon: Icon, folderType }) => (
                 <SidebarMenuItem key={itemPathname}>
                   <SidebarMenuButton asChild isActive={isActive(itemPathname)}>
                     <Link href={itemPathname}>
@@ -57,6 +59,9 @@ export function AppSidebar() {
                       <span>{t(translationKey)}</span>
                     </Link>
                   </SidebarMenuButton>
+                  {folderType && isActive(itemPathname) && (
+                    <SidebarFolderTree type={folderType} pathname={itemPathname} />
+                  )}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
@@ -81,6 +86,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarRail />
     </Sidebar>
   )
 }

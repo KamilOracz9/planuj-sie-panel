@@ -176,6 +176,12 @@
             "from-library": "Z biblioteki",
             "select-from-library": "Wybierz dokument z biblioteki"
         },
+        "folders": {
+            "all": "Wszystkie",
+            "root": "Katalog główny",
+            "new": "Nowy katalog",
+            "name-placeholder": "Nazwa katalogu"
+        },
         "nav": {
             "catalog": "Katalog",
             "system": "System",
