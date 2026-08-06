@@ -1,4 +1,5 @@
 import { fetchAttributeValuesByModel } from "@/app/actions/attribute";
+import { fetchChannelVisibilitiesByModel } from "@/app/actions/channel-visibility";
 import { CategoryContext, fetchCategoriesListForSelect, fetchCategory } from "@/features/categories";
 
 interface LayoutProps {
@@ -11,9 +12,10 @@ const Layout = async ({ children, params }: LayoutProps) => {
 
     const categoryPromise = fetchCategory({ id, locale });
     const existingAttributesPromise = fetchAttributeValuesByModel({ locale, modelId: Number(id), modelType: 'category' });
+    const existingChannelsPromise = fetchChannelVisibilitiesByModel({ locale, modelId: Number(id), modelType: 'category' });
 
     return (
-        <CategoryContext value={{ categoryPromise, existingAttributesPromise }}>
+        <CategoryContext value={{ categoryPromise, existingAttributesPromise, existingChannelsPromise }}>
             {children}
         </CategoryContext>
     )

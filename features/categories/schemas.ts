@@ -15,4 +15,8 @@ export const categorySchema = z.object({
         data: z.any().optional(),
         attribute_id: z.string().optional(),
     })).optional(),
+    channels: z.array(z.object({
+        channel_id: z.number(),
+        is_enabled: z.boolean(),
+    })).optional(),
 })

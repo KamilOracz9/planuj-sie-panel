@@ -31,7 +31,9 @@ export type MediaModelType =
     | 'brands'
     | 'categories'
     | 'products'
-    | 'variants';
+    | 'variants'
+    | 'series'
+    | 'collections';
 
 export type IconModelMedia = { icon: MediaItem | null };
 export type LogoModelMedia = { logo: MediaItem | null };

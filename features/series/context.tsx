@@ -1,0 +1,45 @@
+"use client";
+
+import { createContext, use, useContext } from "react";
+import { SeriesWithTranslations } from "./types";
+import { ExistingAttributeValue } from "../attributes/types";
+import { ExistingChannelVisibility } from "../channels/types";
+import { routing } from "@/lib/i18n/routing";
+import { useAppSelector } from "@/lib/redux/hooks";
+
+export const SeriesContext = createContext<{
+    seriesPromise: Promise<SeriesWithTranslations> | undefined,
+    existingAttributesPromise: Promise<ExistingAttributeValue[]>,
+    existingChannelsPromise: Promise<ExistingChannelVisibility[]>,
+} | undefined>(undefined);
+
+export const useSeries = () => {
+    const ctx = useContext(SeriesContext);
+    const { channelsSelect } = useAppSelector(state => state.channel);
+    const series = ctx?.seriesPromise ? use(ctx.seriesPromise) : {} as SeriesWithTranslations;
+    const existingAttributes = ctx?.existingAttributesPromise ? use(ctx.existingAttributesPromise) : [] as ExistingAttributeValue[];
+    const existingChannels = ctx?.existingChannelsPromise ? use(ctx.existingChannelsPromise) : [] as ExistingChannelVisibility[];
+
+    const defaultNameValues = Object.fromEntries(routing.locales.map(locale => [locale, series.translations ? series.translations[locale as keyof typeof series.translations]?.name : undefined]));
+
+    const defaultAttributes = existingAttributes?.map(av => ({
+        id: av.id,
+        attribute_id: String(av.attribute_id),
+        data: av.data,
+    })) ?? [];
+
+    const defaultChannels = channelsSelect.map(channel => ({
+        channel_id: channel.id,
+        is_enabled: existingChannels.find(v => v.channel_id === channel.id)?.is_enabled ?? true,
+    }));
+
+    return {
+        ...ctx,
+        series,
+        existingAttributes,
+        defaultNameValues,
+        defaultAttributes,
+        channelsSelect,
+        defaultChannels,
+    };
+};

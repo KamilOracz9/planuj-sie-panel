@@ -2,6 +2,56 @@
     "HomePage": {
         "title": "Home page"
     },
+    "Series": {
+        "list": {
+            "title": "Series"
+        },
+        "edit": {
+            "title": "Edit series"
+        },
+        "create": {
+            "title": "Create series"
+        },
+        "show": {
+            "title": "Series details"
+        },
+        "fields": {
+            "attribute_id": "Attribute",
+            "data": "Value"
+        }
+    },
+    "Collections": {
+        "list": {
+            "title": "Collections"
+        },
+        "edit": {
+            "title": "Edit collection"
+        },
+        "create": {
+            "title": "Create collection"
+        },
+        "show": {
+            "title": "Collection details"
+        },
+        "fields": {
+            "attribute_id": "Attribute",
+            "data": "Value"
+        }
+    },
+    "Channels": {
+        "list": {
+            "title": "Channels"
+        },
+        "edit": {
+            "title": "Edit channel"
+        },
+        "create": {
+            "title": "Create channel"
+        },
+        "show": {
+            "title": "Channel details"
+        }
+    },
     "MediaGallery": {
         "title": "Media gallery",
         "subtitle": "All uploaded images in one place."
@@ -35,6 +85,7 @@
             "attributes": "Attributes",
             "options": "Options",
             "translations": "Translations",
+            "channels": "Channels",
             "media": "Media",
             "documents": "Documents"
         },

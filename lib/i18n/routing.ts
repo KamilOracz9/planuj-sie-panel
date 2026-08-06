@@ -47,6 +47,60 @@ export const routing = defineRouting({
       'en-US': '/brands/[id]/edit',
     },
 
+    // Series
+    [Route.PRIVATE.SERIES.LIST.PATHNAME]: {
+      'pl-PL': '/serie-produktow',
+      'en-US': '/series',
+    },
+    [Route.PRIVATE.SERIES.CREATE.PATHNAME]: {
+      'pl-PL': '/serie-produktow/nowa',
+      'en-US': '/series/new',
+    },
+    [Route.PRIVATE.SERIES.SHOW.PATHNAME]: {
+      'pl-PL': '/serie-produktow/[id]/podglad',
+      'en-US': '/series/[id]/show',
+    },
+    [Route.PRIVATE.SERIES.EDIT.PATHNAME]: {
+      'pl-PL': '/serie-produktow/[id]/edycja',
+      'en-US': '/series/[id]/edit',
+    },
+
+    // Collections
+    [Route.PRIVATE.COLLECTIONS.LIST.PATHNAME]: {
+      'pl-PL': '/kolekcje',
+      'en-US': '/collections',
+    },
+    [Route.PRIVATE.COLLECTIONS.CREATE.PATHNAME]: {
+      'pl-PL': '/kolekcje/nowa',
+      'en-US': '/collections/new',
+    },
+    [Route.PRIVATE.COLLECTIONS.SHOW.PATHNAME]: {
+      'pl-PL': '/kolekcje/[id]/podglad',
+      'en-US': '/collections/[id]/show',
+    },
+    [Route.PRIVATE.COLLECTIONS.EDIT.PATHNAME]: {
+      'pl-PL': '/kolekcje/[id]/edycja',
+      'en-US': '/collections/[id]/edit',
+    },
+
+    // Channels
+    [Route.PRIVATE.CHANNELS.LIST.PATHNAME]: {
+      'pl-PL': '/kanaly',
+      'en-US': '/channels',
+    },
+    [Route.PRIVATE.CHANNELS.CREATE.PATHNAME]: {
+      'pl-PL': '/kanaly/nowy',
+      'en-US': '/channels/new',
+    },
+    [Route.PRIVATE.CHANNELS.SHOW.PATHNAME]: {
+      'pl-PL': '/kanaly/[id]/podglad',
+      'en-US': '/channels/[id]/show',
+    },
+    [Route.PRIVATE.CHANNELS.EDIT.PATHNAME]: {
+      'pl-PL': '/kanaly/[id]/edycja',
+      'en-US': '/channels/[id]/edit',
+    },
+
     // Categories
     [Route.PRIVATE.CATEGORIES.LIST.PATHNAME]: {
       'pl-PL': '/kategorie',

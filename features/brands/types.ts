@@ -1,6 +1,8 @@
-import { ModelWithTranslations, Translation, Model } from "../shared/types";
+import { ModelWithTranslations, Translation, Model, SelectItem } from "../shared/types";
 
 export type Brand = {} & Model;
+
+export type BrandSelectItem = {} & SelectItem;
 
 export type BrandAttributeValue = {
     id: number;

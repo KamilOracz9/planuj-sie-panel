@@ -24,6 +24,21 @@ export enum Pathnames {
     BRANDS_SHOW = "/brands/[id]/show",
     BRANDS_EDIT = "/brands/[id]/edit",
 
+    SERIES_LIST = "/series",
+    SERIES_CREATE = "/series/create",
+    SERIES_SHOW = "/series/[id]/show",
+    SERIES_EDIT = "/series/[id]/edit",
+
+    COLLECTIONS_LIST = "/collections",
+    COLLECTIONS_CREATE = "/collections/create",
+    COLLECTIONS_SHOW = "/collections/[id]/show",
+    COLLECTIONS_EDIT = "/collections/[id]/edit",
+
+    CHANNELS_LIST = "/channels",
+    CHANNELS_CREATE = "/channels/create",
+    CHANNELS_SHOW = "/channels/[id]/show",
+    CHANNELS_EDIT = "/channels/[id]/edit",
+
     CATEGORIES_LIST = "/categories",
     CATEGORIES_CREATE = "/categories/create",
     CATEGORIES_SHOW = "/categories/[id]/show",
@@ -55,6 +70,24 @@ export const Route = {
             CREATE: { PATHNAME: Pathnames.BRANDS_CREATE },
             EDIT: { PATHNAME: Pathnames.BRANDS_EDIT },
             SHOW: { PATHNAME: Pathnames.BRANDS_SHOW }
+        },
+        SERIES: {
+            LIST: { PATHNAME: Pathnames.SERIES_LIST },
+            CREATE: { PATHNAME: Pathnames.SERIES_CREATE },
+            EDIT: { PATHNAME: Pathnames.SERIES_EDIT },
+            SHOW: { PATHNAME: Pathnames.SERIES_SHOW }
+        },
+        COLLECTIONS: {
+            LIST: { PATHNAME: Pathnames.COLLECTIONS_LIST },
+            CREATE: { PATHNAME: Pathnames.COLLECTIONS_CREATE },
+            EDIT: { PATHNAME: Pathnames.COLLECTIONS_EDIT },
+            SHOW: { PATHNAME: Pathnames.COLLECTIONS_SHOW }
+        },
+        CHANNELS: {
+            LIST: { PATHNAME: Pathnames.CHANNELS_LIST },
+            CREATE: { PATHNAME: Pathnames.CHANNELS_CREATE },
+            EDIT: { PATHNAME: Pathnames.CHANNELS_EDIT },
+            SHOW: { PATHNAME: Pathnames.CHANNELS_SHOW }
         },
         PRODUCTS: {
             LIST: { PATHNAME: Pathnames.PRODUCTS_LIST },

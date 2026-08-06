@@ -16,6 +16,7 @@ import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
 import { cn } from "@/lib/utils";
 import { ModelAttributes } from "@/features/attributes";
 import { EntityMediaManager, DocumentsManager } from "@/features/media";
+import { ChannelVisibilityField } from "@/features/channels";
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof categorySchema>) => void;
@@ -29,7 +30,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     const tCategories = useTranslations('Categories');
     const { normalizedActiveHash } = useTabs();
 
-    const { defaultNameValues, defaultDescriptionValues, defaultShortDescriptionValues, selectedParentCategory, category, categoriesSelect, defaultAttributes } = useCategory();
+    const { defaultNameValues, defaultDescriptionValues, defaultShortDescriptionValues, selectedParentCategory, category, categoriesSelect, defaultAttributes, defaultChannels } = useCategory();
 
     const form = useForm<CategoryFormValues>({
         resolver: zodResolver(categorySchema),
@@ -39,11 +40,12 @@ const Form = ({ onSubmit, errors }: FormProps) => {
             description: defaultDescriptionValues,
             short_description: defaultShortDescriptionValues,
             attributes: defaultAttributes,
+            channels: defaultChannels,
         },
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.translations'), tShared('tabs.attributes'), tShared('tabs.media'), tShared('tabs.documents')]
+        return [tShared('tabs.basic'), tShared('tabs.translations'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.media'), tShared('tabs.documents')]
     }, [])
 
     return (
@@ -88,6 +90,10 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                             errors={errors}
                         />
                     </div>
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.channels'), tabs) })}>
+                    <ChannelVisibilityField form={form} onSubmit={onSubmit} errors={errors} />
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>

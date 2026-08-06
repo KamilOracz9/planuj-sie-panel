@@ -13,6 +13,9 @@ import TranslatedField from "@/features/shared/components/translated-field";
 import { ModelAttributes } from "@/features/attributes";
 import { useProduct } from "../context";
 import { EntityMediaManager, DocumentsManager } from "@/features/media";
+import { ChannelVisibilityField } from "@/features/channels";
+import Select from "@/features/shared/components/select";
+import MultiSelect from "@/features/shared/components/multi-select";
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof productSchema>) => void;
@@ -26,26 +29,72 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     const tProducts = useTranslations('Products');
     const { normalizedActiveHash } = useTabs();
 
-    const { product, defaultNameValues, defaultAttributes } = useProduct();
+    const {
+        product,
+        defaultNameValues,
+        defaultAttributes,
+        defaultChannels,
+        brandsSelect,
+        seriesSelect,
+        collectionsSelect,
+        selectedBrand,
+        selectedSeries,
+    } = useProduct();
 
     const form = useForm<ProductFormValues>({
         resolver: zodResolver(productSchema),
         defaultValues: {
             name: defaultNameValues,
+            brand_id: product.brand_id ?? null,
+            series_id: product.series_id ?? null,
+            collections: product.collection_ids ?? [],
             attributes: defaultAttributes,
+            channels: defaultChannels,
         },
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.media'), tShared('tabs.documents')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.media'), tShared('tabs.documents')]
     }, [])
 
     return (
         <FormContainer onSubmit={onSubmit} form={form} >
             <>
                 <Tabs tabs={tabs} />
-                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) })}>
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) }, 'space-y-4')}>
                     <TranslatedField onSubmit={!!onSubmit} errors={errors} form={form} />
+
+                    <Select
+                        label={tProducts('fields.brand_id')}
+                        name={'brand_id'}
+                        items={[{ id: null, name: tShared('values.null') }, ...brandsSelect]}
+                        formControl={form.control}
+                        defaultValue={selectedBrand?.name}
+                        disabled={!onSubmit}
+                        errors={errors}
+                        emptyMessage={tShared('messages.no-items-found')}
+                    />
+
+                    <Select
+                        label={tProducts('fields.series_id')}
+                        name={'series_id'}
+                        items={[{ id: null, name: tShared('values.null') }, ...seriesSelect]}
+                        formControl={form.control}
+                        defaultValue={selectedSeries?.name}
+                        disabled={!onSubmit}
+                        errors={errors}
+                        emptyMessage={tShared('messages.no-items-found')}
+                    />
+
+                    <MultiSelect
+                        label={tProducts('fields.collections')}
+                        name={'collections'}
+                        items={collectionsSelect}
+                        formControl={form.control}
+                        disabled={!onSubmit}
+                        errors={errors}
+                        emptyMessage={tShared('messages.no-items-found')}
+                    />
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.attributes'), tabs) })}>
@@ -57,6 +106,10 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                             errors={errors}
                         />
                     </div>
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.channels'), tabs) })}>
+                    <ChannelVisibilityField form={form} onSubmit={onSubmit} errors={errors} />
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>

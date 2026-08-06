@@ -42,6 +42,56 @@
             "data": "Wartość"
         }
     },
+    "Series": {
+        "list": {
+            "title": "Serie"
+        },
+        "edit": {
+            "title": "Edytuj serię"
+        },
+        "create": {
+            "title": "Utwórz serię"
+        },
+        "show": {
+            "title": "Szczegóły serii"
+        },
+        "fields": {
+            "attribute_id": "Atrybut",
+            "data": "Wartość"
+        }
+    },
+    "Collections": {
+        "list": {
+            "title": "Kolekcje"
+        },
+        "edit": {
+            "title": "Edytuj kolekcję"
+        },
+        "create": {
+            "title": "Utwórz kolekcję"
+        },
+        "show": {
+            "title": "Szczegóły kolekcji"
+        },
+        "fields": {
+            "attribute_id": "Atrybut",
+            "data": "Wartość"
+        }
+    },
+    "Channels": {
+        "list": {
+            "title": "Kanały"
+        },
+        "edit": {
+            "title": "Edytuj kanał"
+        },
+        "create": {
+            "title": "Utwórz kanał"
+        },
+        "show": {
+            "title": "Szczegóły kanału"
+        }
+    },
     "Products": {
         "list": {
             "title": "Produkty"
@@ -56,7 +106,10 @@
             "title": "Szczegóły produktu"
         },
         "fields": {
-            "attribute_id": "Atrybut"
+            "attribute_id": "Atrybut",
+            "brand_id": "Marka",
+            "series_id": "Seria",
+            "collections": "Kolekcje"
         }
     },
     "Variants": {
@@ -153,6 +206,7 @@
             "attributes": "Atrybuty",
             "options": "Opcje",
             "translations": "Tłumaczenia",
+            "channels": "Kanały",
             "media": "Media",
             "documents": "Dokumenty"
         },

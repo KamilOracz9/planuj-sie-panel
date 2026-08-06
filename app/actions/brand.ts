@@ -1,6 +1,6 @@
 "use server"
 
-import { Brand } from "@/features/brands"
+import { Brand, BrandSelectItem } from "@/features/brands"
 import { brandSchema } from "@/features/brands/schemas"
 
 import * as z from "zod";
@@ -34,4 +34,12 @@ export async function updateBrand(data: z.infer<typeof brandSchema>, id: Brand['
             'Content-Type': 'application/json',
         }
     }).then(res => res.json())
+}
+
+export async function fetchBrandsListForSelect({ locale }: { locale: string }): Promise<BrandSelectItem[]> {
+    return await fetch(`${process.env.API_URL}/${locale}/brands/select`, {
+        headers: {
+            'X-API-KEY': process.env.API_KEY || '',
+        }
+    }).then(res => res.json());
 }

@@ -8,6 +8,14 @@ import { fetchAttributesListForSelect } from "../actions/attribute";
 import { getLocale } from "next-intl/server";
 import { CATEGORY_SLICE_NAME } from "@/features/categories/store/slice";
 import { fetchCategoriesListForSelect } from "../actions/category";
+import { BRAND_SLICE_NAME } from "@/features/brands/store/slice";
+import { fetchBrandsListForSelect } from "../actions/brand";
+import { SERIES_SLICE_NAME } from "@/features/series/store/slice";
+import { fetchSeriesListForSelect } from "../actions/series";
+import { COLLECTION_SLICE_NAME } from "@/features/collections/store/slice";
+import { fetchCollectionsListForSelect } from "../actions/collection";
+import { CHANNEL_SLICE_NAME } from "@/features/channels/store/slice";
+import { fetchChannelsListForSelect } from "../actions/channel";
 
 export const metadata: Metadata = {
   title: "Panel",
@@ -31,6 +39,18 @@ export default async function RootLayout({
             },
             [CATEGORY_SLICE_NAME]: {
               categoriesSelect: await fetchCategoriesListForSelect({ locale })
+            },
+            [BRAND_SLICE_NAME]: {
+              brandsSelect: await fetchBrandsListForSelect({ locale })
+            },
+            [SERIES_SLICE_NAME]: {
+              seriesSelect: await fetchSeriesListForSelect({ locale })
+            },
+            [COLLECTION_SLICE_NAME]: {
+              collectionsSelect: await fetchCollectionsListForSelect({ locale })
+            },
+            [CHANNEL_SLICE_NAME]: {
+              channelsSelect: await fetchChannelsListForSelect({ locale })
             }
           }}>
             <TooltipProvider>

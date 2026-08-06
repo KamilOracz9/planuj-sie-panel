@@ -7,9 +7,16 @@ const localesValidation = () => {
 
 export const productSchema = z.object({
     name: localesValidation(),
+    brand_id: z.number().nullable().optional(),
+    series_id: z.number().nullable().optional(),
+    collections: z.array(z.number()).optional(),
     attributes: z.array(z.object({
         id: z.number().optional(),
         data: z.any().optional(),
         attribute_id: z.string().optional(),
+    })).optional(),
+    channels: z.array(z.object({
+        channel_id: z.number(),
+        is_enabled: z.boolean(),
     })).optional(),
 })

@@ -14,7 +14,7 @@ import {
 } from "./ui/sidebar";
 import { Link, usePathname } from "@/lib/i18n/navigation";
 import { Route } from "@/features/routing";
-import { FileText, FolderTree, Images, Layers, Package, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
+import { Bookmark, Boxes, FileText, FolderTree, Images, Layers, Package, Radio, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SidebarFolderTree } from "@/features/media";
 
@@ -23,6 +23,8 @@ const catalogItems = [
   { pathname: Route.PRIVATE.VARIANTS.LIST.PATHNAME, translationKey: "Variants.list.title", icon: Layers, folderType: undefined },
   { pathname: Route.PRIVATE.CATEGORIES.LIST.PATHNAME, translationKey: "Categories.list.title", icon: FolderTree, folderType: undefined },
   { pathname: Route.PRIVATE.BRANDS.LIST.PATHNAME, translationKey: "Brands.list.title", icon: Tag, folderType: undefined },
+  { pathname: Route.PRIVATE.SERIES.LIST.PATHNAME, translationKey: "Series.list.title", icon: Boxes, folderType: undefined },
+  { pathname: Route.PRIVATE.COLLECTIONS.LIST.PATHNAME, translationKey: "Collections.list.title", icon: Bookmark, folderType: undefined },
   { pathname: Route.PRIVATE.ATTRIBUTES.LIST.PATHNAME, translationKey: "Attributes.list.title", icon: SlidersHorizontal, folderType: undefined },
   { pathname: Route.PRIVATE.MEDIA.LIST.PATHNAME, translationKey: "Shared.nav.media", icon: Images, folderType: "images" as const },
   { pathname: Route.PRIVATE.DOCUMENTS.LIST.PATHNAME, translationKey: "Shared.nav.documents", icon: FileText, folderType: "documents" as const },
@@ -30,6 +32,7 @@ const catalogItems = [
 
 const systemItems = [
   { pathname: Route.PRIVATE.USERS.LIST.PATHNAME, translationKey: "Users.list.title", icon: Users },
+  { pathname: Route.PRIVATE.CHANNELS.LIST.PATHNAME, translationKey: "Channels.list.title", icon: Radio },
 ] as const;
 
 export function AppSidebar() {

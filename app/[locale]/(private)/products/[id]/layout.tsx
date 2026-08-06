@@ -1,4 +1,5 @@
 import { fetchAttributeValuesByModel } from "@/app/actions/attribute";
+import { fetchChannelVisibilitiesByModel } from "@/app/actions/channel-visibility";
 import { ProductContext, fetchProduct } from "@/features/products";
 
 interface LayoutProps {
@@ -11,9 +12,10 @@ const Layout = async ({ children, params }: LayoutProps) => {
 
     const productPromise = fetchProduct({ id, locale });
     const existingAttributesPromise = fetchAttributeValuesByModel({ locale, modelId: Number(id), modelType: 'product' });
+    const existingChannelsPromise = fetchChannelVisibilitiesByModel({ locale, modelId: Number(id), modelType: 'product' });
 
     return (
-        <ProductContext value={{ productPromise, existingAttributesPromise }}>
+        <ProductContext value={{ productPromise, existingAttributesPromise, existingChannelsPromise }}>
             {children}
         </ProductContext>
     )
