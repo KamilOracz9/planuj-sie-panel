@@ -119,6 +119,24 @@ export const routing = defineRouting({
       'en-US': '/currencies/[id]/edit',
     },
 
+    // Media collections
+    [Route.PRIVATE.MEDIA_COLLECTIONS.LIST.PATHNAME]: {
+      'pl-PL': '/kolekcje-mediow',
+      'en-US': '/media-collections',
+    },
+    [Route.PRIVATE.MEDIA_COLLECTIONS.CREATE.PATHNAME]: {
+      'pl-PL': '/kolekcje-mediow/nowa',
+      'en-US': '/media-collections/new',
+    },
+    [Route.PRIVATE.MEDIA_COLLECTIONS.SHOW.PATHNAME]: {
+      'pl-PL': '/kolekcje-mediow/[id]/podglad',
+      'en-US': '/media-collections/[id]/show',
+    },
+    [Route.PRIVATE.MEDIA_COLLECTIONS.EDIT.PATHNAME]: {
+      'pl-PL': '/kolekcje-mediow/[id]/edycja',
+      'en-US': '/media-collections/[id]/edit',
+    },
+
     // Categories
     [Route.PRIVATE.CATEGORIES.LIST.PATHNAME]: {
       'pl-PL': '/kategorie',

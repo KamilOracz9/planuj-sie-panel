@@ -113,7 +113,7 @@ const AttributeOptions = ({ attributeId }: AttributeOptionsProps) => {
                         <TableRow key={option.id}>
                             <TableCell>{option.name}</TableCell>
                             <TableCell className="text-center">
-                                <MediaSheetButton modelType="attribute-options" id={option.id} shape="icon" title={option.name} />
+                                <MediaSheetButton modelType="attribute-options" id={option.id} title={option.name} />
                                 <Button type="button" variant="ghost" onClick={() => handleDelete(option.id)}>
                                     <Trash className="h-4 w-4" />
                                 </Button>

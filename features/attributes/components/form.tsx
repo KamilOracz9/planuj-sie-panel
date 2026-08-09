@@ -93,7 +93,7 @@ const Form = ({ onSubmit, attributePromise, attributeTypesSelectPromise, errors 
                 )}
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
-                    <EntityMediaManager modelType="attributes" id={attribute.id} shape="icon" disabled={!onSubmit} />
+                    <EntityMediaManager modelType="attributes" id={attribute.id} disabled={!onSubmit} />
                 </div>
             </>
         </FormContainer>

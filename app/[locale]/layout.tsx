@@ -18,6 +18,8 @@ import { CHANNEL_SLICE_NAME } from "@/features/channels/store/slice";
 import { fetchChannelsListForSelect } from "../actions/channel";
 import { CURRENCY_SLICE_NAME } from "@/features/currencies/store/slice";
 import { fetchCurrenciesListForSelect } from "../actions/currency";
+import { MEDIA_COLLECTION_SLICE_NAME } from "@/features/media-collections/store/slice";
+import { fetchMediaCollectionsListForSelect } from "../actions/media-collection";
 
 export const metadata: Metadata = {
   title: "Panel",
@@ -56,6 +58,9 @@ export default async function RootLayout({
             },
             [CURRENCY_SLICE_NAME]: {
               currenciesSelect: await fetchCurrenciesListForSelect({ locale })
+            },
+            [MEDIA_COLLECTION_SLICE_NAME]: {
+              mediaCollectionsSelect: await fetchMediaCollectionsListForSelect({ locale })
             }
           }}>
             <TooltipProvider>

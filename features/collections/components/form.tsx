@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import TranslatedField from "@/features/shared/components/translated-field";
 import { ModelAttributes } from "@/features/attributes";
 import { useCollection } from "../context";
-import { EntityMediaManager, DocumentsManager } from "@/features/media";
+import { EntityMediaManager } from "@/features/media";
 import { ChannelVisibilityField } from "@/features/channels";
 
 interface FormProps {
@@ -39,7 +39,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.media'), tShared('tabs.documents')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.media')]
     }, [])
 
     return (
@@ -66,11 +66,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
-                    <EntityMediaManager modelType="collections" id={collection.id} shape="logo" disabled={!onSubmit} />
-                </div>
-
-                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.documents'), tabs) })}>
-                    <DocumentsManager modelType="collections" id={collection.id} disabled={!onSubmit} />
+                    <EntityMediaManager modelType="collections" id={collection.id} disabled={!onSubmit} />
                 </div>
             </>
         </FormContainer>

@@ -15,12 +15,11 @@ import EntityMediaManager from "./entity-media-manager";
 interface MediaSheetButtonProps {
     modelType: MediaModelType;
     id: number;
-    shape: "icon" | "logo" | "gallery";
     title: string;
     disabled?: boolean;
 }
 
-const MediaSheetButton = ({ modelType, id, shape, title, disabled }: MediaSheetButtonProps) => {
+const MediaSheetButton = ({ modelType, id, title, disabled }: MediaSheetButtonProps) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -30,7 +29,7 @@ const MediaSheetButton = ({ modelType, id, shape, title, disabled }: MediaSheetB
                     <SheetTitle>{title}</SheetTitle>
                 </SheetHeader>
                 <div className="px-4 pb-4">
-                    {open && <EntityMediaManager modelType={modelType} id={id} shape={shape} disabled={disabled} />}
+                    {open && <EntityMediaManager modelType={modelType} id={id} disabled={disabled} />}
                 </div>
             </SheetContent>
             <Button type="button" variant="ghost" size="icon-sm" onClick={() => setOpen(true)}>

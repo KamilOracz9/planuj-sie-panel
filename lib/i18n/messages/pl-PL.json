@@ -112,6 +112,42 @@
             "decimal_places": "Miejsca dziesiętne"
         }
     },
+    "MediaCollections": {
+        "list": {
+            "title": "Kolekcje mediów"
+        },
+        "edit": {
+            "title": "Edytuj kolekcję mediów"
+        },
+        "create": {
+            "title": "Utwórz kolekcję mediów"
+        },
+        "show": {
+            "title": "Szczegóły kolekcji mediów"
+        },
+        "fields": {
+            "code": "Kod",
+            "name": "Nazwa",
+            "kind": "Typ pliku",
+            "type": "Liczba plików",
+            "conversion_name": "Nazwa konwersji",
+            "width": "Szerokość",
+            "height": "Wysokość",
+            "fit": "Dopasowanie",
+            "model_type": "Typ modelu"
+        },
+        "model_types": {
+            "products": "Produkty",
+            "variants": "Warianty",
+            "brands": "Marki",
+            "series": "Serie",
+            "collections": "Kolekcje",
+            "categories": "Kategorie",
+            "attributes": "Atrybuty",
+            "attribute-options": "Opcje atrybutów",
+            "attribute-values": "Wartości atrybutów"
+        }
+    },
     "Products": {
         "list": {
             "title": "Produkty"
@@ -232,7 +268,9 @@
             "channels": "Kanały",
             "prices": "Ceny",
             "media": "Media",
-            "documents": "Dokumenty"
+            "documents": "Dokumenty",
+            "conversions": "Konwersje",
+            "assignments": "Przypisania"
         },
         "media": {
             "icon": "Ikona",

@@ -44,6 +44,11 @@ export enum Pathnames {
     CURRENCIES_SHOW = "/currencies/[id]/show",
     CURRENCIES_EDIT = "/currencies/[id]/edit",
 
+    MEDIA_COLLECTIONS_LIST = "/media-collections",
+    MEDIA_COLLECTIONS_CREATE = "/media-collections/create",
+    MEDIA_COLLECTIONS_SHOW = "/media-collections/[id]/show",
+    MEDIA_COLLECTIONS_EDIT = "/media-collections/[id]/edit",
+
     CATEGORIES_LIST = "/categories",
     CATEGORIES_CREATE = "/categories/create",
     CATEGORIES_SHOW = "/categories/[id]/show",
@@ -99,6 +104,12 @@ export const Route = {
             CREATE: { PATHNAME: Pathnames.CURRENCIES_CREATE },
             EDIT: { PATHNAME: Pathnames.CURRENCIES_EDIT },
             SHOW: { PATHNAME: Pathnames.CURRENCIES_SHOW }
+        },
+        MEDIA_COLLECTIONS: {
+            LIST: { PATHNAME: Pathnames.MEDIA_COLLECTIONS_LIST },
+            CREATE: { PATHNAME: Pathnames.MEDIA_COLLECTIONS_CREATE },
+            EDIT: { PATHNAME: Pathnames.MEDIA_COLLECTIONS_EDIT },
+            SHOW: { PATHNAME: Pathnames.MEDIA_COLLECTIONS_SHOW }
         },
         PRODUCTS: {
             LIST: { PATHNAME: Pathnames.PRODUCTS_LIST },

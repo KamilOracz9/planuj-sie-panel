@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import TranslatedField from "@/features/shared/components/translated-field";
 import { ModelAttributes } from "@/features/attributes";
 import { useProduct } from "../context";
-import { EntityMediaManager, DocumentsManager } from "@/features/media";
+import { EntityMediaManager } from "@/features/media";
 import { ChannelVisibilityField } from "@/features/channels";
 import { PriceEditor } from "@/features/prices";
 import Select from "@/features/shared/components/select";
@@ -57,7 +57,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.prices'), tShared('tabs.media'), tShared('tabs.documents')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.prices'), tShared('tabs.media')]
     }, [])
 
     return (
@@ -120,11 +120,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
-                    <EntityMediaManager modelType="products" id={product.id} shape="gallery" disabled={!onSubmit} />
-                </div>
-
-                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.documents'), tabs) })}>
-                    <DocumentsManager modelType="products" id={product.id} disabled={!onSubmit} />
+                    <EntityMediaManager modelType="products" id={product.id} disabled={!onSubmit} />
                 </div>
             </>
         </FormContainer>

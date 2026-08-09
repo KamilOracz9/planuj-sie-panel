@@ -1,6 +1,6 @@
 "use server"
 
-import { MediaFolder, MediaFolderType, MediaItem, MediaModelType } from "@/features/media/types";
+import { MediaFolder, MediaFolderType, MediaItem, MediaModelType, ModelMediaByCollection, MediaCollectionAssignmentsByChannel } from "@/features/media/types";
 
 const headers = () => ({
     'X-API-KEY': process.env.API_KEY || '',
@@ -108,7 +108,7 @@ export async function deleteMediaFolder(type: MediaFolderType, id: number): Prom
     }).then(res => res.json());
 }
 
-export async function fetchModelMedia<T>(modelType: MediaModelType, id: number): Promise<T> {
+export async function fetchModelMedia(modelType: MediaModelType, id: number): Promise<ModelMediaByCollection> {
     return await fetch(`${process.env.API_URL}/${modelType}/${id}/media`, {
         headers: headers(),
     }).then(res => res.json());
@@ -129,10 +129,10 @@ export async function deleteModelMedia(modelType: MediaModelType, id: number, me
     }).then(res => res.json());
 }
 
-export async function attachModelMedia(modelType: MediaModelType, id: number, collection: string, mediaId: MediaItem['id']): Promise<MediaItem> {
+export async function attachModelMedia(modelType: MediaModelType, id: number, collection: string, mediaId: MediaItem['id'], channelId: number): Promise<MediaItem> {
     return await fetch(`${process.env.API_URL}/${modelType}/${id}/media/attach`, {
         method: 'POST',
-        body: JSON.stringify({ collection, media_id: mediaId }),
+        body: JSON.stringify({ collection, media_id: mediaId, channel_id: channelId }),
         headers: {
             ...headers(),
             'Content-Type': 'application/json',
@@ -148,5 +148,16 @@ export async function reorderModelMedia(modelType: MediaModelType, id: number, c
             ...headers(),
             'Content-Type': 'application/json',
         },
+    }).then(res => res.json());
+}
+
+// Which collections are offered for this model TYPE, per channel - grouped
+// by channel_id. Configured centrally on MediaCollection's own edit page
+// ("Przypisania" tab, App\Traits\HasMediaCollectionAssignments), not per
+// model instance - there is deliberately no attach/detach-per-instance
+// action anymore.
+export async function fetchMediaCollectionAssignments(modelType: MediaModelType): Promise<MediaCollectionAssignmentsByChannel> {
+    return await fetch(`${process.env.API_URL}/${modelType}/media-collection-assignments`, {
+        headers: headers(),
     }).then(res => res.json());
 }

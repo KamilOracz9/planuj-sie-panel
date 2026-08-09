@@ -5,6 +5,7 @@ import { SERIES_SLICE_NAME, seriesReducer, SeriesState } from "@/features/series
 import { COLLECTION_SLICE_NAME, collectionReducer, CollectionState } from "@/features/collections/store/slice";
 import { CHANNEL_SLICE_NAME, channelReducer, ChannelState } from "@/features/channels/store/slice";
 import { CURRENCY_SLICE_NAME, currencyReducer, CurrencyState } from "@/features/currencies/store/slice";
+import { MEDIA_COLLECTION_SLICE_NAME, mediaCollectionReducer, MediaCollectionState } from "@/features/media-collections/store/slice";
 import { configureStore, Reducer } from "@reduxjs/toolkit";
 
 export function makeStore(preloadedState?: {
@@ -19,6 +20,7 @@ export function makeStore(preloadedState?: {
       [COLLECTION_SLICE_NAME]: collectionReducer as Reducer<CollectionState>,
       [CHANNEL_SLICE_NAME]: channelReducer as Reducer<ChannelState>,
       [CURRENCY_SLICE_NAME]: currencyReducer as Reducer<CurrencyState>,
+      [MEDIA_COLLECTION_SLICE_NAME]: mediaCollectionReducer as Reducer<MediaCollectionState>,
     },
     preloadedState
   });

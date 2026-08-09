@@ -200,7 +200,6 @@ const AttributeValueRow = <T extends FieldValues>({
                 <MediaSheetButton
                     modelType="attribute-values"
                     id={existingId}
-                    shape="icon"
                     title={selectedAttribute?.name ?? label}
                     disabled={!onSubmit}
                 />

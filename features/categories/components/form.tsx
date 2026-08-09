@@ -15,7 +15,7 @@ import { useMemo } from "react";
 import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
 import { cn } from "@/lib/utils";
 import { ModelAttributes } from "@/features/attributes";
-import { EntityMediaManager, DocumentsManager } from "@/features/media";
+import { EntityMediaManager } from "@/features/media";
 import { ChannelVisibilityField } from "@/features/channels";
 
 interface FormProps {
@@ -45,7 +45,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.translations'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.media'), tShared('tabs.documents')]
+        return [tShared('tabs.basic'), tShared('tabs.translations'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.media')]
     }, [])
 
     return (
@@ -97,11 +97,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
-                    <EntityMediaManager modelType="categories" id={category.id} shape="icon" disabled={!onSubmit} />
-                </div>
-
-                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.documents'), tabs) })}>
-                    <DocumentsManager modelType="categories" id={category.id} disabled={!onSubmit} />
+                    <EntityMediaManager modelType="categories" id={category.id} disabled={!onSubmit} />
                 </div>
             </>
         </FormContainer>

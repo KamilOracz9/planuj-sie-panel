@@ -1,6 +1,7 @@
 export interface MediaItem {
     id: number;
     collection_name: string;
+    channel_id: number | null;
     name: string;
     file_name: string;
     mime_type: string;
@@ -35,11 +36,22 @@ export type MediaModelType =
     | 'series'
     | 'collections';
 
-export type IconModelMedia = { icon: MediaItem | null };
-export type LogoModelMedia = { logo: MediaItem | null };
-export type GalleryModelMedia = {
-    gallery: MediaItem[];
-    main_image: MediaItem | null;
-    main_image_2: MediaItem | null;
+// A media collection as offered for a model TYPE within one specific
+// channel - not tied to a model instance. Which collections exist here is
+// configured centrally on MediaCollection's own edit page ("Przypisania"
+// tab), not per Product/Brand/etc row.
+export type MediaCollectionForChannel = {
+    id: number;
+    code: string;
+    name: string;
+    kind: "image" | "document";
+    type: "single" | "multiple";
 };
-export type DocumentsModelMedia = { documents: MediaItem[] };
+
+// Keyed by channel_id (as a string, since it comes back through JSON).
+export type MediaCollectionAssignmentsByChannel = Record<string, MediaCollectionForChannel[]>;
+
+// Keyed by MediaCollection.code - dynamic (any collection the model
+// instance actually has media in), unlike the old fixed
+// {icon}/{logo}/{gallery,...}/{documents} shapes.
+export type ModelMediaByCollection = Record<string, MediaItem[]>;

@@ -72,6 +72,42 @@
             "decimal_places": "Decimal places"
         }
     },
+    "MediaCollections": {
+        "list": {
+            "title": "Media collections"
+        },
+        "edit": {
+            "title": "Edit media collection"
+        },
+        "create": {
+            "title": "Create media collection"
+        },
+        "show": {
+            "title": "Media collection details"
+        },
+        "fields": {
+            "code": "Code",
+            "name": "Name",
+            "kind": "File kind",
+            "type": "File count",
+            "conversion_name": "Conversion name",
+            "width": "Width",
+            "height": "Height",
+            "fit": "Fit",
+            "model_type": "Model type"
+        },
+        "model_types": {
+            "products": "Products",
+            "variants": "Variants",
+            "brands": "Brands",
+            "series": "Series",
+            "collections": "Collections",
+            "categories": "Categories",
+            "attributes": "Attributes",
+            "attribute-options": "Attribute options",
+            "attribute-values": "Attribute values"
+        }
+    },
     "MediaGallery": {
         "title": "Media gallery",
         "subtitle": "All uploaded images in one place."
@@ -111,7 +147,9 @@
             "channels": "Channels",
             "prices": "Prices",
             "media": "Media",
-            "documents": "Documents"
+            "documents": "Documents",
+            "conversions": "Conversions",
+            "assignments": "Assignments"
         },
         "media": {
             "icon": "Icon",

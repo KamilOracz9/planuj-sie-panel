@@ -18,7 +18,7 @@ import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
 import { cn } from "@/lib/utils";
 import { ModelAttributes } from "@/features/attributes";
 import { ExistingAttributeValue } from "@/features/attributes/types";
-import { EntityMediaManager, DocumentsManager } from "@/features/media";
+import { EntityMediaManager } from "@/features/media";
 import { PriceEditor } from "@/features/prices";
 import { ExistingPrice } from "@/features/prices/types";
 
@@ -66,7 +66,7 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.prices'), tShared('tabs.media'), tShared('tabs.documents')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.prices'), tShared('tabs.media')]
     }, [])
 
     return (
@@ -132,11 +132,7 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>
-                    <EntityMediaManager modelType="variants" id={variant.id} shape="gallery" disabled={!onSubmit} />
-                </div>
-
-                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.documents'), tabs) })}>
-                    <DocumentsManager modelType="variants" id={variant.id} disabled={!onSubmit} />
+                    <EntityMediaManager modelType="variants" id={variant.id} disabled={!onSubmit} />
                 </div>
             </>
         </FormContainer>
