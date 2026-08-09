@@ -1,6 +1,6 @@
 import { Series, SeriesSelectItem, SeriesWithTranslations } from "./types";
 
-export const fetchSeriesList = async ({ locale }: { locale: string }): Promise<Series[]> => await fetch(`${process.env.API_URL}/${locale}/series`, {
+export const fetchSeriesList = async ({ locale, channelId }: { locale: string, channelId?: number | null }): Promise<Series[]> => await fetch(`${process.env.API_URL}/${locale}/series${channelId ? `?channel_id=${channelId}` : ''}`, {
     headers: {
         'X-API-KEY': process.env.API_KEY || '',
     }

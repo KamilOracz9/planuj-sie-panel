@@ -20,6 +20,8 @@ import { CURRENCY_SLICE_NAME } from "@/features/currencies/store/slice";
 import { fetchCurrenciesListForSelect } from "../actions/currency";
 import { MEDIA_COLLECTION_SLICE_NAME } from "@/features/media-collections/store/slice";
 import { fetchMediaCollectionsListForSelect } from "../actions/media-collection";
+import { ACTIVE_CHANNEL_COOKIE } from "@/features/channels/constants";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Panel",
@@ -32,6 +34,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+  const activeChannelId = Number((await cookies()).get(ACTIVE_CHANNEL_COOKIE)?.value) || null;
 
   return (
     <html lang={locale}>
@@ -54,7 +57,8 @@ export default async function RootLayout({
               collectionsSelect: await fetchCollectionsListForSelect({ locale })
             },
             [CHANNEL_SLICE_NAME]: {
-              channelsSelect: await fetchChannelsListForSelect({ locale })
+              channelsSelect: await fetchChannelsListForSelect({ locale }),
+              activeChannelId
             },
             [CURRENCY_SLICE_NAME]: {
               currenciesSelect: await fetchCurrenciesListForSelect({ locale })

@@ -8,12 +8,15 @@ import { Link } from "@/lib/i18n/navigation";
 import { slugify } from "@/lib/utils";
 import { PlusCircle } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { cookies } from "next/headers";
+import { ACTIVE_CHANNEL_COOKIE } from "@/features/channels";
 
 const List = async () => {
     const locale = await getLocale();
     const tShared = await getTranslations('Shared');
+    const channelId = Number((await cookies()).get(ACTIVE_CHANNEL_COOKIE)?.value) || null;
 
-    const categoriesPromise = fetchCategoriesList({ locale });
+    const categoriesPromise = fetchCategoriesList({ locale, channelId });
 
     return (
         <Listing translationsPrefix="Categories" actions={

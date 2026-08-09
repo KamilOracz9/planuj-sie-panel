@@ -1,6 +1,6 @@
 import { Product, ProductWithTranslations } from "./types";
 
-export const fetchProductsList = async ({ locale }: { locale: string }): Promise<Product[]> => await fetch(`${process.env.API_URL}/${locale}/products`, {
+export const fetchProductsList = async ({ locale, channelId }: { locale: string, channelId?: number | null }): Promise<Product[]> => await fetch(`${process.env.API_URL}/${locale}/products${channelId ? `?channel_id=${channelId}` : ''}`, {
     headers: {
         'X-API-KEY': process.env.API_KEY || '',
     }

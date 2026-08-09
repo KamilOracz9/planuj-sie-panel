@@ -33,19 +33,23 @@ const buildFormData = (collection: string, channelId: number, files: File[]) => 
 // Which collections are offered is no longer decided per model instance
 // (no more attach/detach step here) - it's configured centrally, per
 // (channel, model type), on MediaCollection's own edit page ("Przypisania"
-// tab). This component just: picks one channel at a time (a single selector
-// for the whole tab, not per-collection tabs), shows whichever collections
-// are assigned to this model type in that channel, and lets the admin
-// upload into them - still scoped to an explicit channel (no fallback).
+// tab). This component just: picks one channel at a time, shows whichever
+// collections are assigned to this model type in that channel, and lets the
+// admin upload into them - still scoped to an explicit channel (no fallback).
+// The channel comes from the panel's global switcher (activeChannelId) when
+// set - "po wybraniu kanalu wszystkie akcje maja sie wykonywac tylko dla
+// tego kanalu" - falling back to a local picker only in "all channels" mode.
 const EntityMediaManager = ({ modelType, id, disabled }: EntityMediaManagerProps) => {
     const tShared = useTranslations("Shared");
-    const { channelsSelect } = useAppSelector(state => state.channel);
+    const { channelsSelect, activeChannelId: globalActiveChannelId } = useAppSelector(state => state.channel);
 
     const [assignmentsByChannel, setAssignmentsByChannel] = useState<MediaCollectionAssignmentsByChannel | null>(null);
     const [mediaByCollection, setMediaByCollection] = useState<ModelMediaByCollection | null>(null);
     const [loading, setLoading] = useState(true);
     const [busyCode, setBusyCode] = useState<string | null>(null);
-    const [activeChannel, setActiveChannel] = useState<number | null>(null);
+    const [localActiveChannel, setLocalActiveChannel] = useState<number | null>(null);
+
+    const activeChannel = globalActiveChannelId ?? localActiveChannel ?? channelsSelect[0]?.id ?? null;
 
     const load = () => {
         if (!id) {
@@ -60,7 +64,6 @@ const EntityMediaManager = ({ modelType, id, disabled }: EntityMediaManagerProps
             .then(([assignmentsRes, mediaRes]) => {
                 setAssignmentsByChannel(assignmentsRes);
                 setMediaByCollection(mediaRes);
-                setActiveChannel((current) => current ?? channelsSelect[0]?.id ?? null);
             })
             .finally(() => setLoading(false));
     };
@@ -100,7 +103,7 @@ const EntityMediaManager = ({ modelType, id, disabled }: EntityMediaManagerProps
 
     return (
         <div className="space-y-6">
-            {channelsSelect.length > 1 && (
+            {!globalActiveChannelId && channelsSelect.length > 1 && (
                 <div className="flex flex-wrap gap-1">
                     {channelsSelect.map((channel) => (
                         <Button
@@ -108,7 +111,7 @@ const EntityMediaManager = ({ modelType, id, disabled }: EntityMediaManagerProps
                             type="button"
                             size="sm"
                             variant={activeChannel === channel.id ? "default" : "outline"}
-                            onClick={() => setActiveChannel(channel.id)}
+                            onClick={() => setLocalActiveChannel(channel.id)}
                         >
                             {channel.name}
                         </Button>

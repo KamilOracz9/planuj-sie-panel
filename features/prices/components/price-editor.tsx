@@ -21,9 +21,14 @@ interface PriceRowProps<T extends FieldValues> {
     onRemove: () => void;
 }
 
+// When the panel's global channel switcher (see features/channels/components/channel-switcher.tsx)
+// has an active channel, rows for other channels are hidden (not removed
+// from form state - remove() is the only thing that deletes a row) and the
+// channel picker itself is hidden since it's implied - "wszystkie akcje maja
+// sie wykonywac tylko dla tego kanalu".
 const PriceRow = <T extends FieldValues>({ form, index, onSubmit, errors, onRemove }: PriceRowProps<T>) => {
     const tShared = useTranslations("Shared");
-    const { channelsSelect } = useAppSelector(state => state.channel);
+    const { channelsSelect, activeChannelId } = useAppSelector(state => state.channel);
     const { currenciesSelect } = useAppSelector(state => state.currency);
 
     const channelIdField = `prices.${index}.channel_id` as Path<T>;
@@ -35,20 +40,26 @@ const PriceRow = <T extends FieldValues>({ form, index, onSubmit, errors, onRemo
     const selectedChannel = channelsSelect.find(c => c.id === currentChannelId);
     const selectedCurrency = currenciesSelect.find(c => c.id === currentCurrencyId);
 
+    if (activeChannelId && currentChannelId !== activeChannelId) {
+        return null;
+    }
+
     return (
         <div className="flex items-end gap-2">
-            <div className="flex-1">
-                <Select
-                    label={tShared('fields.channel')}
-                    name={channelIdField}
-                    items={channelsSelect}
-                    formControl={form.control}
-                    disabled={!onSubmit}
-                    errors={errors}
-                    defaultValue={selectedChannel?.name}
-                    emptyMessage={tShared('messages.no-items-found')}
-                />
-            </div>
+            {!activeChannelId && (
+                <div className="flex-1">
+                    <Select
+                        label={tShared('fields.channel')}
+                        name={channelIdField}
+                        items={channelsSelect}
+                        formControl={form.control}
+                        disabled={!onSubmit}
+                        errors={errors}
+                        defaultValue={selectedChannel?.name}
+                        emptyMessage={tShared('messages.no-items-found')}
+                    />
+                </div>
+            )}
             <div className="flex-1">
                 <Select
                     label={tShared('fields.currency')}
@@ -83,6 +94,7 @@ const PriceRow = <T extends FieldValues>({ form, index, onSubmit, errors, onRemo
 
 const PriceEditor = <T extends FieldValues>({ form, onSubmit, errors }: PriceEditorProps<T>) => {
     const tShared = useTranslations("Shared");
+    const { activeChannelId } = useAppSelector(state => state.channel);
     const { fields, append, remove } = useFieldArray({
         control: form.control,
         name: "prices" as ArrayPath<T>,
@@ -105,7 +117,7 @@ const PriceEditor = <T extends FieldValues>({ form, onSubmit, errors }: PriceEdi
                 <Button
                     type="button"
                     variant="outline"
-                    onClick={() => append({ channel_id: null, currency_id: null, amount: '' } as any)}
+                    onClick={() => append({ channel_id: activeChannelId ?? null, currency_id: null, amount: '' } as any)}
                 >
                     {tShared("actions.add")}
                 </Button>

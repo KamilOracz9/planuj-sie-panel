@@ -182,6 +182,9 @@
             "system": "System",
             "media": "Media gallery",
             "documents": "Documents"
+        },
+        "channel-switcher": {
+            "all-channels": "All channels"
         }
     }
 }

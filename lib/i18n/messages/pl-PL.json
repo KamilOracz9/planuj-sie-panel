@@ -303,6 +303,9 @@
             "system": "System",
             "media": "Galeria zdjęć",
             "documents": "Dokumenty"
+        },
+        "channel-switcher": {
+            "all-channels": "Wszystkie kanały"
         }
     }
 }

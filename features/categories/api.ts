@@ -1,6 +1,6 @@
 import { Category, CategorySelectItem, CategoryWithTranslations } from "./types";
 
-export const fetchCategoriesList = async ({ locale }: { locale: string }): Promise<Category[]> => await fetch(`${process.env.API_URL}/${locale}/categories`, {
+export const fetchCategoriesList = async ({ locale, channelId }: { locale: string, channelId?: number | null }): Promise<Category[]> => await fetch(`${process.env.API_URL}/${locale}/categories${channelId ? `?channel_id=${channelId}` : ''}`, {
     headers: {
         'X-API-KEY': process.env.API_KEY || '',
     }

@@ -17,14 +17,15 @@ import { Route } from "@/features/routing";
 import { Bookmark, Boxes, Coins, FileText, FolderTree, FolderCog, Images, Layers, Package, Radio, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SidebarFolderTree } from "@/features/media";
+import { ChannelSwitcher } from "@/features/channels";
 
 const catalogItems = [
-  { pathname: Route.PRIVATE.PRODUCTS.LIST.PATHNAME, translationKey: "Products.list.title", icon: Package, folderType: undefined },
-  { pathname: Route.PRIVATE.VARIANTS.LIST.PATHNAME, translationKey: "Variants.list.title", icon: Layers, folderType: undefined },
-  { pathname: Route.PRIVATE.CATEGORIES.LIST.PATHNAME, translationKey: "Categories.list.title", icon: FolderTree, folderType: undefined },
   { pathname: Route.PRIVATE.BRANDS.LIST.PATHNAME, translationKey: "Brands.list.title", icon: Tag, folderType: undefined },
   { pathname: Route.PRIVATE.SERIES.LIST.PATHNAME, translationKey: "Series.list.title", icon: Boxes, folderType: undefined },
+  { pathname: Route.PRIVATE.CATEGORIES.LIST.PATHNAME, translationKey: "Categories.list.title", icon: FolderTree, folderType: undefined },
   { pathname: Route.PRIVATE.COLLECTIONS.LIST.PATHNAME, translationKey: "Collections.list.title", icon: Bookmark, folderType: undefined },
+  { pathname: Route.PRIVATE.PRODUCTS.LIST.PATHNAME, translationKey: "Products.list.title", icon: Package, folderType: undefined },
+  { pathname: Route.PRIVATE.VARIANTS.LIST.PATHNAME, translationKey: "Variants.list.title", icon: Layers, folderType: undefined },
   { pathname: Route.PRIVATE.ATTRIBUTES.LIST.PATHNAME, translationKey: "Attributes.list.title", icon: SlidersHorizontal, folderType: undefined },
   { pathname: Route.PRIVATE.MEDIA.LIST.PATHNAME, translationKey: "Shared.nav.media", icon: Images, folderType: "images" as const },
   { pathname: Route.PRIVATE.DOCUMENTS.LIST.PATHNAME, translationKey: "Shared.nav.documents", icon: FileText, folderType: "documents" as const },
@@ -50,6 +51,9 @@ export function AppSidebar() {
           <Store className="size-5 shrink-0" />
           <h1 className="text-base font-semibold tracking-tight">Panel</h1>
         </Link>
+        <div className="px-2 pb-1.5">
+          <ChannelSwitcher />
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

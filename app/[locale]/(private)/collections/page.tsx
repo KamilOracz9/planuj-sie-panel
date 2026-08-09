@@ -8,12 +8,15 @@ import { slugify } from "@/lib/utils";
 import { PlusCircle } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { ACTIVE_CHANNEL_COOKIE } from "@/features/channels";
 
 const List = async () => {
     const locale = await getLocale();
     const tShared = await getTranslations('Shared');
+    const channelId = Number((await cookies()).get(ACTIVE_CHANNEL_COOKIE)?.value) || null;
 
-    const collectionsPromise = fetchCollectionsList({ locale });
+    const collectionsPromise = fetchCollectionsList({ locale, channelId });
 
     return (
         <Listing translationsPrefix="Collections" actions={
