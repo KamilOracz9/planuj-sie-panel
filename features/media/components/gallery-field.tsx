@@ -44,7 +44,7 @@ const GalleryField = ({ label, media, disabled, uploading, onUpload, onDelete, o
     };
 
     return (
-        <div className="space-y-2">
+        <div className="grid gap-2">
             <FieldLabel>{label}</FieldLabel>
 
             <div
@@ -57,7 +57,7 @@ const GalleryField = ({ label, media, disabled, uploading, onUpload, onDelete, o
                 onDragLeave={() => setIsDragOver(false)}
                 onDrop={disabled ? undefined : handleDrop}
                 className={cn(
-                    "flex flex-wrap gap-3 rounded-md p-2 transition-colors -m-2",
+                    "flex flex-wrap gap-3 rounded-md transition-colors mb-2",
                     isDragOver && "bg-primary/5 outline-2 outline-dashed outline-primary"
                 )}
             >
@@ -83,7 +83,7 @@ const GalleryField = ({ label, media, disabled, uploading, onUpload, onDelete, o
                         type="button"
                         disabled={uploading}
                         onClick={() => inputRef.current?.click()}
-                        className="flex h-28 w-28 items-center justify-center rounded-md border border-dashed bg-muted/30 text-muted-foreground hover:bg-muted/50"
+                        className="flex size-55 items-center justify-center rounded-md border border-dashed bg-muted/30 text-muted-foreground hover:bg-muted/50"
                     >
                         {uploading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Plus className="h-6 w-6" />}
                     </button>

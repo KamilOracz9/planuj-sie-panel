@@ -92,6 +92,26 @@
             "title": "Szczegóły kanału"
         }
     },
+    "Currencies": {
+        "list": {
+            "title": "Waluty"
+        },
+        "edit": {
+            "title": "Edytuj walutę"
+        },
+        "create": {
+            "title": "Utwórz walutę"
+        },
+        "show": {
+            "title": "Szczegóły waluty"
+        },
+        "fields": {
+            "code": "Kod",
+            "name": "Nazwa",
+            "symbol": "Symbol",
+            "decimal_places": "Miejsca dziesiętne"
+        }
+    },
     "Products": {
         "list": {
             "title": "Produkty"
@@ -193,7 +213,10 @@
             "email": "Email",
             "slug": "Slug",
             "created_at": "Utworzono",
-            "actions": "Akcje"
+            "actions": "Akcje",
+            "channel": "Kanał",
+            "currency": "Waluta",
+            "amount": "Cena"
         },
         "values": {
             "null": "Brak"
@@ -207,6 +230,7 @@
             "options": "Opcje",
             "translations": "Tłumaczenia",
             "channels": "Kanały",
+            "prices": "Ceny",
             "media": "Media",
             "documents": "Dokumenty"
         },

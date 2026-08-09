@@ -44,7 +44,7 @@ const DocumentsField = ({ label, documents, disabled, uploading, onUpload, onDel
     };
 
     return (
-        <div className="space-y-2">
+        <div className="grid gap-2">
             <FieldLabel>{label}</FieldLabel>
 
             <div
@@ -57,7 +57,7 @@ const DocumentsField = ({ label, documents, disabled, uploading, onUpload, onDel
                 onDragLeave={() => setIsDragOver(false)}
                 onDrop={disabled ? undefined : handleDrop}
                 className={cn(
-                    "space-y-2 rounded-md p-2 -m-2 transition-colors",
+                    "grid gap-2 rounded-md p-2 -m-2 transition-colors",
                     isDragOver && "bg-primary/5 outline-2 outline-dashed outline-primary"
                 )}
             >

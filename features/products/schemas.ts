@@ -1,4 +1,5 @@
 import { routing } from "@/lib/i18n/routing"
+import { pricesFieldSchema } from "@/features/prices"
 import * as z from "zod"
 
 const localesValidation = () => {
@@ -19,4 +20,5 @@ export const productSchema = z.object({
         channel_id: z.number(),
         is_enabled: z.boolean(),
     })).optional(),
+    prices: pricesFieldSchema,
 })

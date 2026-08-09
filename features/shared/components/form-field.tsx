@@ -9,9 +9,10 @@ interface FormFieldProps {
   control: any;
   readonly?: boolean;
   type?: 'text' | 'number' | 'date';
+  step?: string;
 }
 
-const FormField = ({ label, name, errors, control, readonly = false, type = 'text' }: FormFieldProps) => {
+const FormField = ({ label, name, errors, control, readonly = false, type = 'text', step }: FormFieldProps) => {
   return (
     <Field>
       {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
@@ -19,7 +20,7 @@ const FormField = ({ label, name, errors, control, readonly = false, type = 'tex
         control={control}
         name={name}
         render={({ field }) => (
-          <Input id={name} type={type} {...field} value={field.value ?? ''} className='focus-visible:ring-0' readOnly={readonly} disabled={readonly} />
+          <Input id={name} type={type} step={step} {...field} value={field.value ?? ''} className='focus-visible:ring-0' readOnly={readonly} disabled={readonly} />
         )}
       />
       {errors && errors[name] && (

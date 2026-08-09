@@ -14,7 +14,7 @@ import {
 } from "./ui/sidebar";
 import { Link, usePathname } from "@/lib/i18n/navigation";
 import { Route } from "@/features/routing";
-import { Bookmark, Boxes, FileText, FolderTree, Images, Layers, Package, Radio, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
+import { Bookmark, Boxes, Coins, FileText, FolderTree, Images, Layers, Package, Radio, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SidebarFolderTree } from "@/features/media";
 
@@ -33,6 +33,7 @@ const catalogItems = [
 const systemItems = [
   { pathname: Route.PRIVATE.USERS.LIST.PATHNAME, translationKey: "Users.list.title", icon: Users },
   { pathname: Route.PRIVATE.CHANNELS.LIST.PATHNAME, translationKey: "Channels.list.title", icon: Radio },
+  { pathname: Route.PRIVATE.CURRENCIES.LIST.PATHNAME, translationKey: "Currencies.list.title", icon: Coins },
 ] as const;
 
 export function AppSidebar() {

@@ -44,7 +44,7 @@ const SingleImageField = ({ label, media, disabled, uploading, onUpload, onDelet
     };
 
     return (
-        <div className="space-y-2">
+        <div className="grid gap-2 w-max">
             <FieldLabel>{label}</FieldLabel>
 
             <div
@@ -57,7 +57,7 @@ const SingleImageField = ({ label, media, disabled, uploading, onUpload, onDelet
                 onDragLeave={() => setIsDragOver(false)}
                 onDrop={disabled ? undefined : handleDrop}
                 className={cn(
-                    "relative flex h-32 w-32 items-center justify-center overflow-hidden rounded-md border border-dashed bg-muted/30 transition-colors",
+                    "relative flex size-55 items-center justify-center overflow-hidden rounded-md border border-dashed bg-muted/30 transition-colors",
                     isDragOver && "border-primary bg-primary/5"
                 )}
             >
@@ -72,12 +72,12 @@ const SingleImageField = ({ label, media, disabled, uploading, onUpload, onDelet
 
             {!disabled && (
                 <div className="flex flex-wrap gap-2">
-                    <Button type="button" variant="outline" size="sm" disabled={uploading} onClick={() => inputRef.current?.click()}>
+                    <Button className="flex-1" type="button" variant="outline" size="sm" disabled={uploading} onClick={() => inputRef.current?.click()}>
                         {media ? tShared("media.replace") : tShared("media.upload")}
                     </Button>
                     <GalleryPicker onSelect={onSelectFromGallery} />
                     {media && (
-                        <Button type="button" variant="ghost" size="sm" disabled={uploading} onClick={onDelete}>
+                        <Button type="button"  variant="ghost" size="sm" disabled={uploading} onClick={onDelete}>
                             <Trash className="h-4 w-4" />
                         </Button>
                     )}

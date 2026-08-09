@@ -1,4 +1,5 @@
 import { routing } from "@/lib/i18n/routing"
+import { pricesFieldSchema } from "@/features/prices"
 import * as z from "zod"
 
 const localesValidation = () => {
@@ -12,4 +13,5 @@ export const attributeSchema = z.object({
 
 export const attributeOptionSchema = z.object({
     name: localesValidation(),
+    prices: pricesFieldSchema,
 })

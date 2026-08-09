@@ -47,7 +47,7 @@ const DocumentPicker = ({ onSelect }: DocumentPickerProps) => {
                 <SheetHeader>
                     <SheetTitle>{tShared("documents.select-from-library")}</SheetTitle>
                 </SheetHeader>
-                <div className="space-y-2 overflow-y-auto px-4 pb-4">
+                <div className="grid gap-2 overflow-y-auto px-4 pb-4">
                     {loading ? (
                         <p className="text-sm text-muted-foreground">{tShared("media.loading")}</p>
                     ) : !documents?.length ? (

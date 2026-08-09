@@ -52,6 +52,26 @@
             "title": "Channel details"
         }
     },
+    "Currencies": {
+        "list": {
+            "title": "Currencies"
+        },
+        "edit": {
+            "title": "Edit currency"
+        },
+        "create": {
+            "title": "Create currency"
+        },
+        "show": {
+            "title": "Currency details"
+        },
+        "fields": {
+            "code": "Code",
+            "name": "Name",
+            "symbol": "Symbol",
+            "decimal_places": "Decimal places"
+        }
+    },
     "MediaGallery": {
         "title": "Media gallery",
         "subtitle": "All uploaded images in one place."
@@ -72,7 +92,10 @@
             "email": "Email",
             "slug": "Slug",
             "created_at": "Created at",
-            "actions": "Actions"
+            "actions": "Actions",
+            "channel": "Channel",
+            "currency": "Currency",
+            "amount": "Price"
         },
         "values": {
             "null": "None"
@@ -86,6 +109,7 @@
             "options": "Options",
             "translations": "Translations",
             "channels": "Channels",
+            "prices": "Prices",
             "media": "Media",
             "documents": "Documents"
         },

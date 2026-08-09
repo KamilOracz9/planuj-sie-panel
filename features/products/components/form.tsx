@@ -14,6 +14,7 @@ import { ModelAttributes } from "@/features/attributes";
 import { useProduct } from "../context";
 import { EntityMediaManager, DocumentsManager } from "@/features/media";
 import { ChannelVisibilityField } from "@/features/channels";
+import { PriceEditor } from "@/features/prices";
 import Select from "@/features/shared/components/select";
 import MultiSelect from "@/features/shared/components/multi-select";
 
@@ -34,6 +35,7 @@ const Form = ({ onSubmit, errors }: FormProps) => {
         defaultNameValues,
         defaultAttributes,
         defaultChannels,
+        defaultPrices,
         brandsSelect,
         seriesSelect,
         collectionsSelect,
@@ -50,11 +52,12 @@ const Form = ({ onSubmit, errors }: FormProps) => {
             collections: product.collection_ids ?? [],
             attributes: defaultAttributes,
             channels: defaultChannels,
+            prices: defaultPrices,
         },
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.media'), tShared('tabs.documents')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.prices'), tShared('tabs.media'), tShared('tabs.documents')]
     }, [])
 
     return (
@@ -110,6 +113,10 @@ const Form = ({ onSubmit, errors }: FormProps) => {
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.channels'), tabs) })}>
                     <ChannelVisibilityField form={form} onSubmit={onSubmit} errors={errors} />
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.prices'), tabs) })}>
+                    <PriceEditor form={form} onSubmit={onSubmit} errors={errors} />
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>

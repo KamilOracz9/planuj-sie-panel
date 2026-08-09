@@ -101,6 +101,24 @@ export const routing = defineRouting({
       'en-US': '/channels/[id]/edit',
     },
 
+    // Currencies
+    [Route.PRIVATE.CURRENCIES.LIST.PATHNAME]: {
+      'pl-PL': '/waluty',
+      'en-US': '/currencies',
+    },
+    [Route.PRIVATE.CURRENCIES.CREATE.PATHNAME]: {
+      'pl-PL': '/waluty/nowa',
+      'en-US': '/currencies/new',
+    },
+    [Route.PRIVATE.CURRENCIES.SHOW.PATHNAME]: {
+      'pl-PL': '/waluty/[id]/podglad',
+      'en-US': '/currencies/[id]/show',
+    },
+    [Route.PRIVATE.CURRENCIES.EDIT.PATHNAME]: {
+      'pl-PL': '/waluty/[id]/edycja',
+      'en-US': '/currencies/[id]/edit',
+    },
+
     // Categories
     [Route.PRIVATE.CATEGORIES.LIST.PATHNAME]: {
       'pl-PL': '/kategorie',

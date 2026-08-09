@@ -11,15 +11,17 @@ import { AttributeOptionSelectItem } from "../types";
 import {
     createAttributeOption,
     deleteAttributeOption,
+    fetchAttributeOption,
     fetchAttributeOptionsListForSelect,
     updateAttributeOption,
 } from "@/app/actions/attribute-option";
-import { fetchAttributeOption } from "../api";
 import { routing } from "@/lib/i18n/routing";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/features/shared/components/ui/table";
 import { Button } from "@/features/shared/components/ui/button";
 import TranslatedField from "@/features/shared/components/translated-field";
 import { MediaSheetButton } from "@/features/media";
+import { PriceEditor } from "@/features/prices";
+import { fetchPricesByModel } from "@/app/actions/price";
 
 interface AttributeOptionsProps {
     attributeId: number;
@@ -38,7 +40,7 @@ const AttributeOptions = ({ attributeId }: AttributeOptionsProps) => {
 
     const form = useForm<AttributeOptionFormValues>({
         resolver: zodResolver(attributeOptionSchema),
-        defaultValues: { name: {} },
+        defaultValues: { name: {}, prices: [] },
     });
 
     const loadOptions = () => {
@@ -51,17 +53,20 @@ const AttributeOptions = ({ attributeId }: AttributeOptionsProps) => {
     }, [attributeId, locale]);
 
     const startCreate = () => {
-        form.reset({ name: {} });
+        form.reset({ name: {}, prices: [] });
         setErrors(null);
         setEditingId("new");
     };
 
     const startEdit = async (id: number) => {
-        const option = await fetchAttributeOption({ locale, id });
+        const [option, prices] = await Promise.all([
+            fetchAttributeOption({ locale, id }),
+            fetchPricesByModel({ locale, modelId: id, modelType: 'attribute-option' }),
+        ]);
         const defaultNameValues = Object.fromEntries(
             routing.locales.map((l) => [l, option.translations?.[l as keyof typeof option.translations]?.name])
         );
-        form.reset({ name: defaultNameValues });
+        form.reset({ name: defaultNameValues, prices });
         setErrors(null);
         setEditingId(id);
     };
@@ -130,6 +135,10 @@ const AttributeOptions = ({ attributeId }: AttributeOptionsProps) => {
             {editingId !== null && (
                 <div className="space-y-4 rounded-md border p-4">
                     <TranslatedField onSubmit errors={errors} form={form} />
+                    <div className="grid gap-2">
+                        <p className="text-sm font-medium">{tShared("tabs.prices")}</p>
+                        <PriceEditor form={form} onSubmit={onSubmit} errors={errors} />
+                    </div>
                     <div className="flex gap-2">
                         <Button type="button" onClick={form.handleSubmit(onSubmit)}>
                             {tShared("actions.save")}

@@ -19,18 +19,21 @@ import { cn } from "@/lib/utils";
 import { ModelAttributes } from "@/features/attributes";
 import { ExistingAttributeValue } from "@/features/attributes/types";
 import { EntityMediaManager, DocumentsManager } from "@/features/media";
+import { PriceEditor } from "@/features/prices";
+import { ExistingPrice } from "@/features/prices/types";
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof variantSchema>) => void;
     variantPromise?: Promise<VariantWithTranslations>;
     productsSelectPromise?: Promise<ProductSelectItem[]>;
     existingAttributesPromise?: Promise<ExistingAttributeValue[]>;
+    existingPricesPromise?: Promise<ExistingPrice[]>;
     errors?: Record<string, string> | null;
 }
 
 type VariantFormValues = z.infer<typeof variantSchema>;
 
-const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttributesPromise, errors }: FormProps) => {
+const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttributesPromise, existingPricesPromise, errors }: FormProps) => {
     const tVariants = useTranslations('Variants');
     const tShared = useTranslations('Shared');
     const { normalizedActiveHash } = useTabs();
@@ -38,6 +41,9 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
     const variant = variantPromise ? use(variantPromise) : {} as VariantWithTranslations;
     const productsSelect = productsSelectPromise ? use(productsSelectPromise) : [] as ProductSelectItem[];
     const existingAttributes = existingAttributesPromise ? use(existingAttributesPromise) : [] as ExistingAttributeValue[];
+    // No fallback for prices (unlike ChannelVisibility-style tabs elsewhere):
+    // a price row only exists for explicit (channel, currency) pairs.
+    const defaultPrices = existingPricesPromise ? use(existingPricesPromise) : [] as ExistingPrice[];
 
     const defaultNameValues = Object.fromEntries(routing.locales.map(locale => [locale, variant.translations ? variant.translations[locale as keyof typeof variant.translations]?.name : undefined]));
 
@@ -55,11 +61,12 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
             name: defaultNameValues,
             product_id: variant.product_id ?? null,
             attributes: defaultAttributes,
+            prices: defaultPrices,
         },
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.media'), tShared('tabs.documents')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.prices'), tShared('tabs.media'), tShared('tabs.documents')]
     }, [])
 
     return (
@@ -118,6 +125,10 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
                             errors={errors}
                         />
                     </div>
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.prices'), tabs) })}>
+                    <PriceEditor form={form} onSubmit={onSubmit} errors={errors} />
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.media'), tabs) })}>

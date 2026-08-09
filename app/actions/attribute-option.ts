@@ -1,6 +1,6 @@
 "use server"
 
-import { AttributeOption, AttributeOptionSelectItem } from "@/features/attributes";
+import { AttributeOption, AttributeOptionSelectItem, AttributeOptionWithTranslations } from "@/features/attributes";
 import { attributeOptionSchema } from "@/features/attributes/schemas";
 
 import * as z from "zod";
@@ -38,6 +38,18 @@ export async function updateAttributeOption(data: z.infer<typeof attributeOption
 
 export async function fetchAttributeOptionsListForSelect({ locale, attributeId }: { locale: string, attributeId: number }): Promise<AttributeOptionSelectItem[]> {
     return await fetch(`${process.env.API_URL}/${locale}/attribute-options/select/${attributeId}`, {
+        headers: {
+            'X-API-KEY': process.env.API_KEY || '',
+        }
+    }).then(res => res.json());
+}
+
+// Server action (unlike features/attributes/api.ts's fetchAttributeOption):
+// attribute-options.tsx is a client component and calling the plain api.ts
+// version directly from the client would try to read process.env.API_URL in
+// the browser, where it's undefined (no NEXT_PUBLIC_ prefix).
+export async function fetchAttributeOption({ locale, id }: { locale: string, id: AttributeOption['id'] }): Promise<AttributeOptionWithTranslations> {
+    return await fetch(`${process.env.API_URL}/${locale}/attribute-options/${id}`, {
         headers: {
             'X-API-KEY': process.env.API_KEY || '',
         }

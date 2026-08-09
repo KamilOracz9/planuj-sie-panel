@@ -39,6 +39,11 @@ export enum Pathnames {
     CHANNELS_SHOW = "/channels/[id]/show",
     CHANNELS_EDIT = "/channels/[id]/edit",
 
+    CURRENCIES_LIST = "/currencies",
+    CURRENCIES_CREATE = "/currencies/create",
+    CURRENCIES_SHOW = "/currencies/[id]/show",
+    CURRENCIES_EDIT = "/currencies/[id]/edit",
+
     CATEGORIES_LIST = "/categories",
     CATEGORIES_CREATE = "/categories/create",
     CATEGORIES_SHOW = "/categories/[id]/show",
@@ -88,6 +93,12 @@ export const Route = {
             CREATE: { PATHNAME: Pathnames.CHANNELS_CREATE },
             EDIT: { PATHNAME: Pathnames.CHANNELS_EDIT },
             SHOW: { PATHNAME: Pathnames.CHANNELS_SHOW }
+        },
+        CURRENCIES: {
+            LIST: { PATHNAME: Pathnames.CURRENCIES_LIST },
+            CREATE: { PATHNAME: Pathnames.CURRENCIES_CREATE },
+            EDIT: { PATHNAME: Pathnames.CURRENCIES_EDIT },
+            SHOW: { PATHNAME: Pathnames.CURRENCIES_SHOW }
         },
         PRODUCTS: {
             LIST: { PATHNAME: Pathnames.PRODUCTS_LIST },
