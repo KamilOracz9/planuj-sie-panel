@@ -7,12 +7,11 @@ import { Button } from "@/features/shared/components/ui/button";
 import { Link } from "@/lib/i18n/navigation";
 import { PlusCircle } from "lucide-react";
 import { getLocale } from "next-intl/server";
-import { cookies } from "next/headers";
-import { ACTIVE_CHANNEL_COOKIE } from "@/features/channels";
+import { getActiveChannelId } from "@/features/channels/get-active-channel-id";
 
 const List = async () => {
     const locale = await getLocale();
-    const channelId = Number((await cookies()).get(ACTIVE_CHANNEL_COOKIE)?.value) || null;
+    const channelId = await getActiveChannelId(locale);
 
     const productsPromise = fetchProductsList({ locale, channelId });
 

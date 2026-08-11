@@ -135,7 +135,7 @@ const AttributeOptions = ({ attributeId }: AttributeOptionsProps) => {
             {editingId !== null && (
                 <div className="space-y-4 rounded-md border p-4">
                     <TranslatedField onSubmit errors={errors} form={form} />
-                    <div className="grid gap-2">
+                    <div className="grid gap-2 w-max">
                         <p className="text-sm font-medium">{tShared("tabs.prices")}</p>
                         <PriceEditor form={form} onSubmit={onSubmit} errors={errors} />
                     </div>

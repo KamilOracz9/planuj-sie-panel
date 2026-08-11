@@ -1,6 +1,6 @@
 import { Variant, VariantWithTranslations } from "./types";
 
-export const fetchVariantsList = async ({ locale }: { locale: string }): Promise<Variant[]> => await fetch(`${process.env.API_URL}/${locale}/variants`, {
+export const fetchVariantsList = async ({ locale, channelId }: { locale: string, channelId?: number | null }): Promise<Variant[]> => await fetch(`${process.env.API_URL}/${locale}/variants${channelId ? `?channel_id=${channelId}` : ''}`, {
     headers: {
         'X-API-KEY': process.env.API_KEY || '',
     }

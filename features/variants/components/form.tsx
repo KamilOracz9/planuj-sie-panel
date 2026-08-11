@@ -19,28 +19,34 @@ import { cn } from "@/lib/utils";
 import { ModelAttributes } from "@/features/attributes";
 import { ExistingAttributeValue } from "@/features/attributes/types";
 import { EntityMediaManager } from "@/features/media";
+import { ChannelVisibilityField } from "@/features/channels";
+import { ExistingChannelVisibility } from "@/features/channels/types";
 import { PriceEditor } from "@/features/prices";
 import { ExistingPrice } from "@/features/prices/types";
+import { useAppSelector } from "@/lib/redux/hooks";
 
 interface FormProps {
     onSubmit?: (data: z.infer<typeof variantSchema>) => void;
     variantPromise?: Promise<VariantWithTranslations>;
     productsSelectPromise?: Promise<ProductSelectItem[]>;
     existingAttributesPromise?: Promise<ExistingAttributeValue[]>;
+    existingChannelsPromise?: Promise<ExistingChannelVisibility[]>;
     existingPricesPromise?: Promise<ExistingPrice[]>;
     errors?: Record<string, string> | null;
 }
 
 type VariantFormValues = z.infer<typeof variantSchema>;
 
-const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttributesPromise, existingPricesPromise, errors }: FormProps) => {
+const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttributesPromise, existingChannelsPromise, existingPricesPromise, errors }: FormProps) => {
     const tVariants = useTranslations('Variants');
     const tShared = useTranslations('Shared');
     const { normalizedActiveHash } = useTabs();
+    const { channelsSelect } = useAppSelector(state => state.channel);
 
     const variant = variantPromise ? use(variantPromise) : {} as VariantWithTranslations;
     const productsSelect = productsSelectPromise ? use(productsSelectPromise) : [] as ProductSelectItem[];
     const existingAttributes = existingAttributesPromise ? use(existingAttributesPromise) : [] as ExistingAttributeValue[];
+    const existingChannels = existingChannelsPromise ? use(existingChannelsPromise) : [] as ExistingChannelVisibility[];
     // No fallback for prices (unlike ChannelVisibility-style tabs elsewhere):
     // a price row only exists for explicit (channel, currency) pairs.
     const defaultPrices = existingPricesPromise ? use(existingPricesPromise) : [] as ExistingPrice[];
@@ -53,6 +59,11 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
         data: av.data,
     })) ?? [];
 
+    const defaultChannels = channelsSelect.map(channel => ({
+        channel_id: channel.id,
+        is_enabled: existingChannels.find(v => v.channel_id === channel.id)?.is_enabled ?? true,
+    }));
+
     const selectedProduct = useMemo(() => productsSelect.find(p => p.id === variant.product_id), [productsSelect, variant.product_id]);
 
     const form = useForm<VariantFormValues>({
@@ -61,12 +72,13 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
             name: defaultNameValues,
             product_id: variant.product_id ?? null,
             attributes: defaultAttributes,
+            channels: defaultChannels,
             prices: defaultPrices,
         },
     })
 
     const tabs = useMemo(() => {
-        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.prices'), tShared('tabs.media')]
+        return [tShared('tabs.basic'), tShared('tabs.attributes'), tShared('tabs.channels'), tShared('tabs.prices'), tShared('tabs.media')]
     }, [])
 
     return (
@@ -125,6 +137,10 @@ const Form = ({ onSubmit, variantPromise, productsSelectPromise, existingAttribu
                             errors={errors}
                         />
                     </div>
+                </div>
+
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.channels'), tabs) })}>
+                    <ChannelVisibilityField form={form} onSubmit={onSubmit} errors={errors} />
                 </div>
 
                 <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.prices'), tabs) })}>

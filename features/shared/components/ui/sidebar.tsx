@@ -30,7 +30,7 @@ const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
 const SIDEBAR_WIDTH_DEFAULT = 256
 const SIDEBAR_WIDTH_MIN = 200
 const SIDEBAR_WIDTH_MAX = 480
-const SIDEBAR_WIDTH_STORAGE_KEY = "sidebar_width"
+const SIDEBAR_WIDTH_COOKIE_NAME = "sidebar_width"
 const SIDEBAR_WIDTH_MOBILE = "18rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
@@ -60,6 +60,7 @@ function useSidebar() {
 
 function SidebarProvider({
   defaultOpen = true,
+  defaultWidth = SIDEBAR_WIDTH_DEFAULT,
   open: openProp,
   onOpenChange: setOpenProp,
   className,
@@ -68,26 +69,24 @@ function SidebarProvider({
   ...props
 }: React.ComponentProps<"div"> & {
   defaultOpen?: boolean
+  defaultWidth?: number
   open?: boolean
   onOpenChange?: (open: boolean) => void
 }) {
   const isMobile = useIsMobile()
   const [openMobile, setOpenMobile] = React.useState(false)
 
-  // Sidebar width, resizable by dragging the rail. Starts at the default on
-  // both server and client to avoid a hydration mismatch, then picks up the
-  // user's saved width (if any) after mount.
-  const [width, _setWidth] = React.useState(SIDEBAR_WIDTH_DEFAULT)
-  React.useEffect(() => {
-    const stored = Number(window.localStorage.getItem(SIDEBAR_WIDTH_STORAGE_KEY))
-    if (stored) {
-      _setWidth(Math.min(SIDEBAR_WIDTH_MAX, Math.max(SIDEBAR_WIDTH_MIN, stored)))
-    }
-  }, [])
+  // Sidebar width, resizable by dragging the rail. The initial value comes
+  // from the `sidebar_width` cookie, read server-side and passed in as
+  // `defaultWidth` - this way the very first paint already has the right
+  // width, instead of flashing the default and resizing after mount.
+  const [width, _setWidth] = React.useState(() =>
+    Math.min(SIDEBAR_WIDTH_MAX, Math.max(SIDEBAR_WIDTH_MIN, defaultWidth))
+  )
   const setWidth = React.useCallback((value: number) => {
     const clamped = Math.min(SIDEBAR_WIDTH_MAX, Math.max(SIDEBAR_WIDTH_MIN, value))
     _setWidth(clamped)
-    window.localStorage.setItem(SIDEBAR_WIDTH_STORAGE_KEY, String(clamped))
+    document.cookie = `${SIDEBAR_WIDTH_COOKIE_NAME}=${clamped}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
   }, [])
 
   // This is the internal state of the sidebar.

@@ -7,11 +7,13 @@ import { Button } from "@/features/shared/components/ui/button";
 import { Link } from "@/lib/i18n/navigation";
 import { PlusCircle } from "lucide-react";
 import { getLocale } from "next-intl/server";
+import { getActiveChannelId } from "@/features/channels/get-active-channel-id";
 
 const List = async () => {
     const locale = await getLocale();
+    const channelId = await getActiveChannelId(locale);
 
-    const variantsPromise = fetchVariantsList({ locale });
+    const variantsPromise = fetchVariantsList({ locale, channelId });
 
     return (
         <Listing translationsPrefix="Variants" actions={

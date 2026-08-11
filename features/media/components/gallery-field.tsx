@@ -44,7 +44,7 @@ const GalleryField = ({ label, media, disabled, uploading, onUpload, onDelete, o
     };
 
     return (
-        <div className="grid gap-2">
+        <div className="grid gap-2 w-max">
             <FieldLabel>{label}</FieldLabel>
 
             <div

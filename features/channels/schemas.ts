@@ -7,4 +7,5 @@ const localesValidation = () => {
 
 export const channelSchema = z.object({
     name: localesValidation(),
+    is_default: z.boolean().optional(),
 })

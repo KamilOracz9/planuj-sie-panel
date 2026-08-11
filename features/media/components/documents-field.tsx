@@ -44,7 +44,7 @@ const DocumentsField = ({ label, documents, disabled, uploading, onUpload, onDel
     };
 
     return (
-        <div className="grid gap-2">
+        <div className="grid gap-2 w-max">
             <FieldLabel>{label}</FieldLabel>
 
             <div

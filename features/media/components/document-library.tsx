@@ -102,7 +102,7 @@ const DocumentLibrary = ({ initialDocuments, folders, activeFolderId }: Document
             {!documents.length ? (
                 <p className="text-sm text-muted-foreground">{tShared("messages.no-items-found")}</p>
             ) : (
-                <div className="grid gap-2">
+                <div className="grid gap-2 w-max">
                     {documents.map((document) => (
                         <DocumentRow
                             key={document.id}

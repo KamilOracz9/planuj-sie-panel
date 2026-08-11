@@ -50,6 +50,9 @@
         },
         "show": {
             "title": "Channel details"
+        },
+        "fields": {
+            "is_default": "Default"
         }
     },
     "Currencies": {
@@ -131,7 +134,8 @@
             "actions": "Actions",
             "channel": "Channel",
             "currency": "Currency",
-            "amount": "Price"
+            "amount": "Price",
+            "is_default": "Default"
         },
         "values": {
             "null": "None"

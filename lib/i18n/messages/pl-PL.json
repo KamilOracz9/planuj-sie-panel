@@ -90,6 +90,9 @@
         },
         "show": {
             "title": "Szczegóły kanału"
+        },
+        "fields": {
+            "is_default": "Domyślny"
         }
     },
     "Currencies": {
@@ -252,7 +255,8 @@
             "actions": "Akcje",
             "channel": "Kanał",
             "currency": "Waluta",
-            "amount": "Cena"
+            "amount": "Cena",
+            "is_default": "Domyślny"
         },
         "values": {
             "null": "Brak"

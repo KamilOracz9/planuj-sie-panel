@@ -10,6 +10,7 @@ import FormContainer from "@/features/shared/components/form-container";
 import Tabs, { isTabActive, useTabs } from "@/features/shared/components/tabs";
 import { cn } from "@/lib/utils";
 import TranslatedField from "@/features/shared/components/translated-field";
+import SwitchField from "@/features/shared/components/switch-field";
 import { useChannel } from "../context";
 
 interface FormProps {
@@ -21,14 +22,16 @@ type ChannelFormValues = z.infer<typeof channelSchema>;
 
 const Form = ({ onSubmit, errors }: FormProps) => {
     const tShared = useTranslations('Shared');
+    const tChannels = useTranslations('Channels');
     const { normalizedActiveHash } = useTabs();
 
-    const { defaultNameValues } = useChannel();
+    const { channel, defaultNameValues } = useChannel();
 
     const form = useForm<ChannelFormValues>({
         resolver: zodResolver(channelSchema),
         defaultValues: {
             name: defaultNameValues,
+            is_default: channel.is_default ?? false,
         },
     })
 
@@ -40,8 +43,9 @@ const Form = ({ onSubmit, errors }: FormProps) => {
         <FormContainer onSubmit={onSubmit} form={form} >
             <>
                 <Tabs tabs={tabs} />
-                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) })}>
+                <div className={cn({ 'hidden': !isTabActive(normalizedActiveHash, tShared('tabs.basic'), tabs) }, 'space-y-4')}>
                     <TranslatedField onSubmit={!!onSubmit} errors={errors} form={form} />
+                    <SwitchField label={tChannels('fields.is_default')} name="is_default" control={form.control} disabled={!onSubmit} errors={errors} />
                 </div>
             </>
         </FormContainer>

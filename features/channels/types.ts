@@ -1,10 +1,10 @@
 import { ModelWithTranslations, SelectItem, Translation, Model } from "../shared/types";
 
-export type Channel = {} & Model;
+export type Channel = { is_default: boolean } & Model;
 
-export type ChannelSelectItem = {} & SelectItem;
+export type ChannelSelectItem = { is_default: boolean } & SelectItem;
 
-export type ChannelWithTranslations = {} & ModelWithTranslations<ChannelTranslation>;
+export type ChannelWithTranslations = { is_default: boolean } & ModelWithTranslations<ChannelTranslation>;
 
 export type ChannelTranslation = {
     channel_id: number;

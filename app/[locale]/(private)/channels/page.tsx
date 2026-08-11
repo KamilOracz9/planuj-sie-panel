@@ -30,7 +30,7 @@ const List = async () => {
                     show: Route.PRIVATE.CHANNELS.SHOW.PATHNAME,
                     edit: Route.PRIVATE.CHANNELS.EDIT.PATHNAME,
                 }}
-                fields={['name']}
+                fields={['name', 'is_default']}
             />
         </Listing>
     )

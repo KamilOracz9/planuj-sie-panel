@@ -34,7 +34,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
-  const activeChannelId = Number((await cookies()).get(ACTIVE_CHANNEL_COOKIE)?.value) || null;
+  const channelsSelect = await fetchChannelsListForSelect({ locale });
+  // No cookie yet (first visit) - land on the default channel rather than
+  // "all channels", so a fresh session starts scoped somewhere sensible.
+  // (Entity list pages use features/channels/get-active-channel-id.ts for
+  // the same fallback, since they don't already have channelsSelect fetched.)
+  const activeChannelId = Number((await cookies()).get(ACTIVE_CHANNEL_COOKIE)?.value)
+    || channelsSelect.find(channel => channel.is_default)?.id
+    || null;
 
   return (
     <html lang={locale}>
@@ -57,7 +64,7 @@ export default async function RootLayout({
               collectionsSelect: await fetchCollectionsListForSelect({ locale })
             },
             [CHANNEL_SLICE_NAME]: {
-              channelsSelect: await fetchChannelsListForSelect({ locale }),
+              channelsSelect,
               activeChannelId
             },
             [CURRENCY_SLICE_NAME]: {
