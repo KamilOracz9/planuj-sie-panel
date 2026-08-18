@@ -11,3 +11,9 @@ export const fetchVariant = async ({ locale, id }: { locale: string, id: Variant
         'X-API-KEY': process.env.API_KEY || '',
     }
 }).then(res => res.json());
+
+export const fetchVariantsByProduct = async ({ locale, productId, channelId }: { locale: string, productId: number, channelId?: number | null }): Promise<Variant[]> => await fetch(`${process.env.API_URL}/${locale}/variants/by-product/${productId}${channelId ? `?channel_id=${channelId}` : ''}`, {
+    headers: {
+        'X-API-KEY': process.env.API_KEY || '',
+    }
+}).then(res => res.json());

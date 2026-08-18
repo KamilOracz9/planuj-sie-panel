@@ -14,3 +14,16 @@ export type ExistingChannelVisibility = {
     channel_id: number;
     is_enabled: boolean;
 }
+
+export type VisibilityReportCandidate = {
+    type: string;
+    id: number;
+    name: string | null;
+}
+
+export type VisibilityReport = {
+    channel_id: number;
+    own_enabled: boolean;
+    blocking_groups: VisibilityReportCandidate[][];
+    visible: boolean;
+}

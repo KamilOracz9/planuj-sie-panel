@@ -172,6 +172,10 @@ export const routing = defineRouting({
       'pl-PL': '/produkty/[id]/edycja',
       'en-US': '/products/[id]/edit',
     },
+    [Route.PRIVATE.PRODUCTS.SIMULATE.PATHNAME]: {
+      'pl-PL': '/produkty/[id]/symulacja',
+      'en-US': '/products/[id]/simulate',
+    },
 
     // Variants
     [Route.PRIVATE.VARIANTS.LIST.PATHNAME]: {
@@ -207,6 +211,24 @@ export const routing = defineRouting({
     [Route.PRIVATE.ATTRIBUTES.EDIT.PATHNAME]: {
       'pl-PL': '/atrybuty/[id]/edycja',
       'en-US': '/attributes/[id]/edit',
+    },
+
+    // Attribute options
+    [Route.PRIVATE.ATTRIBUTE_OPTIONS.LIST.PATHNAME]: {
+      'pl-PL': '/opcje-atrybutow',
+      'en-US': '/attribute-options',
+    },
+    [Route.PRIVATE.ATTRIBUTE_OPTIONS.CREATE.PATHNAME]: {
+      'pl-PL': '/opcje-atrybutow/nowa',
+      'en-US': '/attribute-options/new',
+    },
+    [Route.PRIVATE.ATTRIBUTE_OPTIONS.SHOW.PATHNAME]: {
+      'pl-PL': '/opcje-atrybutow/[id]/podglad',
+      'en-US': '/attribute-options/[id]/show',
+    },
+    [Route.PRIVATE.ATTRIBUTE_OPTIONS.EDIT.PATHNAME]: {
+      'pl-PL': '/opcje-atrybutow/[id]/edycja',
+      'en-US': '/attribute-options/[id]/edit',
     },
 
     // Media gallery

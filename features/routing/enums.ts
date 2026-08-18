@@ -3,6 +3,7 @@ export enum Pathnames {
     PRODUCTS_CREATE = "/products/create",
     PRODUCTS_SHOW = "/products/[id]/show",
     PRODUCTS_EDIT = "/products/[id]/edit",
+    PRODUCTS_SIMULATE = "/products/[id]/simulate",
 
     VARIANTS_LIST = "/variants",
     VARIANTS_CREATE = "/variants/create",
@@ -58,6 +59,11 @@ export enum Pathnames {
     ATTRIBUTES_CREATE = "/attributes/create",
     ATTRIBUTES_SHOW = "/attributes/[id]/show",
     ATTRIBUTES_EDIT = "/attributes/[id]/edit",
+
+    ATTRIBUTE_OPTIONS_LIST = "/attribute-options",
+    ATTRIBUTE_OPTIONS_CREATE = "/attribute-options/create",
+    ATTRIBUTE_OPTIONS_SHOW = "/attribute-options/[id]/show",
+    ATTRIBUTE_OPTIONS_EDIT = "/attribute-options/[id]/edit",
 
     MEDIA_LIST = "/media",
 
@@ -115,7 +121,8 @@ export const Route = {
             LIST: { PATHNAME: Pathnames.PRODUCTS_LIST },
             CREATE: { PATHNAME: Pathnames.PRODUCTS_CREATE },
             EDIT: { PATHNAME: Pathnames.PRODUCTS_EDIT },
-            SHOW: { PATHNAME: Pathnames.PRODUCTS_SHOW }
+            SHOW: { PATHNAME: Pathnames.PRODUCTS_SHOW },
+            SIMULATE: { PATHNAME: Pathnames.PRODUCTS_SIMULATE }
         },
         CATEGORIES: {
             LIST: { PATHNAME: Pathnames.CATEGORIES_LIST },
@@ -134,6 +141,12 @@ export const Route = {
             CREATE: { PATHNAME: Pathnames.ATTRIBUTES_CREATE },
             EDIT: { PATHNAME: Pathnames.ATTRIBUTES_EDIT },
             SHOW: { PATHNAME: Pathnames.ATTRIBUTES_SHOW }
+        },
+        ATTRIBUTE_OPTIONS: {
+            LIST: { PATHNAME: Pathnames.ATTRIBUTE_OPTIONS_LIST },
+            CREATE: { PATHNAME: Pathnames.ATTRIBUTE_OPTIONS_CREATE },
+            EDIT: { PATHNAME: Pathnames.ATTRIBUTE_OPTIONS_EDIT },
+            SHOW: { PATHNAME: Pathnames.ATTRIBUTE_OPTIONS_SHOW }
         },
         MEDIA: {
             LIST: { PATHNAME: Pathnames.MEDIA_LIST },

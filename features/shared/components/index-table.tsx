@@ -3,7 +3,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/features/shared/components/ui/table"
 import { use, useState } from "react"
 import { Button } from "@/features/shared/components/ui/button"
-import { Edit, Eye, Inbox, Trash } from "lucide-react"
+import { Edit, Eye, Inbox, ScanEye, Trash } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import { Link } from "@/lib/i18n/navigation"
 import { Pathnames } from "@/features/routing"
@@ -17,6 +17,7 @@ interface IndexTableProps<T extends { id: string | number }> {
   routes: {
     show: PrivateRouteWithId
     edit: PrivateRouteWithId
+    simulate?: PrivateRouteWithId
   }
     fields: Array<Exclude<keyof T, "id">>
     modelTranslationsPrefix?: string
@@ -83,6 +84,13 @@ const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteActi
                                         <Eye className="h-4 w-4" />
                                     </Link>
                                 </Button>
+                                {routes.simulate && (
+                                    <Button variant="ghost" size="icon-sm" asChild>
+                                        <Link href={{ pathname: routes.simulate, params: { id: item.id } }} >
+                                            <ScanEye className="h-4 w-4" />
+                                        </Link>
+                                    </Button>
+                                )}
                                 <Button variant="ghost" size="icon-sm" asChild>
                                     <Link href={{ pathname: routes.edit, hash: slugify(tShared('tabs.basic')), params: { id: item.id } }} >
                                         <Edit className="h-4 w-4" />

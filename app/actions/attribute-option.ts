@@ -14,7 +14,7 @@ export async function deleteAttributeOption(attributeOptionId: AttributeOption['
     }).then(res => res.json())
 }
 
-export async function createAttributeOption(data: z.infer<typeof attributeOptionSchema> & { attribute_id: number }) {
+export async function createAttributeOption(data: z.infer<typeof attributeOptionSchema>) {
     return await fetch(`${process.env.API_URL}/attribute-options`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -25,7 +25,7 @@ export async function createAttributeOption(data: z.infer<typeof attributeOption
     }).then(res => res.json())
 }
 
-export async function updateAttributeOption(data: z.infer<typeof attributeOptionSchema> & { attribute_id: number }, id: AttributeOption['id']) {
+export async function updateAttributeOption(data: z.infer<typeof attributeOptionSchema>, id: AttributeOption['id']) {
     return await fetch(`${process.env.API_URL}/attribute-options/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),

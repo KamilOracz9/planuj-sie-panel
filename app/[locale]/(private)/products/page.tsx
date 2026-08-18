@@ -29,6 +29,7 @@ const List = async () => {
                 routes={{
                     show: Route.PRIVATE.PRODUCTS.SHOW.PATHNAME,
                     edit: Route.PRIVATE.PRODUCTS.EDIT.PATHNAME,
+                    simulate: Route.PRIVATE.PRODUCTS.SIMULATE.PATHNAME,
                 }}
                 fields={['name']}
             />  

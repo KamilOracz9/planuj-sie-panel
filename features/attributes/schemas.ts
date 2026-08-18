@@ -13,5 +13,6 @@ export const attributeSchema = z.object({
 
 export const attributeOptionSchema = z.object({
     name: localesValidation(),
+    attribute_id: z.number().nullable(),
     prices: pricesFieldSchema,
 })

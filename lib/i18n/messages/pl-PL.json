@@ -168,7 +168,36 @@
             "attribute_id": "Atrybut",
             "brand_id": "Marka",
             "series_id": "Seria",
-            "collections": "Kolekcje"
+            "collections": "Kolekcje",
+            "description": "Opis",
+            "short_description": "Krótki opis"
+        },
+        "simulate": {
+            "title": "Symulacja produktu w kanale",
+            "sections": {
+                "basic": "Podstawowe informacje",
+                "relations": "Marka / Seria / Kolekcje",
+                "variants": "Warianty",
+                "attributes": "Atrybuty",
+                "prices": "Cena",
+                "visibility": "Widoczność w kanale",
+                "media": "Media"
+            },
+            "visibility": {
+                "visible": "Widoczny",
+                "hidden": "Niewidoczny",
+                "disabled_directly": "Wyłączony bezpośrednio dla tego kanału.",
+                "blocked_by": "Zablokowane przez",
+                "no_channel": "Wybierz kanał w sidebarze, aby zobaczyć dane zależne od kanału."
+            },
+            "prices": {
+                "product_price": "Cena produktu",
+                "variant_column": "Wariant",
+                "attribute_options_column": "Kombinacja atrybutów",
+                "variant_price_column": "Cena wariantu",
+                "attributes_price_column": "Cena atrybutów",
+                "final_price_column": "Cena końcowa"
+            }
         }
     },
     "Variants": {
@@ -232,6 +261,23 @@
             "save-hint": "Zapisz atrybut, aby zarządzać jego opcjami."
         }
     },
+    "AttributeOptions": {
+        "list": {
+            "title": "Opcje atrybutów"
+        },
+        "edit": {
+            "title": "Edytuj opcję atrybutu"
+        },
+        "create": {
+            "title": "Utwórz opcję atrybutu"
+        },
+        "show": {
+            "title": "Szczegóły opcji atrybutu"
+        },
+        "fields": {
+            "attribute_id": "Atrybut"
+        }
+    },
     "MediaGallery": {
         "title": "Galeria zdjęć",
         "subtitle": "Wszystkie przesłane zdjęcia w jednym miejscu."
@@ -245,7 +291,8 @@
             "save": "Zapisz",
             "add": "Dodaj",
             "remove": "Usuń",
-            "cancel": "Anuluj"
+            "cancel": "Anuluj",
+            "edit": "Edytuj"
         },
         "fields": {
             "name": "Nazwa",
@@ -259,7 +306,10 @@
             "is_default": "Domyślny"
         },
         "values": {
-            "null": "Brak"
+            "null": "Brak",
+            "yes": "Tak",
+            "no": "Nie",
+            "or": "lub"
         },
         "messages": {
             "no-items-found": "Nie znaleziono żadnych elementów."

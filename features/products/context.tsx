@@ -3,8 +3,9 @@
 import { createContext, use, useContext, useMemo } from "react";
 import { ProductWithTranslations } from "./types";
 import { ExistingAttributeValue } from "../attributes/types";
-import { ExistingChannelVisibility } from "../channels/types";
-import { ExistingPrice } from "../prices/types";
+import { ExistingChannelVisibility, VisibilityReport } from "../channels/types";
+import { ExistingPrice, PriceBreakdown } from "../prices/types";
+import { Variant } from "../variants/types";
 import { routing } from "@/lib/i18n/routing";
 import { useAppSelector } from "@/lib/redux/hooks";
 
@@ -59,5 +60,31 @@ export const useProduct = () => {
         channelsSelect,
         selectedBrand,
         selectedSeries,
+    };
+};
+
+// Separate from ProductContext (rather than adding fields to it) so
+// Show/Edit don't carry promises they never resolve - only the new
+// simulate/layout.tsx provides this context.
+export const ProductSimulationContext = createContext<{
+    existingVariantsPromise: Promise<Variant[]> | undefined,
+    visibilityReportPromise: Promise<VisibilityReport> | undefined,
+    priceBreakdownPromise: Promise<PriceBreakdown> | undefined,
+    activeChannelId: number | null,
+} | undefined>(undefined);
+
+export const useProductSimulation = () => {
+    const ctx = useContext(ProductSimulationContext);
+    const productData = useProduct();
+    const variants = ctx?.existingVariantsPromise ? use(ctx.existingVariantsPromise) : [] as Variant[];
+    const visibilityReport = ctx?.visibilityReportPromise ? use(ctx.visibilityReportPromise) : undefined;
+    const priceBreakdown = ctx?.priceBreakdownPromise ? use(ctx.priceBreakdownPromise) : undefined;
+
+    return {
+        ...productData,
+        variants,
+        visibilityReport,
+        priceBreakdown,
+        activeChannelId: ctx?.activeChannelId ?? null,
     };
 };

@@ -12,4 +12,6 @@ export type ProductWithTranslations = {
 
 export type ProductTranslation = {
     product_id: number;
+    description: string | null;
+    short_description: string | null;
 } & Translation;
