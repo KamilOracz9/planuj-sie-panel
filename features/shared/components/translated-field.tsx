@@ -5,7 +5,7 @@ import FormField from "@/features/shared/components/form-field";
 
 const TranslatedField = ({ onSubmit, errors, form }: { onSubmit?: boolean; errors?: Record<string, string> | null; form: any }) => {
     return (
-        <Accordion type="single" collapsible defaultValue="pl-PL">
+        <Accordion type="multiple" defaultValue={["pl-PL"]}>
             {routing.locales.map(locale => (
                 <AccordionItem key={locale} value={locale}>
                     <AccordionTrigger>{useTranslations('Shared')('fields.name')} ({locale})</AccordionTrigger>

@@ -5,7 +5,7 @@ import { use, useState } from "react"
 import { Button } from "@/features/shared/components/ui/button"
 import { Edit, Eye, Inbox, ScanEye, Trash } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
-import { Link } from "@/lib/i18n/navigation"
+import { Link, useRouter } from "@/lib/i18n/navigation"
 import { Pathnames } from "@/features/routing"
 import { formatDate, slugify } from "@/lib/utils"
 
@@ -27,6 +27,7 @@ const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteActi
     const tShared = useTranslations('Shared');
     const tModel = modelTranslationsPrefix ? useTranslations(modelTranslationsPrefix) : tShared;
     const locale = useLocale();
+    const router = useRouter();
 
     const t = (field: string) => tModel.has(`fields.${field}`) ? tModel(`fields.${field}`) : tShared(`fields.${field}`);
 
@@ -70,20 +71,24 @@ const IndexTable = <T extends { id: string | number }>({ dataPromise, deleteActi
                     </TableRow>
                 )}
                 {items.map((item) => (
-                    <TableRow key={item.id}>
+                    <TableRow
+                        key={item.id}
+                        className="cursor-pointer"
+                        onClick={() => router.push({ pathname: routes.edit, params: { id: item.id } })}
+                    >
                         {fields.map((field) => (
                             <TableCell key={String(field)}>{renderValue(field, item[field])}</TableCell>
                         ))}
-                        <TableCell className="text-center">
+                        <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
                             <div className="flex items-center justify-center gap-1">
                                 <Button onClick={() => handleDelete(item.id)} variant="ghost" size="icon-sm" className="text-muted-foreground hover:text-destructive">
                                     <Trash className="h-4 w-4" />
                                 </Button>
-                                <Button variant="ghost" size="icon-sm" asChild>
+                                {/* <Button variant="ghost" size="icon-sm" asChild>
                                     <Link href={{ pathname: routes.show, hash: slugify(tShared('tabs.basic')), params: { id: item.id } }} >
                                         <Eye className="h-4 w-4" />
                                     </Link>
-                                </Button>
+                                </Button> */}
                                 {routes.simulate && (
                                     <Button variant="ghost" size="icon-sm" asChild>
                                         <Link href={{ pathname: routes.simulate, params: { id: item.id } }} >

@@ -7,7 +7,7 @@ import { Button } from "@/features/shared/components/ui/button"
 import { Edit, Eye, Inbox, Trash } from "lucide-react"
 import { deleteUser } from "@/app/actions/user"
 import { useLocale, useTranslations } from "next-intl"
-import { Link } from "@/lib/i18n/navigation"
+import { Link, useRouter } from "@/lib/i18n/navigation"
 import { Route } from "@/features/routing"
 import { formatDate } from "@/lib/utils"
 
@@ -18,6 +18,7 @@ interface IndexTableProps {
 const IndexTable = ({ usersPromise }: IndexTableProps) => {
     const tShared = useTranslations('Shared');
     const locale = useLocale();
+    const router = useRouter();
 
     const [users, setUsers] = useState<User[]>(use(usersPromise));
 
@@ -51,11 +52,15 @@ const IndexTable = ({ usersPromise }: IndexTableProps) => {
                     </TableRow>
                 )}
                 {users.map((user) => (
-                    <TableRow key={user.id}>
+                    <TableRow
+                        key={user.id}
+                        className="cursor-pointer"
+                        onClick={() => router.push({ pathname: Route.PRIVATE.USERS.EDIT.PATHNAME, params: { id: user.id } })}
+                    >
                         <TableCell>{user.name}</TableCell>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>{formatDate(user.created_at, locale)}</TableCell>
-                        <TableCell className="text-center">
+                        <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
                             <div className="flex items-center justify-center gap-1">
                                 <Button onClick={() => handleDelete(user.id)} variant="ghost" size="icon-sm" className="text-muted-foreground hover:text-destructive">
                                     <Trash className="h-4 w-4" />

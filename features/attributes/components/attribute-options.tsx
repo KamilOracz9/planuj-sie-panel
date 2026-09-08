@@ -6,7 +6,7 @@ import { PlusCircle, Trash } from "lucide-react";
 import { AttributeOptionSelectItem } from "../types";
 import { deleteAttributeOption, fetchAttributeOptionsListForSelect } from "@/app/actions/attribute-option";
 import { Route } from "@/features/routing";
-import { Link } from "@/lib/i18n/navigation";
+import { Link, useRouter } from "@/lib/i18n/navigation";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/features/shared/components/ui/table";
 import { Button } from "@/features/shared/components/ui/button";
 
@@ -22,6 +22,7 @@ const AttributeOptions = ({ attributeId }: AttributeOptionsProps) => {
     const locale = useLocale();
     const tShared = useTranslations("Shared");
     const tAttributes = useTranslations("Attributes");
+    const router = useRouter();
 
     const [options, setOptions] = useState<AttributeOptionSelectItem[]>([]);
 
@@ -51,13 +52,13 @@ const AttributeOptions = ({ attributeId }: AttributeOptionsProps) => {
                 </TableHeader>
                 <TableBody>
                     {options.map((option) => (
-                        <TableRow key={option.id}>
-                            <TableCell>
-                                <Link className="underline" href={{ pathname: Route.PRIVATE.ATTRIBUTE_OPTIONS.EDIT.PATHNAME, params: { id: option.id } }}>
-                                    {option.name}
-                                </Link>
-                            </TableCell>
-                            <TableCell className="text-center">
+                        <TableRow
+                            key={option.id}
+                            className="cursor-pointer"
+                            onClick={() => router.push({ pathname: Route.PRIVATE.ATTRIBUTE_OPTIONS.EDIT.PATHNAME, params: { id: option.id } })}
+                        >
+                            <TableCell>{option.name}</TableCell>
+                            <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
                                 <Button type="button" variant="ghost" size="icon-sm" onClick={() => handleDelete(option.id)}>
                                     <Trash className="h-4 w-4" />
                                 </Button>

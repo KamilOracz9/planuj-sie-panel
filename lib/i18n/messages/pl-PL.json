@@ -156,9 +156,9 @@
             "series": "Serie",
             "collections": "Kolekcje",
             "categories": "Kategorie",
-            "attributes": "Atrybuty",
-            "attribute-options": "Opcje atrybutów",
-            "attribute-values": "Wartości atrybutów"
+            "attributes": "Cechy",
+            "attribute-options": "Opcje cech",
+            "attribute-values": "Wartości cech"
         }
     },
     "Products": {
@@ -188,7 +188,7 @@
                 "basic": "Podstawowe informacje",
                 "relations": "Marka / Seria / Kolekcje",
                 "variants": "Warianty",
-                "attributes": "Atrybuty",
+                "attributes": "Cechy",
                 "prices": "Cena",
                 "visibility": "Widoczność w kanale",
                 "media": "Media"
@@ -252,19 +252,19 @@
     },
     "Attributes": {
         "list": {
-            "title": "Atrybuty"
+            "title": "Cechy"
         },
         "edit": {
-            "title": "Edytuj atrybut"
+            "title": "Edytuj cechę"
         },
         "create": {
-            "title": "Utwórz atrybut"
+            "title": "Utwórz cechę"
         },
         "show": {
-            "title": "Szczegóły atrybutu"
+            "title": "Szczegóły cechy"
         },
         "fields": {
-            "type": "Typ atrybutu"
+            "type": "Typ cechy"
         },
         "options": {
             "add": "Dodaj opcję",
@@ -326,7 +326,7 @@
         },
         "tabs": {
             "basic": "Podstawowe",
-            "attributes": "Atrybuty",
+            "attributes": "Cechy",
             "options": "Opcje",
             "translations": "Tłumaczenia",
             "channels": "Kanały",
