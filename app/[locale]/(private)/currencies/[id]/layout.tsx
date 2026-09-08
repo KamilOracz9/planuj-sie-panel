@@ -1,4 +1,5 @@
-import { CurrencyContext, fetchCurrency } from "@/features/currencies";
+import { CurrencyContext } from "@/features/currencies";
+import { fetchCurrency } from "@/features/currencies/api";
 
 interface LayoutProps {
     children: React.ReactNode;

@@ -1,5 +1,5 @@
 import { deleteSeries } from "@/app/actions/series";
-import { fetchSeriesList } from "@/features/series";
+import { fetchSeriesList } from "@/features/series/api";
 import { Route } from "@/features/routing";
 import IndexTable from "@/features/shared/components/index-table";
 import Listing from "@/features/shared/components/listing";

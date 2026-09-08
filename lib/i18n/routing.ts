@@ -11,6 +11,9 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
 
+    // Auth
+    [Route.PUBLIC.SIGN_IN.PATHNAME]: '/auth/sign-in',
+
     // Users
     [Route.PRIVATE.USERS.LIST.PATHNAME]: {
       'pl-PL': '/uzytkownicy',

@@ -1,4 +1,14 @@
 {
+    "Auth": {
+        "title": "Sign in",
+        "description": "Sign in to access the panel.",
+        "fields": {
+            "email": "Email",
+            "password": "Password"
+        },
+        "submit": "Sign in",
+        "logout": "Sign out"
+    },
     "HomePage": {
         "title": "Home page"
     },

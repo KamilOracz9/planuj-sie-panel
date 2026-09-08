@@ -1,4 +1,14 @@
 {
+    "Auth": {
+        "title": "Zaloguj się",
+        "description": "Zaloguj się, aby uzyskać dostęp do panelu.",
+        "fields": {
+            "email": "E-mail",
+            "password": "Hasło"
+        },
+        "submit": "Zaloguj się",
+        "logout": "Wyloguj się"
+    },
     "HomePage": {
         "title": "Strona glowna"
     },

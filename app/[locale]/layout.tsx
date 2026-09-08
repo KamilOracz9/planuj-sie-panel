@@ -2,26 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { TooltipProvider } from "@/features/shared/components/ui/tooltip";
-import StoreProvider from "../store-provider";
-import { ATTRIBUTE_SLICE_NAME } from "@/features/attributes";
-import { fetchAttributesListForSelect } from "../actions/attribute";
 import { getLocale } from "next-intl/server";
-import { CATEGORY_SLICE_NAME } from "@/features/categories/store/slice";
-import { fetchCategoriesListForSelect } from "../actions/category";
-import { BRAND_SLICE_NAME } from "@/features/brands/store/slice";
-import { fetchBrandsListForSelect } from "../actions/brand";
-import { SERIES_SLICE_NAME } from "@/features/series/store/slice";
-import { fetchSeriesListForSelect } from "../actions/series";
-import { COLLECTION_SLICE_NAME } from "@/features/collections/store/slice";
-import { fetchCollectionsListForSelect } from "../actions/collection";
-import { CHANNEL_SLICE_NAME } from "@/features/channels/store/slice";
-import { fetchChannelsListForSelect } from "../actions/channel";
-import { CURRENCY_SLICE_NAME } from "@/features/currencies/store/slice";
-import { fetchCurrenciesListForSelect } from "../actions/currency";
-import { MEDIA_COLLECTION_SLICE_NAME } from "@/features/media-collections/store/slice";
-import { fetchMediaCollectionsListForSelect } from "../actions/media-collection";
-import { ACTIVE_CHANNEL_COOKIE } from "@/features/channels/constants";
-import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Panel",
@@ -34,50 +15,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
-  const channelsSelect = await fetchChannelsListForSelect({ locale });
-  // No cookie yet (first visit) - land on the default channel rather than
-  // "all channels", so a fresh session starts scoped somewhere sensible.
-  // (Entity list pages use features/channels/get-active-channel-id.ts for
-  // the same fallback, since they don't already have channelsSelect fetched.)
-  const activeChannelId = Number((await cookies()).get(ACTIVE_CHANNEL_COOKIE)?.value)
-    || channelsSelect.find(channel => channel.is_default)?.id
-    || null;
 
   return (
     <html lang={locale}>
       <body>
         <NextIntlClientProvider>
-          <StoreProvider preloadedState={{
-            [ATTRIBUTE_SLICE_NAME]: {
-              attributesSelect: await fetchAttributesListForSelect({ locale })
-            },
-            [CATEGORY_SLICE_NAME]: {
-              categoriesSelect: await fetchCategoriesListForSelect({ locale })
-            },
-            [BRAND_SLICE_NAME]: {
-              brandsSelect: await fetchBrandsListForSelect({ locale })
-            },
-            [SERIES_SLICE_NAME]: {
-              seriesSelect: await fetchSeriesListForSelect({ locale })
-            },
-            [COLLECTION_SLICE_NAME]: {
-              collectionsSelect: await fetchCollectionsListForSelect({ locale })
-            },
-            [CHANNEL_SLICE_NAME]: {
-              channelsSelect,
-              activeChannelId
-            },
-            [CURRENCY_SLICE_NAME]: {
-              currenciesSelect: await fetchCurrenciesListForSelect({ locale })
-            },
-            [MEDIA_COLLECTION_SLICE_NAME]: {
-              mediaCollectionsSelect: await fetchMediaCollectionsListForSelect({ locale })
-            }
-          }}>
-            <TooltipProvider>
-              {children}
-            </TooltipProvider>
-          </StoreProvider>
+          <TooltipProvider>
+            {children}
+          </TooltipProvider>
         </NextIntlClientProvider>
       </body>
     </html>

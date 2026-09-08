@@ -1,5 +1,5 @@
 import { deleteCollection } from "@/app/actions/collection";
-import { fetchCollectionsList } from "@/features/collections";
+import { fetchCollectionsList } from "@/features/collections/api";
 import { Route } from "@/features/routing";
 import IndexTable from "@/features/shared/components/index-table";
 import Listing from "@/features/shared/components/listing";

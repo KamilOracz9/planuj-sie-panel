@@ -1,7 +1,8 @@
 import { fetchAttributeValuesByModel } from "@/app/actions/attribute";
 import { fetchChannelVisibilitiesByModel } from "@/app/actions/channel-visibility";
 import { fetchPricesByModel } from "@/app/actions/price";
-import { ProductContext, fetchProduct } from "@/features/products";
+import { ProductContext } from "@/features/products";
+import { fetchProduct } from "@/features/products/api";
 
 interface LayoutProps {
     children: React.ReactNode;

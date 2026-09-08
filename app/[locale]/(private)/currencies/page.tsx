@@ -1,5 +1,5 @@
 import { deleteCurrency } from "@/app/actions/currency";
-import { fetchCurrenciesList } from "@/features/currencies";
+import { fetchCurrenciesList } from "@/features/currencies/api";
 import { Route } from "@/features/routing";
 import IndexTable from "@/features/shared/components/index-table";
 import Listing from "@/features/shared/components/listing";

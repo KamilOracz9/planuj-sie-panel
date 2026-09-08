@@ -1,4 +1,5 @@
-import { fetchUser, UserContext } from "@/features/users";
+import { UserContext } from "@/features/users";
+import { fetchUser } from "@/features/users/api";
 
 interface LayoutProps {
     children: React.ReactNode;

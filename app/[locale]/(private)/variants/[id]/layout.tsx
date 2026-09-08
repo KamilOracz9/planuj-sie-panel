@@ -2,7 +2,8 @@ import { fetchAttributeValuesByModel } from "@/app/actions/attribute";
 import { fetchProductsListForSelect } from "@/app/actions/product";
 import { fetchChannelVisibilitiesByModel } from "@/app/actions/channel-visibility";
 import { fetchPricesByModel } from "@/app/actions/price";
-import { fetchVariant, VariantContext } from "@/features/variants";
+import { VariantContext } from "@/features/variants";
+import { fetchVariant } from "@/features/variants/api";
 
 interface LayoutProps {
     children: React.ReactNode;

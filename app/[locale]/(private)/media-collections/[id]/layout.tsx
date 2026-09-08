@@ -1,4 +1,5 @@
-import { MediaCollectionContext, fetchMediaCollection } from "@/features/media-collections";
+import { MediaCollectionContext } from "@/features/media-collections";
+import { fetchMediaCollection } from "@/features/media-collections/api";
 
 interface LayoutProps {
     children: React.ReactNode;

@@ -1,33 +1,30 @@
 "use server"
 
+import { apiFetch } from "@/lib/api-client";
+
 import { User } from "@/features/users";
 
 export async function deleteUser(userId: User['id']): Promise<{id: User['id']}> {
-    return await fetch(`${process.env.API_URL}/users/${userId}`, {
+    return await apiFetch(`/users/${userId}`, {
         method: 'DELETE',
-        headers: {
-            'X-API-KEY': process.env.API_KEY || '',
-        }
     }).then(res => res.json())
 }
 
 export async function createUser(data: User) {
-    return await fetch(`${process.env.API_URL}/users`, {
+    return await apiFetch(`/users`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-            'X-API-KEY': process.env.API_KEY || '',
             'Content-Type': 'application/json',
         }
     }).then(res => res.json())
 }
 
 export async function updateUser(data: User, id: User['id']) {
-    return await fetch(`${process.env.API_URL}/users/${id}`, {
+    return await apiFetch(`/users/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {
-            'X-API-KEY': process.env.API_KEY || '',
             'Content-Type': 'application/json',
         }
     }).then(res => res.json())

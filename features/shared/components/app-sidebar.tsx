@@ -3,6 +3,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -14,10 +15,11 @@ import {
 } from "./ui/sidebar";
 import { Link, usePathname } from "@/lib/i18n/navigation";
 import { Route } from "@/features/routing";
-import { Bookmark, Boxes, Coins, FileText, FolderTree, FolderCog, Images, Layers, ListTree, Package, Radio, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
+import { Bookmark, Boxes, Coins, FileText, FolderTree, FolderCog, Images, Layers, ListTree, LogOut, Package, Radio, SlidersHorizontal, Store, Tag, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SidebarFolderTree } from "@/features/media";
 import { ChannelSwitcher } from "@/features/channels";
+import { logout } from "@/app/actions/auth";
 
 const catalogItems = [
   { pathname: Route.PRIVATE.BRANDS.LIST.PATHNAME, translationKey: "Brands.list.title", icon: Tag, folderType: undefined },
@@ -96,6 +98,14 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <form action={logout}>
+          <SidebarMenuButton type="submit">
+            <LogOut />
+            <span>{t("Auth.logout")}</span>
+          </SidebarMenuButton>
+        </form>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )

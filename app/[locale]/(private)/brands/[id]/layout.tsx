@@ -1,6 +1,7 @@
 import { fetchAttributeValuesByModel } from "@/app/actions/attribute";
 import { fetchChannelVisibilitiesByModel } from "@/app/actions/channel-visibility";
-import { BrandContext, fetchBrand } from "@/features/brands";
+import { BrandContext } from "@/features/brands";
+import { fetchBrand } from "@/features/brands/api";
 
 interface LayoutProps {
     children: React.ReactNode;

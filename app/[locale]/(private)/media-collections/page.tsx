@@ -1,5 +1,5 @@
 import { deleteMediaCollection } from "@/app/actions/media-collection";
-import { fetchMediaCollectionsList } from "@/features/media-collections";
+import { fetchMediaCollectionsList } from "@/features/media-collections/api";
 import { Route } from "@/features/routing";
 import IndexTable from "@/features/shared/components/index-table";
 import Listing from "@/features/shared/components/listing";

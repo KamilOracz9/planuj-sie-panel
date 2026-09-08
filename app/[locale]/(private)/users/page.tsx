@@ -1,7 +1,8 @@
 import { Route } from "@/features/routing";
 import Listing from "@/features/shared/components/listing";
 import { Button } from "@/features/shared/components/ui/button";
-import { fetchUsersList, IndexTable } from "@/features/users"
+import { IndexTable } from "@/features/users"
+import { fetchUsersList } from "@/features/users/api"
 import { Link } from "@/lib/i18n/navigation";
 import { PlusCircle } from "lucide-react";
 import { getLocale } from "next-intl/server";

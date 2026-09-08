@@ -1,47 +1,40 @@
 "use server"
 
+import { apiFetch } from "@/lib/api-client";
+
 import { AttributeOption, AttributeOptionSelectItem, AttributeOptionWithTranslations } from "@/features/attributes";
 import { attributeOptionSchema } from "@/features/attributes/schemas";
 
 import * as z from "zod";
 
 export async function deleteAttributeOption(attributeOptionId: AttributeOption['id']): Promise<{ id: AttributeOption['id'] }> {
-    return await fetch(`${process.env.API_URL}/attribute-options/${attributeOptionId}`, {
+    return await apiFetch(`/attribute-options/${attributeOptionId}`, {
         method: 'DELETE',
-        headers: {
-            'X-API-KEY': process.env.API_KEY || '',
-        }
     }).then(res => res.json())
 }
 
 export async function createAttributeOption(data: z.infer<typeof attributeOptionSchema>) {
-    return await fetch(`${process.env.API_URL}/attribute-options`, {
+    return await apiFetch(`/attribute-options`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-            'X-API-KEY': process.env.API_KEY || '',
             'Content-Type': 'application/json',
         }
     }).then(res => res.json())
 }
 
 export async function updateAttributeOption(data: z.infer<typeof attributeOptionSchema>, id: AttributeOption['id']) {
-    return await fetch(`${process.env.API_URL}/attribute-options/${id}`, {
+    return await apiFetch(`/attribute-options/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {
-            'X-API-KEY': process.env.API_KEY || '',
             'Content-Type': 'application/json',
         }
     }).then(res => res.json())
 }
 
 export async function fetchAttributeOptionsListForSelect({ locale, attributeId }: { locale: string, attributeId: number }): Promise<AttributeOptionSelectItem[]> {
-    return await fetch(`${process.env.API_URL}/${locale}/attribute-options/select/${attributeId}`, {
-        headers: {
-            'X-API-KEY': process.env.API_KEY || '',
-        }
-    }).then(res => res.json());
+    return await apiFetch(`/${locale}/attribute-options/select/${attributeId}`, {}).then(res => res.json());
 }
 
 // Server action (unlike features/attributes/api.ts's fetchAttributeOption):
@@ -49,9 +42,5 @@ export async function fetchAttributeOptionsListForSelect({ locale, attributeId }
 // version directly from the client would try to read process.env.API_URL in
 // the browser, where it's undefined (no NEXT_PUBLIC_ prefix).
 export async function fetchAttributeOption({ locale, id }: { locale: string, id: AttributeOption['id'] }): Promise<AttributeOptionWithTranslations> {
-    return await fetch(`${process.env.API_URL}/${locale}/attribute-options/${id}`, {
-        headers: {
-            'X-API-KEY': process.env.API_KEY || '',
-        }
-    }).then(res => res.json());
+    return await apiFetch(`/${locale}/attribute-options/${id}`, {}).then(res => res.json());
 }

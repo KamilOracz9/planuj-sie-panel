@@ -1,6 +1,7 @@
 import { fetchAttributeValuesByModel } from "@/app/actions/attribute";
 import { fetchChannelVisibilitiesByModel } from "@/app/actions/channel-visibility";
-import { CollectionContext, fetchCollection } from "@/features/collections";
+import { CollectionContext } from "@/features/collections";
+import { fetchCollection } from "@/features/collections/api";
 
 interface LayoutProps {
     children: React.ReactNode;

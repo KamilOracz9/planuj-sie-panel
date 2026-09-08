@@ -1,5 +1,5 @@
 import { deleteBrand } from "@/app/actions/brand";
-import { fetchBrandsList } from "@/features/brands";
+import { fetchBrandsList } from "@/features/brands/api";
 import { Route } from "@/features/routing";
 import IndexTable from "@/features/shared/components/index-table";
 import Listing from "@/features/shared/components/listing";

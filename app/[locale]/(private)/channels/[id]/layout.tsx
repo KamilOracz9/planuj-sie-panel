@@ -1,4 +1,5 @@
-import { ChannelContext, fetchChannel } from "@/features/channels";
+import { ChannelContext } from "@/features/channels";
+import { fetchChannel } from "@/features/channels/api";
 
 interface LayoutProps {
     children: React.ReactNode;

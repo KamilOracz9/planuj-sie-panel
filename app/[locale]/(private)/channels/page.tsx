@@ -1,5 +1,5 @@
 import { deleteChannel } from "@/app/actions/channel";
-import { fetchChannelsList } from "@/features/channels";
+import { fetchChannelsList } from "@/features/channels/api";
 import { Route } from "@/features/routing";
 import IndexTable from "@/features/shared/components/index-table";
 import Listing from "@/features/shared/components/listing";

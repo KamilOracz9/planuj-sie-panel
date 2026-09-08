@@ -1,5 +1,6 @@
 import { fetchPricesByModel } from "@/app/actions/price";
-import { AttributeOptionContext, fetchAttributeOption } from "@/features/attributes";
+import { AttributeOptionContext } from "@/features/attributes";
+import { fetchAttributeOption } from "@/features/attributes/api";
 
 interface LayoutProps {
     children: React.ReactNode;
